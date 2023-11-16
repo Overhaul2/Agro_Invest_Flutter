@@ -1,6 +1,4 @@
-import 'package:agro_invest/pages/Accueil.dart';
-import 'package:agro_invest/pages/InscriptionPage.dart';
-import 'package:agro_invest/pages/test.dart';
+import 'package:agro_invest/pages/Agriculteur/Accueil.dart';
 import 'package:flutter/material.dart';
 
 void main() {

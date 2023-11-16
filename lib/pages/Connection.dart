@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class _ConnexionState extends StatefulWidget {
-  const _ConnexionState({super.key});
+class Connexion extends StatefulWidget {
+  const Connexion({Key? key}) : super(key: key);
 
   @override
-  State<_ConnexionState> createState() => __ConnexionStateState();
+  State<Connexion> createState() => _ConnexionState();
 }
 
-class __ConnexionStateState extends State<_ConnexionState> {
+class _ConnexionState extends State<Connexion> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Placeholder();
   }
 }
