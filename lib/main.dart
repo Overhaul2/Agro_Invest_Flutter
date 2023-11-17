@@ -1,4 +1,7 @@
-import 'package:agro_invest/pages/Agriculteur/Accueil.dart';
+
+import 'package:agro_invest/configuration/configurationCouleur.dart';
+import 'package:agro_invest/pages/MotDePasseOublier.dart';
+import 'package:agro_invest/pages/SplashScren.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,9 +14,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      title: "test",
+      theme: ThemeData(
+        splashColor: MesCouleur().couleurPrincipal,
+        primarySwatch: Colors.green,
+
+      ),
       debugShowCheckedModeBanner: false,
-      home:  Accueil(),
+      home:  MotDePasseOublier(),
+              //Accueil(),
+
     );
   }
 }

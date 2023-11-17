@@ -12,18 +12,20 @@ class Accueil extends StatefulWidget {
 }
 
 class _AccueilState extends State<Accueil> {
-  var currentPage = DrawersSection.Parametre;
+  var currentPage = DrawersSection.Accueil;
   @override
   Widget build(BuildContext context) {
     //images dans le carousel
     List<String> imagePath = [
       "asset/images/slider1.png",
       "asset/images/slider2.png",
-      "asset/images/slider1.png",
-      "asset/images/slider2.png",
-      "asset/images/slider1.png",
-      "asset/images/slider2.png",
-      "asset/images/slider1.png",
+      "asset/images/slider3.png",
+      "asset/images/slider4.png",
+      "asset/images/slider5.png",
+      "asset/images/slider6.png",
+      "asset/images/slider7.png",
+      "asset/images/slider8.png",
+      "asset/images/slider9.png",
     ];
     var container1;
     if (currentPage == DrawersSection.Accueil) {
@@ -65,44 +67,52 @@ class _AccueilState extends State<Accueil> {
                 ),
                 scrollDirection: Axis.vertical,
                 children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Card(
-                      clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        elevation: 10,
-                        child: Column(
-                          children: [
-                            Image.asset("asset/images/image3.jpg"),
-                            FittedBox(
-                              child: Text(
-                                "Mes Demandes",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ],
-                        )),
+                Card(
+                clipBehavior: Clip.hardEdge,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                elevation: 10,
+                child: InkWell(
+                  onTap: () {},
+                  child: Container(
+               //     color: Colors.grey,
+                    child: Column(
+                      children: [
+                        Image.asset("asset/images/demande.jpg"),
+                          FittedBox(
+                            child: Text(
+                              "Mes Demandes",
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
-                  InkWell(
+                ),
+              ),
+
+                InkWell(
                     onTap: () {},
                     child: Card(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0)),
                         elevation: 10,
-                        child: Column(
-                          children: [
-                            Image.asset("asset/images/image3.jpg"),
-                            FittedBox(
-                              child: Text(
-                                "Formations",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ],
+                        child: Container(
+                    //      color: Colors.grey,
+                          child: Column(
+                            children: [
+                              Image.asset("asset/images/formations2.jpg"),
+                              FittedBox(
+                                child: Text(
+                                  "Formations",
+                                  style: TextStyle(
+                                      fontSize: 20, fontWeight: FontWeight.bold),
+                                ),
+                              )
+                            ],
+                          ),
                         )),
                   ),
                   InkWell(
@@ -112,17 +122,20 @@ class _AccueilState extends State<Accueil> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0)),
                         elevation: 10,
-                        child: Column(
-                          children: [
-                            Image.asset("asset/images/image3.jpg"),
-                            FittedBox(
-                              child: Text(
-                                "Offre à proximité",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ],
+                        child: Container(
+                          //color: Colors.grey,
+                          child: Column(
+                            children: [
+                              Image.asset("asset/images/proximite2.jpg"),
+                              FittedBox(
+                                child: Text(
+                                  "Offre à proximité",
+                                  style: TextStyle(
+                                      fontSize: 20, fontWeight: FontWeight.bold),
+                                ),
+                              )
+                            ],
+                          ),
                         )),
                   ),
                   InkWell(
@@ -132,17 +145,20 @@ class _AccueilState extends State<Accueil> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0)),
                         elevation: 10,
-                        child: Column(
-                          children: [
-                            Image.asset("asset/images/image3.jpg"),
-                            FittedBox(
-                              child: Text(
-                                "Forums de Discutions",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ],
+                        child: Container(
+                         // color: Colors.grey,
+                          child: Column(
+                            children: [
+                              Image.asset("asset/images/forums2.jpg"),
+                              FittedBox(
+                                child: Text(
+                                  "Forums de Discutions",
+                                  style: TextStyle(
+                                      fontSize: 20, fontWeight: FontWeight.bold),
+                                ),
+                              )
+                            ],
+                          ),
                         )),
                   ),
                   InkWell(
@@ -152,17 +168,20 @@ class _AccueilState extends State<Accueil> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0)),
                         elevation: 10,
-                        child: Column(
-                          children: [
-                            Image.asset("asset/images/image3.jpg"),
-                            FittedBox(
-                              child: Text(
-                                "Messages",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ],
+                        child: Container(
+                        //  color: Colors.grey,
+                          child: Column(
+                            children: [
+                              Image.asset("asset/images/message23.jpg"),
+                              FittedBox(
+                                child: Text(
+                                  "Messages",
+                                  style: TextStyle(
+                                      fontSize: 20, fontWeight: FontWeight.bold),
+                                ),
+                              )
+                            ],
+                          ),
                         )),
                   ),
                 ],
@@ -240,7 +259,7 @@ class _AccueilState extends State<Accueil> {
       ),
     ));
   }
-
+//side bare widget
   Widget MonheaderDrawerList() {
     return Container(
       padding: EdgeInsets.only(
@@ -255,24 +274,17 @@ class _AccueilState extends State<Accueil> {
               currentPage == DrawersSection.Parametre ? true : false),
           menuItem(3, "Apropos", Icons.info_outline,
               currentPage == DrawersSection.Apropos ? true : false),
-          menuItem(
-              4,
-              "Contacter le Support",
+          menuItem(4,"Contacter le Support",
               Icons.contact_support_outlined,
-              currentPage == DrawersSection.Contacter_le_Supports
-                  ? true
-                  : false),
+              currentPage == DrawersSection.Contacter_le_Supports ? true : false),
           menuItem(5, "Aide", Icons.add_task,
               currentPage == DrawersSection.Aide ? true : false),
-          menuItem(
-              6,
-              "Partager l'Application",
-              Icons.settings,
+          menuItem(6, "Partager l'Application",
+              Icons.share,
               currentPage == DrawersSection.Partager_lapplication
-                  ? true
-                  : false),
+                  ? true : false),
           menuItem(7, "Noter l'Application", Icons.feedback_outlined,
-              currentPage == DrawersSection ? true : false),
+              currentPage == DrawersSection.noter ? true : false),
           menuItem(8, "Se Deconnecter", Icons.logout,
               currentPage == DrawersSection.Se_Deconnecter ? true : false),
         ],
@@ -293,7 +305,7 @@ class _AccueilState extends State<Accueil> {
             } else if (id == 2) {
               currentPage = DrawersSection.Parametre;
             } else if (id == 3) {
-              currentPage = DrawersSection.Accueil;
+              currentPage = DrawersSection.Apropos;
             } else if (id == 4) {
               currentPage = DrawersSection.Contacter_le_Supports;
             } else if (id == 5) {
@@ -308,22 +320,24 @@ class _AccueilState extends State<Accueil> {
           });
         },
         child: Padding(
-          padding: EdgeInsets.all(15.0),
+          padding: EdgeInsets.all(13.0),
           child: Row(
             children: [
+              //taille de l'icone side
               Expanded(
                   child: Icon(
                 icon,
-                size: 40,
+                size: 30,
                 color: Colors.black87,
               )),
+              //taille du texte side
               Expanded(
                 flex: 3,
                 child: Text(
                   title,
                   style: TextStyle(
                       color: Colors.black87,
-                      fontSize: 20,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold),
                 ),
               ),

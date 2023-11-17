@@ -2,14 +2,14 @@ import 'package:agro_invest/configuration/configurationCouleur.dart';
 import 'package:agro_invest/pages/login.dart';
 import 'package:flutter/material.dart';
 
-class InscriptionAgriculteur extends StatefulWidget {
-  const InscriptionAgriculteur({Key? key}) : super(key: key);
+class InscriptionInvestisseur extends StatefulWidget {
+  const InscriptionInvestisseur({Key? key}) : super(key: key);
 
   @override
-  State<InscriptionAgriculteur> createState() => _InscriptionAgriculteurState();
+  State<InscriptionInvestisseur> createState() => _InscriptionInvestisseurState();
 }
 
-class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
+class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,7 +129,9 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                     style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(horizontal: 90, vertical: 15),
                         backgroundColor: Color(0xA8008000),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginAgriculteur()));
+                    },
                     child: Text("S'inscrire",
                       style: TextStyle(fontSize: 25),),
                   ),
@@ -152,7 +154,7 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                         child: FittedBox(
                           child: Text("   Se Connecter",
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: MesCouleur().couleurPrincipal
                             ),),
