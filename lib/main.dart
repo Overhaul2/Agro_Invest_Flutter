@@ -1,6 +1,5 @@
 
 import 'package:agro_invest/configuration/configurationCouleur.dart';
-import 'package:agro_invest/pages/MotDePasseOublier.dart';
 import 'package:agro_invest/pages/SplashScren.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
 
       ),
       debugShowCheckedModeBanner: false,
-      home:  MotDePasseOublier(),
+      home:  SplashScreen(),
               //Accueil(),
 
     );
