@@ -1,6 +1,6 @@
 
 import 'package:agro_invest/configuration/configurationCouleur.dart';
-import 'package:agro_invest/pages/SplashScren.dart';
+import 'package:agro_invest/pages/Demarrage/SplashScren.dart';
 import 'package:flutter/material.dart';
 
 void main() {

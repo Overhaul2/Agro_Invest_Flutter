@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:agro_invest/pages/Demo1.dart';
+import 'package:agro_invest/pages/Demarrage/Demo1.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,14 +13,14 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   void initState(){
     super.initState();
-    Timer(Duration(seconds: 7), () {
+    Timer(Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> DemoPage1()));
     });
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Image.asset("asset/images/blob.png",height:180,),

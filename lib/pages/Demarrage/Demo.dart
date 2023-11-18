@@ -6,10 +6,10 @@ class DemoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+     /* appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 19, 108, 22),
         elevation: 0,
-      ),
+      ),*/
       body:  SingleChildScrollView(
         child: Column(
         children: [

@@ -1,18 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-class PartagerApplication extends StatefulWidget {
+class PartagerApplication extends StatelessWidget {
   const PartagerApplication({Key? key}) : super(key: key);
 
   @override
-  State<PartagerApplication> createState() => _PartagerApplicationState();
-}
-
-class _PartagerApplicationState extends State<PartagerApplication> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Container(child: Text("Body"),),
+    return const Placeholder(
+      child: Text("bonjour"),
     );
   }
 }

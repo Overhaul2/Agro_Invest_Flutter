@@ -18,23 +18,25 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
       //   elevation: 0,
       // ),
 
-      body: SingleChildScrollView(
+      body: Center(
             child: Column(
               children: [
                 Container(
                   height: 250,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20),
-                    child: SizedBox(
-                        child:
-                            Image.asset("asset/images/iinscription.jpg",fit: BoxFit.cover,)),
+                        child:SizedBox(
+                           child: Image.asset("asset/images/iinscription.jpg",fit: BoxFit.cover,)),)
                   ),
-                ),
-                SizedBox(height: 20,),
-            Container(
-              child: Padding(
+              Expanded(child: SingleChildScrollView
+                (
+                child: Column
+                  (children: [
+                  Container(
+                    child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 35.0),
                       child: TextField(
+                        onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 20),
@@ -48,9 +50,9 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                         keyboardType: TextInputType.name,
                       ),
                     ),
-            ),
-                SizedBox(height: 20,),
-                Padding(
+                  ),
+                  SizedBox(height: 20,),
+                  Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 35.0),
                     child: TextField(
                       //obscureText: true,
@@ -66,9 +68,9 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                       keyboardType: TextInputType.emailAddress,
                     ),
                   ),
-                SizedBox(height: 20,),
-                Container(
-                  child: Padding(
+                  SizedBox(height: 20,),
+                  Container(
+                    child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 35.0),
                       child: TextField(
                         //obscureText: true,
@@ -84,10 +86,10 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                         keyboardType: TextInputType.phone,
                       ),
                     ),
-                ),
+                  ),
 
-                SizedBox(height: 20,),
-                Padding(
+                  SizedBox(height: 20,),
+                  Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 35.0),
                     child: TextField(
                       //obscureText: true,
@@ -104,8 +106,8 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                       obscureText: true,
                     ),
                   ),
-                SizedBox(height: 20,),
-                Padding(
+                  SizedBox(height: 20,),
+                  Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 35.0),
                     child: TextField(
                       //obscureText: true,
@@ -122,50 +124,53 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                       obscureText: true,
                     ),
                   ),
-                SizedBox(height: 20,),
+                  SizedBox(height: 20,),
 
-                Container(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(horizontal: 90, vertical: 15),
-                        backgroundColor: Color(0xA8008000),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-                    onPressed: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginAgriculteur()));
-                    },
-                    child: Text("S'inscrire",
-                      style: TextStyle(fontSize: 25),),
+                  Container(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(horizontal: 90, vertical: 15),
+                          backgroundColor: Color(0xA8008000),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+                      onPressed: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginAgriculteur()));
+                      },
+                      child: Text("S'inscrire",
+                        style: TextStyle(fontSize: 25),),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 28.0),
-                  child: Row(
-                    children: [
-                      FittedBox(
-                        child: Text("Vous avez déjà un compte ?",
-                          style: TextStyle(
-                            fontSize: 15,
-                          ),),
-                      ),
-                      SizedBox(height: 60,),
-                      InkWell(
-                        onTap: (){
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginAgriculteur()));
-                        },
-                        child: FittedBox(
-                          child: Text("   Se Connecter",
+                  Padding(
+                    padding: const EdgeInsets.only(left: 28.0),
+                    child: Row(
+                      children: [
+                        FittedBox(
+                          child: Text("Vous avez déjà un compte ?",
                             style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: MesCouleur().couleurPrincipal
+                              fontSize: 15,
                             ),),
                         ),
-                      ),
+                        SizedBox(height: 60,),
+                        InkWell(
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginAgriculteur()));
+                          },
+                          child: FittedBox(
+                            child: Text("   Se Connecter",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: MesCouleur().couleurPrincipal
+                              ),),
+                          ),
+                        ),
 
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],),
+              )
+              )]
             ),
+
           ),
     );
   }

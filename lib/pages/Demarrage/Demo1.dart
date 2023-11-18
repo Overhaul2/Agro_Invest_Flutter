@@ -1,5 +1,4 @@
-import 'package:agro_invest/pages/Agriculteur/Accueil.dart';
-import 'package:agro_invest/pages/Demo2.dart';
+import 'package:agro_invest/pages/Demarrage/Demo2.dart';
 import 'package:agro_invest/pages/login.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +16,11 @@ class _DemoPage1State extends State<DemoPage1> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset("asset/images/blob.png",height:180,),
+            Image.asset("asset/images/blob.png",),
             Container(
               child: Image.asset("asset/images/logo.png",height: 200,),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 60),
             Center(
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 30),
@@ -37,7 +36,7 @@ class _DemoPage1State extends State<DemoPage1> {
                   ),),//),
               ),
             ),
-            SizedBox(height: 40,),
+            SizedBox(height: 60,),
             Container(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(horizontal: 85, vertical: 16),

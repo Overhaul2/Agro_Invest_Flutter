@@ -1,3 +1,4 @@
+import 'package:agro_invest/pages/MesDemandes.dart';
 import 'package:agro_invest/pages/SideBar.dart';
 import 'package:agro_invest/pages/SideBarre/Parametre.dart';
 import 'package:agro_invest/pages/SideBarre/PartagerApplication.dart';
@@ -74,7 +75,9 @@ class _AccueilState extends State<Accueil> {
                 ),
                 elevation: 10,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>MesDemndes()));
+                  },
                   child: Container(
                //     color: Colors.grey,
                     child: Column(
@@ -86,6 +89,7 @@ class _AccueilState extends State<Accueil> {
                               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                           ),
+                        //IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios_rounded,color: Colors.green,),)
                       ],
                     ),
                   ),
