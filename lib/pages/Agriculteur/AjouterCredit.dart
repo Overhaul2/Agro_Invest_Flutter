@@ -1,3 +1,4 @@
+import 'package:agro_invest/pages/MesDemandes.dart';
 import 'package:flutter/material.dart';
 
 import '../../configuration/configurationCouleur.dart';
@@ -20,13 +21,9 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
         child: Column(
           children: [
             Container(
-                height: 250,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child:SizedBox(
-                      child: Image.asset("asset/images/mesdemandes.jpg",height: 100,)),)
+                child: SizedBox(
+                    child: Image.asset("asset/images/demandecredit.jpg",))
             ),
-            SizedBox(height: 20,),
             FittedBox(child: Text("Formulaire de demande de micro_crédit", style: TextStyle(fontWeight: FontWeight.bold,
                 fontSize: 18, color: MesCouleur().couleurPrincipal),),),
             Expanded(child: SingleChildScrollView(
@@ -44,8 +41,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10.0)),
                           ),
-                          prefixIcon: Icon(Icons.person,
-                              color: Color(0xA8008000)),
+                          prefixIcon: Icon(Icons.person),
                         ),
                         keyboardType: TextInputType.name,
                       ),
@@ -60,9 +56,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10.0)),
                           ),
-                          prefixIcon: Icon(Icons.monetization_on_outlined,
-                              color: Color(0xA8008000)),
-                        ),
+                          prefixIcon: Icon(Icons.monetization_on_outlined,),),
                         keyboardType: TextInputType.numberWithOptions(decimal: false,signed: false),
                       ),
                     ),Padding(
@@ -76,8 +70,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10.0)),
                           ),
-                          prefixIcon: Icon(Icons.timelapse_outlined,
-                              color: Color(0xA8008000)),
+                          prefixIcon: Icon(Icons.timelapse_outlined,),
                         ),
                         keyboardType: TextInputType.numberWithOptions(signed: false,decimal: false),
                       ),
@@ -92,8 +85,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10.0)),
                           ),
-                          prefixIcon: Icon(Icons.description_outlined,
-                              color: Color(0xA8008000)),
+                          prefixIcon: Icon(Icons.description_outlined,),
                         ),
                         keyboardType: TextInputType.text,
                       ),
@@ -104,7 +96,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                         //obscureText: true,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 20),
-                          labelText: "Nom",
+                          labelText: "Description audio",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10.0)),
                           ),
@@ -112,6 +104,37 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                               color: Color(0xA8008000)),
                         ),
                         keyboardType: TextInputType.name,
+                      ),
+                    ),
+                    SizedBox(height: 15,),
+                    Container(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.only(
+                                right: 35, left: 35, ),
+                            backgroundColor: Color(0xA8008000),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15))),
+                        onPressed: () async {
+                          // if (_formkey.currentState!.validate()) {
+                          //   // Si le formulaire est valide, effectuer la requête API
+                          //   final email = _emailController.text; // Récupérez l'email à partir du champ de texte
+                          //   final password = _passWordController.text; // Récupérez le mot de passe à partir du champ de texte
+                          //   final success = await _agriculteurService.loginAgriculteur(email, password);
+                          //   if(success){
+                          //     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Accueil()));
+                          //   }else{
+                          //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Email ou mot de passe incorrect")));
+                          //   }
+                          // }
+
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => MesDemndes()));
+                        },
+                        child: Text(
+                          "Enregistrer",
+                          style: TextStyle(fontSize: 25),
+                        ),
                       ),
                     ),
                   ],

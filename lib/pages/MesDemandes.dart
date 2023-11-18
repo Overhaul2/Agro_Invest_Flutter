@@ -18,17 +18,15 @@ class _MesDemndesState extends State<MesDemndes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         leading: (BackButton()),
       ),
       body: Center(
         child: Column(
           children: [
             Container(
-                height: 250,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child:SizedBox(
-                      child: Image.asset("asset/images/mesdemandes.jpg",fit: BoxFit.fitWidth,)),)
+                child: SizedBox(
+                    child: Image.asset("asset/images/mesdemandes.jpg"))
             ),
             FittedBox(child: Text("Mes Demandes", style: TextStyle(fontWeight: FontWeight.bold,
             fontSize: 30, color: MesCouleur().couleurPrincipal),),),
