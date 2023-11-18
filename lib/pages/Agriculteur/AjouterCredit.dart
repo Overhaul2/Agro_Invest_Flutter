@@ -15,6 +15,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         leading: (BackButton()),
       ),
       body: Center(
@@ -31,7 +32,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 30,right:30,top: 28.0),
+                      padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextField(
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
@@ -46,7 +47,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                         keyboardType: TextInputType.name,
                       ),
                     ),Padding(
-                      padding: const EdgeInsets.only(left: 30,right:30,top: 28.0),
+                      padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextField(
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
@@ -60,7 +61,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                         keyboardType: TextInputType.numberWithOptions(decimal: false,signed: false),
                       ),
                     ),Padding(
-                      padding: const EdgeInsets.only(left: 30,right:30,top: 28.0),
+                      padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextField(
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
@@ -75,7 +76,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                         keyboardType: TextInputType.numberWithOptions(signed: false,decimal: false),
                       ),
                     ),Padding(
-                      padding: const EdgeInsets.only(left: 30,right:30,top: 28.0),
+                      padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextFormField(
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
@@ -90,7 +91,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                         keyboardType: TextInputType.text,
                       ),
                     ),Padding(
-                      padding: const EdgeInsets.only(left: 30,right:30,top: 28.0),
+                      padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextField(
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
@@ -110,8 +111,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                     Container(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.only(
-                                right: 35, left: 35, ),
+                            padding: EdgeInsets.symmetric(vertical: 13,horizontal: 75),
                             backgroundColor: Color(0xA8008000),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15))),
@@ -133,7 +133,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                         },
                         child: Text(
                           "Enregistrer",
-                          style: TextStyle(fontSize: 25),
+                          style: TextStyle(fontSize: 30),
                         ),
                       ),
                     ),

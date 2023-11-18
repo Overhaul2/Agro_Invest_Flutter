@@ -46,10 +46,14 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                         child: TextFormField(
                           onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                           //obscureText: true,
-                          controller: _passWordController,
+                          controller: _emailController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Veillez saisir votre adresse email !';
+                              return 'Veuillez saisir une adresse e-mail.';
+                            }
+                            // Utilisation d'une expression régulière pour vérifier une adresse e-mail simple
+                            if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(value)) {
+                              return 'Veuillez saisir une adresse e-mail valide.';
                             }
                             return null;
                           },
@@ -75,7 +79,7 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                         padding: const EdgeInsets.symmetric(horizontal: 35.0),
                         child: TextFormField(
                           //obscureText: true,
-                          controller: _emailController,
+                          controller: _passWordController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Veillez saisir votre mot de passe !';
@@ -131,20 +135,29 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15))),
                         onPressed: () async {
-                          // if (_formkey.currentState!.validate()) {
-                          //   // Si le formulaire est valide, effectuer la requête API
-                          //   final email = _emailController.text; // Récupérez l'email à partir du champ de texte
-                          //   final password = _passWordController.text; // Récupérez le mot de passe à partir du champ de texte
-                          //   final success = await _agriculteurService.loginAgriculteur(email, password);
-                          //   if(success){
-                          //     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Accueil()));
-                          //   }else{
-                          //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Email ou mot de passe incorrect")));
-                          //   }
-                          // }
+                          if (_formkey.currentState!.validate()) {
+                            // Si le formulaire est valide, effectuer la requête API
+                            try {
+                              final email = _emailController.text;
+                              final password = _passWordController.text;
 
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => Accueil()));
+                              // Affichez un indicateur de chargement ici si nécessaire
+
+                              final success = await _agriculteurService.loginAgriculteur(email, password);
+
+                              // Masquez l'indicateur de chargement ici si nécessaire
+
+                              if (success) {
+                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Accueil()));
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Email ou mot de passe incorrect")));
+                              }
+                            } catch (e) {
+                              // Gérer les erreurs de la requête API ici
+                              print('Erreur API: $e');
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Une erreur s'est produite")));
+                            }
+                          }
                         },
                         child: Text(
                           "Se Connecter",
