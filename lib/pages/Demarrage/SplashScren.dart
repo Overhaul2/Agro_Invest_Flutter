@@ -13,7 +13,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   void initState(){
     super.initState();
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 4), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> DemoPage1()));
     });
   }
@@ -23,10 +23,9 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset("asset/images/blob.png",height:180,),
-            SizedBox(height:60,),
+            Image.asset("asset/images/blob.png",),
             Container(
-              child: Image.asset("asset/images/logo.png",height: 250,),
+              child: Image.asset("asset/images/logo.png",height: 200,),
             ),
             SizedBox(height: 80),
             Container(

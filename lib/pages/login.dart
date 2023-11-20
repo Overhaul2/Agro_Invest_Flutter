@@ -13,6 +13,7 @@ class LoginAgriculteur extends StatefulWidget {
 }
 
 class _LoginAgriculteurState extends State<LoginAgriculteur> {
+  bool nonVisible=false;
   Map agriculteurData = {};
   final _formkey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
@@ -78,13 +79,15 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 35.0),
                         child: TextFormField(
-                          //obscureText: true,
+                         obscureText: nonVisible,
                           controller: _passWordController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Veillez saisir votre mot de passe !';
-                            }
-                            return null;
+                            }if(value.length<=7){
+                              return "Le mot de passe doit conténir au moins 8 caractère";
+                            }else{
+                              return null;}
                           },
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(vertical: 20),
@@ -95,9 +98,18 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                             ),
                             prefixIcon:
                             Icon(Icons.lock, color: Color(0xA8008000)),
+                            suffixIcon: IconButton(
+                              onPressed: (){
+                                setState(() {
+                                  nonVisible=!nonVisible;
+                                });
+                              },
+                              icon: Icon(
+                                nonVisible==true?Icons.visibility_off:Icons.visibility
+                              ),
+                            )
                           ),
                           keyboardType: TextInputType.name,
-                          obscureText: true,
                         ),
                       ),
                     ),
@@ -115,7 +127,6 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                           child: Text(
                             "Mot de passe oublier ?",
                             style: TextStyle(
-                                fontFamily: "Inaka",
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: MesCouleur().couleurPrincipal),
@@ -141,11 +152,7 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                               final email = _emailController.text;
                               final password = _passWordController.text;
 
-                              // Affichez un indicateur de chargement ici si nécessaire
-
                               final success = await _agriculteurService.loginAgriculteur(email, password);
-
-                              // Masquez l'indicateur de chargement ici si nécessaire
 
                               if (success) {
                                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Accueil()));
@@ -153,7 +160,7 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Email ou mot de passe incorrect")));
                               }
                             } catch (e) {
-                              // Gérer les erreurs de la requête API ici
+                              // gestion des erreurs de la requête API
                               print('Erreur API: $e');
                               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Une erreur s'est produite")));
                             }
@@ -166,7 +173,7 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 28.0,top: 80),
+                      padding: const EdgeInsets.only(left: 28.0,top: 60),
                       child: Row(
                         children: [
                           FittedBox(

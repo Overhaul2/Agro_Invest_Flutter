@@ -11,6 +11,8 @@ class MotDePasseOublier extends StatefulWidget {
 }
 
 class _MotDePasseOublierState extends State<MotDePasseOublier> {
+  final _formkey=GlobalKey<FormState>();
+  final _emailController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,9 +49,14 @@ class _MotDePasseOublierState extends State<MotDePasseOublier> {
                           padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 40),
                           child: TextFormField(
                             onTapOutside: (e) =>FocusScope.of(context).unfocus(),
-                            validator: (value){
-                              if(value==null||value.isEmpty){
-                                return 'Veillez saisir votre adresse email !';
+                            controller: _emailController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Veuillez saisir une adresse e-mail.';
+                              }
+                              // Utilisation d'une expression régulière pour vérifier une adresse e-mail simple
+                              if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(value)) {
+                                return 'Veuillez saisir une adresse e-mail valide.';
                               }
                               return null;
                             },
@@ -72,6 +79,7 @@ class _MotDePasseOublierState extends State<MotDePasseOublier> {
                                   backgroundColor: Color(0xA8008000),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
                               onPressed: ()  {
+                                //if(_formkey.currentState!.validate())
                                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NouveauMotdePasse()));
                               },
                               child: Text("Recevoir le code",

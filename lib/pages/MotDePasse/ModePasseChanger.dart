@@ -16,12 +16,13 @@ class _MotDePasseChangerState extends State<MotDePasseChanger> {
         child: Column(
           children: [
             Image.asset("asset/images/blob.png"),
-            SizedBox(height: 40,),
+            SizedBox(child: Image.asset("asset/images/Successmark.png"),height: 150,),
+            SizedBox(height: 50,),
             Container(
               child: Column(
                 children: [
                   FittedBox(
-                    child: Text("Mot de passe oublie ?",
+                    child: Text("Mot de passe changé !",
                       style: TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.bold
@@ -29,7 +30,7 @@ class _MotDePasseChangerState extends State<MotDePasseChanger> {
                   ),
                   SizedBox(height: 30,),
                   FittedBox(
-                    child: Text("Veillez saisir votre adresse email"),
+                    child: Text("Votre mot de passe à été change avec succès2"),
                   )
                 ],
               ),
@@ -46,14 +47,15 @@ class _MotDePasseChangerState extends State<MotDePasseChanger> {
                   onPressed: ()  {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Accueil()));
                   },
-                  child: Text("Recevoir le code",
-                    style: TextStyle(fontSize: 16,
+                  child: Text("Se connecter",
+                    style: TextStyle(fontSize: 20,
                         fontWeight: FontWeight.bold),),
                 ),
               ),
             ),
+            SizedBox(height: 20,),
             Container(
-              child: Image.asset("asset/images/motdepasseoublier.jpg"),
+              child: Image.asset("asset/images/motdepasseoublier.jpg",height: 250,),
             )
           ],
         ),

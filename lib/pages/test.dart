@@ -1,162 +1,261 @@
+
+import 'package:agro_invest/pages/Agriculteur/Accueil.dart';
 import 'package:flutter/material.dart';
 
-class Testt extends StatefulWidget {
-  const Testt({super.key});
+class UserProfil extends StatefulWidget {
+  const UserProfil({Key? key}) : super(key: key);
 
   @override
-  State<Testt> createState() => _TesttState();
+  State<UserProfil> createState() => _UserProfilState();
 }
 
-class _TesttState extends State<Testt> {
+class _UserProfilState extends State<UserProfil> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  String evaluer = '';
+  void partagerApplication() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF175419),
+        elevation: 0,
+        title: Center(
+          child: Text(
+            "Profil",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25,
+            ),
+          ),
+        ),
+        leading: IconButton(
+          color: Colors.white,
+          icon: const Icon(Icons.arrow_back_rounded, size: 30),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 1),
-            Container(
-              height: 200,
-              child: Image.asset("asset/images/blob.png")),
-            SingleChildScrollView(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset("asset/images/image6.jpg"),
-                   const  TextField(
-                      keyboardType: TextInputType.name,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 20.0),
-                        labelText: "Nom et Prenom",
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(255, 19, 108, 22),
-                            width: 2.0,
-                          ),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0)),
-                        ),
-                        prefixIcon: Icon(
-                          Icons.person,
-                          color: Color.fromARGB(255, 19, 108, 22),
-                        ),
-                      ),
+            Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height / 7,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(35.5),
+                      bottomRight: Radius.circular(35.5),
                     ),
-                    const SizedBox(height: 20),
-                    const TextField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 20.0),
-                        labelText: "Email",
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(255, 19, 108, 22),
-                            width: 2.0,
-                          ),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0)),
-                        ),
-                        prefixIcon: Icon(
-                          Icons.email,
-                          color: Color.fromARGB(255, 19, 108, 22),
-                        ),
-                      ),
-                    ),
-                   const SizedBox(height: 20),
-                   const TextField(
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 20.0),
-                        labelText: "Numéro Téléphone",
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(255, 19, 108, 22),
-                            width: 2.0,
-                          ),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0)),
-                        ),
-                        prefixIcon: Icon(
-                          Icons.phone,
-                          color: Color.fromARGB(255, 19, 108, 22),
-                        ),
-                      ),
-                    ),
-                   const SizedBox(height: 20),
-                  const  TextField(
-                      keyboardType: TextInputType.text,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 20.0),
-                        labelText: "Mot de passe",
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(255, 19, 108, 22),
-                            width: 2.0,
-                          ),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0)),
-                        ),
-                        prefixIcon: Icon(
-                          Icons.lock,
-                          color: Color.fromARGB(255, 19, 108, 22),
-                        ),
-                      ),
-                    ),
-                  const  SizedBox(height: 20),
-                   const TextField(
-                      keyboardType: TextInputType.text,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 20.0),
-                        labelText: "Confirmer le Mot de passe",
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(255, 19, 108, 22),
-                            width: 2.0,
-                          ),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0)),
-                        ),
-                        prefixIcon: Icon(
-                          Icons.lock,
-                          color: Color.fromARGB(255, 19, 108, 22),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Action à effectuer lorsqu'on appuie sur le bouton
-                      },
-                      child: Text(
-                        "Enregistrer",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 2,
-                          color: Colors.white,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 19, 108, 22),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 120,
-                            vertical: 20), // Ajustez les valeurs ici
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      
-                    ),
-                    // SizedBox(height: 100,)
-                  ]
-                  
+                    color: Color(0xFF175419),
                   ),
+                ),
+                Positioned(
+                  bottom: -80.0,
+                  child: InkWell(
+                    child: ClipOval(
+                      child: Container(
+                        width: 120,
+                        height: 120,
+                        color: Colors.blueAccent,
+                        child: Image.network(
+                          'https://www.pngall.com/wp-content/uploads/8/Young-Man-PNG-Free-Image.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                //icone du boutton modifier profile
+                Positioned(
+                  bottom: -5,
+                  right: 150,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => Accueil()),
+                      );
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 4, color: Colors.white38),
+                        color: Colors.white70,
+                      ),
+                      child: Icon(
+                        Icons.edit,
+                        color: Color(0xFF175419),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
+            const SizedBox(
+              height: 55,
+            ),
+
+            Transform.translate(
+              offset: Offset(0 ,30),
+              child:
+              Text("Souleymane Fomba",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  )),),
+
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Padding(
+                padding: EdgeInsets.all(40.0),
+                child: Column(
+                  children: [
+                    Card(
+                      elevation: 8,
+                      child: ListTile(
+                        onTap: () async {
+                          final evaluer = await EvaluerApp();
+                          if (evaluer == null || evaluer.isEmpty) return;
+                        },
+                        leading: Icon(
+                          Icons.bookmark_add_sharp,
+                          color: Colors.green,
+                        ),
+                        title: Text("Evaluer l'Application"),
+                        tileColor: Colors.white,
+                      ),
+                    ),
+                    Card(
+                      elevation: 8,
+                      child: ListTile(
+                        onTap: partagerApplication,
+                        leading: Icon(
+                          Icons.share,
+                          color: Colors.blue,
+                        ),
+                        title: Text("Partager l'application"),
+                        tileColor: Colors.white,
+                      ),
+                    ),
+
+                    Card(
+                      elevation: 8,
+                      child: ListTile(
+                        onTap: () {
+                          Apropos();
+                        },
+                        leading: Icon(
+                          Icons.help_outline,
+                          color: Colors.black,
+                        ),
+                        title: Text("A Propos"),
+                        tileColor: Colors.white,
+                      ),
+                    ),
+                    Card(
+                      elevation: 8,
+                      child: ListTile(
+                        onTap: () {
+                          SuprimerCompte();
+                        },
+                        leading: Icon(
+                          Icons.delete_forever_rounded,
+                          color: Colors.red,
+                        ),
+                        title: Text("Demander la Suppression de mon Compte"),
+                        tileColor: Colors.white,
+                      ),
+                    ),
+                    Card(
+                      elevation: 8,
+                      margin: EdgeInsets.only(top: 50),
+                      child: ListTile(
+                        onTap: () {
+                          sedeconecter();
+                        },
+                        title: Center(
+                          child: Text(
+                            "Se Déconnecter",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        tileColor: Colors.green,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
     );
+  }
+
+  Future EvaluerApp() => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Evaluez l\'Application'),
+        content: TextField(
+          autofocus: true,
+          decoration: InputDecoration(hintText: 'Saisir une Note'),
+        ),
+        actions: [
+          TextButton(onPressed: resset, child: Text("Annuler")),
+          TextButton(onPressed: submit, child: Text('Envoyer')),
+        ],
+      ));
+
+  Future Apropos() => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+            'Notre application de gestion de budget est un outil qui vous permet  de suivre, de gérer et d\'analyser vos dépenses et vos revenus pour mieux gérer vos finances personnelles.'),
+        actions: [
+          TextButton(onPressed: resset, child: Text("Fermer")),
+        ],
+      ));
+  Future sedeconecter() => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Voulez ête sur le point de vous deconnecter"),
+        actions: [
+          TextButton(onPressed: resset, child: Text("Annuler")),
+          TextButton(onPressed: resset, child: Text("Se deconnecter")),
+        ],
+      ));
+  Future SuprimerCompte() => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("En enpuiyant sur \"Envoyer\" votre compte sera supprimer au cours des 72h prochain"),
+        actions: [
+          TextButton(onPressed: resset, child: Text("Annuler")),
+          TextButton(onPressed: resset, child: Text("Envoyer")),
+        ],
+      ));
+  void submit() {
+    Navigator.of(context).pop();
+  }
+
+  void resset() {
+    Navigator.pop(context);
   }
 }

@@ -79,14 +79,14 @@ class _NouveauMotdePasseState extends State<NouveauMotdePasse> {
 
                   Container(
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(horizontal: 45, vertical: 20),
+                      style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(horizontal: 85, vertical: 18),
                           backgroundColor: Color(0xA8008000),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
                       onPressed: ()  {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MotDePasseChanger()));
                       },
-                      child: Text("Retour sur la page de connexion",
-                        style: TextStyle(fontSize: 13,
+                      child: Text("Enrregistrer",
+                        style: TextStyle(fontSize: 20,
                             fontWeight: FontWeight.bold),),
                     ),
                   ),

@@ -1,4 +1,8 @@
+import 'package:agro_invest/pages/Formations/Formations.dart';
+import 'package:agro_invest/pages/Forum.dart';
 import 'package:agro_invest/pages/MesDemandes.dart';
+import 'package:agro_invest/pages/Messages.dart';
+import 'package:agro_invest/pages/OffreAProximite.dart';
 import 'package:agro_invest/pages/SideBar.dart';
 import 'package:agro_invest/pages/SideBarre/Parametre.dart';
 import 'package:agro_invest/pages/SideBarre/PartagerApplication.dart';
@@ -18,53 +22,58 @@ class _AccueilState extends State<Accueil> {
   Widget build(BuildContext context) {
     //images dans le carousel
     List<String> imagePath = [
-      "asset/images/slider1.png",
-      "asset/images/slider2.png",
-      "asset/images/slider3.png",
-      "asset/images/slider4.png",
-      "asset/images/slider5.png",
-      "asset/images/slider6.png",
-      "asset/images/slider7.png",
-      "asset/images/slider8.png",
-      "asset/images/slider9.png",
+      "asset/images/sliders/slider1.png",
+      "asset/images/sliders/slider2.png",
+      "asset/images/sliders/slider3.png",
+      "asset/images/sliders/slider4.png",
+      "asset/images/sliders/slider5.png",
+      "asset/images/sliders/slider6.png",
+      "asset/images/sliders/slider7.png",
+      "asset/images/sliders/slider8.png",
+      "asset/images/sliders/slider9.png",
+      "asset/images/sliders/slider11.png",
+      "asset/images/sliders/slider12.png",
+      "asset/images/sliders/slider13.png",
+      "asset/images/sliders/slider14.png",
+      "asset/images/sliders/slider15.png",
+      "asset/images/sliders/slider16.png",
+      "asset/images/sliders/slider17.png",
     ];
-    var container1;
+    var Container1;
     if (currentPage == DrawersSection.Accueil) {
-      container1 = Accueil();
+      Container1 = Accueil();
     } else if (currentPage == DrawersSection.Parametre) {
-      container1 = ParametrePage();
+      Container1 = ParametrePage();
     } else if (currentPage == DrawersSection.Apropos) {
-      container1 = ParametrePage();
+      Container1 = ParametrePage();
     } else if (currentPage == DrawersSection.Contacter_le_Supports) {
-      container1 = ParametrePage();
+      Container1 = ParametrePage();
     } else if (currentPage == DrawersSection.Aide) {
-      container1 = ParametrePage();
+      Container1 = ParametrePage();
     } else if (currentPage == DrawersSection.Partager_lapplication) {
-      container1 = PartagerApplication();
+      Container1 = PartagerApplication();
     } else if (currentPage == DrawersSection.noter) {
-      container1 = ParametrePage();
+      Container1 = ParametrePage();
     } else if (currentPage == DrawersSection.Se_Deconnecter) {
-      container1 = ParametrePage();
+      Container1 = ParametrePage();
     }
 
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: Center(child: Text("Accueil")),
-          backgroundColor: Color(0xA8008000),
         ),
         body: Column(
           children: [
             Container(
               child: content(context, imagePath),
             ),
-            //SizedBox(height: 5,),
             //les cards  sur la page d'accueil
             Expanded(
               child: GridView(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.8,
+                  childAspectRatio: 1.1,
                 ),
                 scrollDirection: Axis.vertical,
                 children: [
@@ -82,11 +91,11 @@ class _AccueilState extends State<Accueil> {
                //     color: Colors.grey,
                     child: Column(
                       children: [
-                        Image.asset("asset/images/demande.jpg"),
+                        Image.asset("asset/images/demande.jpg",height: 125,),
                           FittedBox(
                             child: Text(
                               "Mes Demandes",
-                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                             ),
                           ),
                         //IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios_rounded,color: Colors.green,),)
@@ -97,7 +106,9 @@ class _AccueilState extends State<Accueil> {
               ),
 
                 InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Formations()));
+                    },
                     child: Card(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                         shape: RoundedRectangleBorder(
@@ -107,12 +118,12 @@ class _AccueilState extends State<Accueil> {
                     //      color: Colors.grey,
                           child: Column(
                             children: [
-                              Image.asset("asset/images/formations2.jpg"),
+                              Image.asset("asset/images/formations2.jpg",height: 125,),
                               FittedBox(
                                 child: Text(
                                   "Formations",
                                   style: TextStyle(
-                                      fontSize: 20, fontWeight: FontWeight.bold),
+                                      fontSize: 15, fontWeight: FontWeight.bold),
                                 ),
                               )
                             ],
@@ -120,7 +131,9 @@ class _AccueilState extends State<Accueil> {
                         )),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>OffreAProximite()));
+                    },
                     child: Card(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         shape: RoundedRectangleBorder(
@@ -130,12 +143,12 @@ class _AccueilState extends State<Accueil> {
                           //color: Colors.grey,
                           child: Column(
                             children: [
-                              Image.asset("asset/images/proximite2.jpg"),
+                              Image.asset("asset/images/proximite2.jpg",height: 125,),
                               FittedBox(
                                 child: Text(
                                   "Offre à proximité",
                                   style: TextStyle(
-                                      fontSize: 20, fontWeight: FontWeight.bold),
+                                      fontSize: 15, fontWeight: FontWeight.bold),
                                 ),
                               )
                             ],
@@ -143,7 +156,9 @@ class _AccueilState extends State<Accueil> {
                         )),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Forums()));
+                    },
                     child: Card(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         shape: RoundedRectangleBorder(
@@ -153,12 +168,12 @@ class _AccueilState extends State<Accueil> {
                          // color: Colors.grey,
                           child: Column(
                             children: [
-                              Image.asset("asset/images/forums2.jpg"),
+                              Image.asset("asset/images/forums2.jpg",height: 125,),
                               FittedBox(
                                 child: Text(
                                   "Forums de Discutions",
                                   style: TextStyle(
-                                      fontSize: 20, fontWeight: FontWeight.bold),
+                                      fontSize: 15, fontWeight: FontWeight.bold),
                                 ),
                               )
                             ],
@@ -166,7 +181,9 @@ class _AccueilState extends State<Accueil> {
                         )),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Messages()));
+                    },
                     child: Card(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         shape: RoundedRectangleBorder(
@@ -176,12 +193,12 @@ class _AccueilState extends State<Accueil> {
                         //  color: Colors.grey,
                           child: Column(
                             children: [
-                              Image.asset("asset/images/message23.jpg"),
+                              Image.asset("asset/images/message23.jpg",height: 125,),
                               FittedBox(
                                 child: Text(
                                   "Messages",
                                   style: TextStyle(
-                                      fontSize: 20, fontWeight: FontWeight.bold),
+                                      fontSize: 15, fontWeight: FontWeight.bold),
                                 ),
                               )
                             ],
@@ -200,6 +217,9 @@ class _AccueilState extends State<Accueil> {
                 children: [
                   MonHearderDrawer(),
                   MonheaderDrawerList(),
+                 /* Container(
+                    child: Container1,
+                  )*/
                 ],
               ),
             ),

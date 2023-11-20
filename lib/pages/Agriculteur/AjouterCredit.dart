@@ -11,6 +11,17 @@ class FaireUneDemane extends StatefulWidget {
 }
 
 class _FaireUneDemaneState extends State<FaireUneDemane> {
+  Map creditData = {};
+  final _formkey= GlobalKey<FormState>();
+  final _nomController=TextEditingController();
+  final _montantController=TextEditingController();
+  final _dateDebuitController=TextEditingController();
+  final _descriptionController=TextEditingController();
+  final _durreController=TextEditingController();
+  final _audioController=TextEditingController();
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,11 +40,13 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                 fontSize: 18, color: MesCouleur().couleurPrincipal),),),
             Expanded(child: SingleChildScrollView(
               child: Form(
+                key: _formkey,
                 child: Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextField(
+                        controller: _nomController,
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
                         decoration: InputDecoration(
@@ -49,6 +62,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                     ),Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextField(
+                        controller: _montantController,
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
                         decoration: InputDecoration(
@@ -63,6 +77,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                     ),Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextField(
+                        controller: _durreController,
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
                         decoration: InputDecoration(
@@ -78,6 +93,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                     ),Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextFormField(
+                        controller: _descriptionController,
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
                         decoration: InputDecoration(
@@ -93,6 +109,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                     ),Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextField(
+                        controller: _audioController,
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
                         decoration: InputDecoration(
@@ -115,19 +132,21 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                             backgroundColor: Color(0xA8008000),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15))),
-                        onPressed: () async {
+                        onPressed: ()  {
                           // if (_formkey.currentState!.validate()) {
                           //   // Si le formulaire est valide, effectuer la requête API
-                          //   final email = _emailController.text; // Récupérez l'email à partir du champ de texte
-                          //   final password = _passWordController.text; // Récupérez le mot de passe à partir du champ de texte
-                          //   final success = await _agriculteurService.loginAgriculteur(email, password);
-                          //   if(success){
-                          //     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Accueil()));
-                          //   }else{
-                          //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Email ou mot de passe incorrect")));
-                          //   }
-                          // }
-
+                          /*  final nom= _nomController.text;
+                            final montant= _montantController.text;
+                            final durre= _durreController.text;
+                            final audioDescriptionPath=_audioController.text;
+                            final description = _descriptionController.text; // Récupérez le mot de passe à partir du champ de texte
+                            final success = await _agriculteurService.loginAgriculteur(email, password);
+                            if(success){
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Accueil()));
+                            }else{
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Email ou mot de passe incorrect")));
+                            }
+                          }*/
                           Navigator.of(context).push(
                               MaterialPageRoute(builder: (context) => MesDemndes()));
                         },

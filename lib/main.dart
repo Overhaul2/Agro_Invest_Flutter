@@ -1,6 +1,11 @@
 
 import 'package:agro_invest/configuration/configurationCouleur.dart';
+import 'package:agro_invest/pages/Agriculteur/Accueil.dart';
 import 'package:agro_invest/pages/Demarrage/SplashScren.dart';
+import 'package:agro_invest/pages/MotDePasse/CompteCreerEnAttente2.dart';
+import 'package:agro_invest/pages/MotDePasse/CompteCreerEnattente.dart';
+import 'package:agro_invest/pages/login.dart';
+import 'package:agro_invest/pages/test.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,15 +19,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "test",
+      title: "",
       theme: ThemeData(
         splashColor: MesCouleur().couleurPrincipal,
         primarySwatch: Colors.green,
 
       ),
       debugShowCheckedModeBanner: false,
-      home:  SplashScreen(),
+      routes: {
+        "/":(context)=>LoginAgriculteur(),
+      },
+      //home:
+            //  SplashScreen(),
+              //Accueil()
+              //CompteCreerEnAttente2(),
               //Accueil(),
+
 
     );
   }

@@ -26,7 +26,7 @@ class _MesDemndesState extends State<MesDemndes> {
           children: [
             Container(
                 child: SizedBox(
-                    child: Image.asset("asset/images/mesdemandes.jpg"))
+                    child: Image.asset("asset/images/mesdemandes.jpg",height: 250,))
             ),
             FittedBox(child: Text("Mes Demandes", style: TextStyle(fontWeight: FontWeight.bold,
             fontSize: 30, color: MesCouleur().couleurPrincipal),),),
@@ -48,13 +48,18 @@ class _MesDemndesState extends State<MesDemndes> {
                   width: 300,
                   height: 70,
                   child: Center(
-                    child: Text('Demandes En Cour',style: TextStyle(
-                      fontSize: 30,fontWeight: FontWeight.bold,
-                    ),),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Demandes En Cour',style: TextStyle(
+                        fontSize: 30,fontWeight: FontWeight.bold,
+                      ),),
+                    ),
                   ),
                 ),
               ),
-            ),Card(
+            ),
+            SizedBox(height: 15,),
+            Card(
               clipBehavior: Clip.hardEdge,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),

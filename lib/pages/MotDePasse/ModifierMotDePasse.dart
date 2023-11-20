@@ -9,6 +9,9 @@ class ModifierMotDePasse extends StatefulWidget {
 }
 
 class _ModifierMotDePasseState extends State<ModifierMotDePasse> {
+  var nonVisible=false;
+  var nonVisible2=false;
+  var nonVisible3=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +37,14 @@ class _ModifierMotDePasseState extends State<ModifierMotDePasse> {
                       padding: const EdgeInsets.only(left: 40.0,right: 40, top: 100),
                       child: TextFormField(
                         onTapOutside: (e)=>FocusScope.of(context).unfocus(),
-                        obscureText: true,
-                        validator: (value){
-                          if(value==null||value.isEmpty){
-                            return 'Veillez confirmer votre ancien mot de passe !';
-                          }
-                          return null;
+                        obscureText: nonVisible,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Veillez saisir votre Ancien mot de passe !';
+                          }if(value.length<=7){
+                            return "Le mot de passe doit conténir au moins 8 caractère";
+                          }else{
+                            return null;}
                         },
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 20),
@@ -48,6 +53,14 @@ class _ModifierMotDePasseState extends State<ModifierMotDePasse> {
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           prefixIcon: Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                              onPressed: (){
+                                setState(() {
+                                  nonVisible=!nonVisible;
+                                });
+                              },
+                              icon: Icon(nonVisible==true?Icons.visibility_off:Icons.visibility),
+                            )
                         ),
                         keyboardType: TextInputType.text,
                       ),
@@ -57,12 +70,14 @@ class _ModifierMotDePasseState extends State<ModifierMotDePasse> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 40.0,right: 40,),
                       child: TextFormField(
-                        obscureText: true,
-                        validator: (value){
-                          if(value==null||value.isEmpty){
-                            return 'Veillez confirmer votre nouveau mot de passe !';
-                          }
-                          return null;
+                        obscureText: nonVisible2,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Veillez saisir votre nouveau mot de passe !';
+                          }if(value.length<=7){
+                            return "Le mot de passe doit conténir au moins 8 caractère";
+                          }else{
+                            return null;}
                         },
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 20),
@@ -71,6 +86,14 @@ class _ModifierMotDePasseState extends State<ModifierMotDePasse> {
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           prefixIcon: Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            onPressed: (){
+                              setState(() {
+                                nonVisible2=!nonVisible2;
+                              });
+                            },
+                            icon: Icon(nonVisible==true?Icons.visibility_off:Icons.visibility),
+                          )
                         ),
                         keyboardType: TextInputType.text,
                       ),
@@ -81,12 +104,14 @@ class _ModifierMotDePasseState extends State<ModifierMotDePasse> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40.0),
                       child: TextFormField(
-                        obscureText: true,
-                        validator: (value){
-                          if(value==null||value.isEmpty){
-                            return 'Veillez saisir votre adresse email !';
-                          }
-                          return null;
+                        obscureText: nonVisible3,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Veillez saisir votre mot de passe !';
+                          }if(value.length<=7){
+                            return "Les deux mot de passe ne se corresponde pas !";
+                          }else{
+                            return null;}
                         },
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 20),
@@ -95,6 +120,14 @@ class _ModifierMotDePasseState extends State<ModifierMotDePasse> {
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           prefixIcon: Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                              onPressed: (){
+                                setState(() {
+                                  nonVisible3=!nonVisible3;
+                                });
+                              },
+                              icon: Icon(nonVisible==true?Icons.visibility_off:Icons.visibility),
+                            )
                         ),
                         keyboardType: TextInputType.text,
                       ),
