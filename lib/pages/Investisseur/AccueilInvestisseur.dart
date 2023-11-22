@@ -11,16 +11,14 @@ import 'package:agro_invest/pages/SideBarre/PartagerApplication.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import 'Demandes/MesDemandes.dart';
-
-class Accueil extends StatefulWidget {
-  const Accueil({Key? key}) : super(key: key);
+class AccueilInves extends StatefulWidget {
+  const AccueilInves({Key? key}) : super(key: key);
 
   @override
-  State<Accueil> createState() => _AccueilState();
+  State<AccueilInves> createState() => _AccueilState();
 }
 
-class _AccueilState extends State<Accueil> {
+class _AccueilState extends State<AccueilInves> {
   var currentPage = DrawersSection.Accueil;
 
   @override
@@ -90,8 +88,8 @@ class _AccueilState extends State<Accueil> {
                     elevation: 10,
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (
-                            context) => MesDemndes()));
+                       /* Navigator.push(context, MaterialPageRoute(builder: (
+                            context) => MesDemndes()));*/
                       },
                       child: Container(
                         //     color: Colors.grey,
@@ -101,7 +99,36 @@ class _AccueilState extends State<Accueil> {
                               "asset/images/demande.jpg", height: 125,),
                             FittedBox(
                               child: Text(
-                                "Mes Demandes",
+                                "Demandes/Offre",
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            //IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios_rounded,color: Colors.green,),)
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),Card(
+                    clipBehavior: Clip.hardEdge,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    elevation: 10,
+                    child: InkWell(
+                      onTap: () {
+                       /* Navigator.push(context, MaterialPageRoute(builder: (
+                            context) => MesDemndes()));*/
+                      },
+                      child: Container(
+                        //     color: Colors.grey,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              "asset/images/projetagricole.jpg", height: 125,),
+                            FittedBox(
+                              child: Text(
+                                "Projets Agricoles",
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),

@@ -1,9 +1,10 @@
 import 'package:agro_invest/configuration/configurationCouleur.dart';
-import 'package:agro_invest/pages/Agriculteur/AjouterCredit.dart';
 import 'package:agro_invest/pages/Demarrage/DemandeEnCourPage.dart';
-import 'package:agro_invest/pages/HistoriqueDemande.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+
+import '../../Investisseur/OffreCredit.dart';
+import 'HistoriqueDemande.dart';
 
 class MesDemndes extends StatefulWidget {
   const MesDemndes({Key? key}) : super(key: key);

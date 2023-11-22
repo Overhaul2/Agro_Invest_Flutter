@@ -4,6 +4,9 @@ import 'package:agro_invest/pages/Demarrage/Demo2.dart';
 import 'package:agro_invest/pages/MotDePasse/MotDePasseOublier.dart';
 import 'package:agro_invest/service/agriculteurService.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../Provider/AgriculteurPovider.dart';
 
 class LoginAgriculteur extends StatefulWidget {
   const LoginAgriculteur({Key? key}) : super(key: key);
@@ -154,8 +157,14 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
 
                               final success = await _agriculteurService.loginAgriculteur(email, password);
 
-                              if (success) {
+                              if (success!=null) {
+                                //effacer l'ancien donné s'il existe
+                                Provider.of<AgriculteurProvider>(context, listen: false).clearAgriculteur();
+                                //stocker les nouvvelle donné
+                                print(success);
+                                Provider.of<AgriculteurProvider>(context, listen: false).setAgriculteur(success);
                                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Accueil()));
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Connecter avec succè")));
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Email ou mot de passe incorrect")));
                               }

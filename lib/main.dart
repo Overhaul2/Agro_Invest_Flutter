@@ -1,5 +1,6 @@
 
 import 'package:agro_invest/configuration/configurationCouleur.dart';
+import 'package:agro_invest/pages/Agriculteur/Accueil.dart';
 import 'package:agro_invest/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';

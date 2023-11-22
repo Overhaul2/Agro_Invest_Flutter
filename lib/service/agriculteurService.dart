@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:agro_invest/model/Agriculteur.dart';
@@ -21,12 +22,12 @@ class AgriculteurService {
     required String passWord,
     required String passWordConfirm,
     required String ActiviteMenee,
-    // File ? image,
+    File ? image,
   }) async {
     try {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://10.0.2.2:8080/agriculteur/inscrire'),
+        Uri.parse('http://10.175.48.77:8080/agriculteur/inscrire'),
       );
 
       /*if (image != null) {
@@ -52,7 +53,7 @@ class AgriculteurService {
         'residense': residense,
         'activiteMenee': ActiviteMenee,
         'telephone': telephone,
-        // 'image': "",
+        'image': "",
         'passWord': passWord,
         'passWordConfirm': passWordConfirm,
       });
@@ -85,25 +86,20 @@ class AgriculteurService {
   }
 
 
-  Future<bool> loginAgriculteur(String email, String password) async {
+  Future<Agriculteur?> loginAgriculteur(String email, String password) async {
     //const apiUrl = "http://localhost:8080/agriculteur/connexion";
-    const apiUrl = "http://10.0.2.2:8080/agriculteur/connexion";
+    const apiUrl = "http://10.175.48.77:8080/agriculteur/connexion";
 
     final response =
         await http.get(Uri.parse("$apiUrl?email=$email&password=$password"));
 
     if (response.statusCode == 200) {
       // Connexion réussie
-      if (response.body == "Agriculteur connecter avec succès") {
-        return true;
-      }
-      print('Connexion réussie');
-      return false;
+      return Agriculteur.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     } else {
       print(response.body);
       // Identifiants invalides
-      print('$response');
-      return false;
+      return null;
     }
   }
 }
