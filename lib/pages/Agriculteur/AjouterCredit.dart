@@ -1,6 +1,8 @@
-import 'package:agro_invest/pages/MesDemandes.dart';
+import 'package:agro_invest/pages/Demarrage/DemandeEnCourPage.dart';
 import 'package:flutter/material.dart';
-
+import 'package:agro_invest/service/CreditService.dart';
+import 'package:provider/provider.dart';
+import '../../Provider/AgriculteurPovider.dart';
 import '../../configuration/configurationCouleur.dart';
 
 class FaireUneDemane extends StatefulWidget {
@@ -24,6 +26,8 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
 
   @override
   Widget build(BuildContext context) {
+    AgriculteurProvider agriculteurProvider = Provider.of<AgriculteurProvider>(context, listen: false);
+    CreditService creditService = CreditService(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -45,13 +49,21 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
-                      child: TextField(
+                      child: TextFormField(
                         controller: _nomController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Veillez donner un titre a votre demande !';
+                          }if(value.length<=10){
+                            return "le titre doit contenir au moins 10 caractère";
+                          }else{
+                            return null;}
+                        },
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 20),
-                          labelText: "Nom",
+                          labelText: "Titre",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10.0)),
                           ),
@@ -61,8 +73,16 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                       ),
                     ),Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
-                      child: TextField(
+                      child: TextFormField(
                         controller: _montantController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Veillez donner le montant  !';
+                          }if(value.length>=7){
+                            return "Le montant doit être inferrieur a 1Million";
+                          }else{
+                            return null;}
+                        },
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
                         decoration: InputDecoration(
@@ -74,10 +94,43 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                           prefixIcon: Icon(Icons.monetization_on_outlined,),),
                         keyboardType: TextInputType.numberWithOptions(decimal: false,signed: false),
                       ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
+                      child: TextFormField(
+                        controller: _dateDebuitController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Veillez fournir le délait pout rembourser !';
+                          }if(value.length>=11){
+                            return "le délait est trop longue";
+                          }else{
+                            return null;}
+                        },
+                        onTapOutside: (e) =>FocusScope.of(context).unfocus(),
+                        //obscureText: true,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(vertical: 20),
+                          labelText: "Date Debut",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                          prefixIcon: Icon(Icons.timelapse_outlined,),
+                        ),
+                        keyboardType: TextInputType.numberWithOptions(signed: false,decimal: false),
+                      ),
                     ),Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
-                      child: TextField(
+                      child: TextFormField(
                         controller: _durreController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Veillez fournir le délait pout rembourser !';
+                          }if(value.length>=3){
+                            return "le délait est trop longue";
+                          }else{
+                            return null;}
+                        },
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
                         decoration: InputDecoration(
@@ -90,11 +143,20 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                         ),
                         keyboardType: TextInputType.numberWithOptions(signed: false,decimal: false),
                       ),
-                    ),Padding(
+                    ),
+
+                    Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextFormField(
                         controller: _descriptionController,
-                        onTapOutside: (e) =>FocusScope.of(context).unfocus(),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Veillez donner un titre a votre demande !';
+                          }if(value.length<=20){
+                            return "description trop court";
+                          }else{
+                            return null;}
+                        },
                         //obscureText: true,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 20),
@@ -108,9 +170,8 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                       ),
                     ),Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
-                      child: TextField(
+                      child: TextFormField(
                         controller: _audioController,
-                        onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 20),
@@ -132,23 +193,34 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                             backgroundColor: Color(0xA8008000),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15))),
-                        onPressed: ()  {
-                          // if (_formkey.currentState!.validate()) {
-                          //   // Si le formulaire est valide, effectuer la requête API
-                          /*  final nom= _nomController.text;
-                            final montant= _montantController.text;
-                            final durre= _durreController.text;
-                            final audioDescriptionPath=_audioController.text;
-                            final description = _descriptionController.text; // Récupérez le mot de passe à partir du champ de texte
-                            final success = await _agriculteurService.loginAgriculteur(email, password);
-                            if(success){
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Accueil()));
-                            }else{
-                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Email ou mot de passe incorrect")));
-                            }
-                          }*/
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => MesDemndes()));
+                        onPressed: ()  async {
+                          AgriculteurProvider agriculteurProvider = Provider.of<AgriculteurProvider>(context, listen: false);
+                          CreditService creditService = CreditService(context);
+                           if (_formkey.currentState!.validate()) {
+                             try{
+                               final titre= _nomController.text;
+                               final montant= _montantController.text;
+                               final durre= _durreController.text;
+                               final dateDebut = _dateDebuitController.text;
+                               //final audioDescriptionPath=_audioController.text;
+                               final description = _descriptionController.text;
+                               final result = await creditService.ajouter(titre: titre,
+                                   montant: montant,
+                                   description: description,
+                                   durre: durre,
+                                   dateDebut: dateDebut );
+                               print('Demande effectuer avec succes : ${result.toString()}');
+                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Demande effectuer avec succès")));
+                               Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DemandeEnCour()));
+
+                             }catch(e){
+                               print('Erreur API: $e');
+                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Une erreur s'est produite ; veillez verifier toute vos information; Vous ne pouver pas envoyer deux demande avec le même nom")));
+
+                             }
+                           }
+
+
                         },
                         child: Text(
                           "Enregistrer",

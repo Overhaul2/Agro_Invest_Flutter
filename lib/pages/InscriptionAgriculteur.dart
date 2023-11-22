@@ -1,8 +1,11 @@
 import 'package:agro_invest/configuration/configurationCouleur.dart';
 import 'package:agro_invest/pages/login.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../Provider/AgriculteurPovider.dart';
 import '../service/agriculteurService.dart';
+import 'MotDePasse/CompteCreerEnattente.dart';
 
 class InscriptionAgriculteur extends StatefulWidget {
   const InscriptionAgriculteur({Key? key}) : super(key: key);
@@ -12,8 +15,8 @@ class InscriptionAgriculteur extends StatefulWidget {
 }
 
 class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
-  bool nonVisible=true;
-  bool nonVisible2=true;
+  bool nonVisibles=false;
+  bool nonVisible2=false;
   final _formkey = GlobalKey<FormState>();
   final _nomPrenomController = TextEditingController();
   final _emailController = TextEditingController();
@@ -21,7 +24,7 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
   final _ageController= TextEditingController();
   final _residenseController= TextEditingController();
   final _ActiviteMeneeController= TextEditingController();
-  final _imageController= TextEditingController();
+  //final _imageController= TextEditingController();
   final _passWordController= TextEditingController();
   final _passWordConfirmController= TextEditingController();
   @override
@@ -56,10 +59,8 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                           CircleAvatar(radius: 64,
                           backgroundImage: AssetImage("asset/images/carteid.png"),),
                           Positioned(child: IconButton(
-                            onPressed: (){
-                              SelectI
-                            },
-                            icon: Icon(Icons.camera_alt_outlined),
+                            onPressed: (){},
+                            icon: Icon(Icons.camera_alt_outlined,),
                           ),bottom:
                             -10,
                           left: 80,)
@@ -239,7 +240,7 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                             }else{
                             return null;}
                           },
-                          obscureText: nonVisible,
+                          obscureText: !nonVisibles,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(vertical: 20),
                             labelText: "Mot de Passe",
@@ -251,10 +252,10 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                             suffixIcon: IconButton(
                               onPressed: (){
                                 setState(() {
-                                  nonVisible=!nonVisible;
+                                  nonVisibles=!nonVisibles;
                                 });
                               },
-                              icon: Icon(nonVisible==true?Icons.visibility_off:Icons.visibility),
+                              icon: Icon(nonVisibles==false?Icons.visibility_off:Icons.visibility),
                             )
                           ),
                           keyboardType: TextInputType.text,
@@ -288,7 +289,7 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                                   nonVisible2=!nonVisible2;
                                 });
                               },
-                              icon: Icon(nonVisible==true?Icons.visibility_off:Icons.visibility),
+                              icon: Icon(nonVisible2==false?Icons.visibility_off:Icons.visibility),
                             )
                           ),
                           keyboardType: TextInputType.text,
@@ -303,19 +304,19 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                               backgroundColor: Color(0xA8008000),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
                           onPressed: () async {
-                            if (_formkey.currentState!.validate()){
-                              try{
-                                final nomPrenom=_nomPrenomController.text;
+                            if (_formkey.currentState!.validate()) {
+                              try {
+                                final nomPrenom = _nomPrenomController.text;
                                 final email = _emailController.text;
                                 final telephone = _telephoneController.text;
                                 final residense = _residenseController.text;
                                 final age = int.parse(_ageController.text);
                                 final ActiviteMenee = _ActiviteMeneeController.text;
-                                //final image = _imageController;
                                 final passWord = _passWordController.text;
                                 final passWordConfirm = _passWordConfirmController.text;
 
                                 final result = await AgriculteurService().inscrire(
+                                 // context: context,
                                   nomPrenom: nomPrenom,
                                   email: email,
                                   telephone: telephone,
@@ -323,25 +324,24 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                                   age: age,
                                   ActiviteMenee: ActiviteMenee,
                                   // image: image, // Ajoutez la valeur de l'image si nécessaire
-                                  password: passWord,
+                                  passWord: passWord,
                                   passWordConfirm: passWordConfirm,
                                 );
-                                print('Inscription réussie : $result');
+                                print('Inscription réussie : ${result.toString()}');
+                                print('test:${result.idAgr}');
 
+                                Provider.of<AgriculteurProvider>(context, listen: false).setAgriculteur(result);
 
-                              /* if (success) {
-                                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ()));
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Email ou mot de passe incorrect")));
-                                }*/
-                              }catch (e) {
-                                // Gérer les erreurs de la requête API ici
+                                //print('Inscription réussie : $result');
+
+                                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CompteEnAttente()));
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Inscription Effectuer avec Succès !!!   En attente de verification du compte")));
+                              } catch (e) {
                                 print('Erreur API: $e');
-                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Une erreur s'est produite; vérifier votre connection internet ")));
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Erreur:$e")));
                               }
-                              //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginAgriculteur()));
                             }
-                            },
+                          },
                           child: Text("S'inscrire",
                             style: TextStyle(fontSize: 25),),
                         ),

@@ -1,4 +1,4 @@
-class investisseur {
+class Investisseur {
   int? _idInv;
   String? _nomPrenom;
   String? _email;
@@ -61,7 +61,7 @@ class investisseur {
   set passWordConfirm(String? passWordConfirm) =>
       _passWordConfirm = passWordConfirm;
 
-  investisseur.fromJson(Map<String, dynamic> json) {
+  Investisseur.fromJson(Map<String, dynamic> json) {
     _idInv = json['idInv'];
     _nomPrenom = json['nomPrenom'];
     _email = json['email'];

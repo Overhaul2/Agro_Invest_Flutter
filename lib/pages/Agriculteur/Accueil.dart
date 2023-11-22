@@ -4,6 +4,9 @@ import 'package:agro_invest/pages/MesDemandes.dart';
 import 'package:agro_invest/pages/Messages.dart';
 import 'package:agro_invest/pages/OffreAProximite.dart';
 import 'package:agro_invest/pages/SideBar.dart';
+import 'package:agro_invest/pages/SideBarre/Aide.dart';
+import 'package:agro_invest/pages/SideBarre/Appropos.dart';
+import 'package:agro_invest/pages/SideBarre/ContacterSupport.dart';
 import 'package:agro_invest/pages/SideBarre/Parametre.dart';
 import 'package:agro_invest/pages/SideBarre/PartagerApplication.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -18,6 +21,7 @@ class Accueil extends StatefulWidget {
 
 class _AccueilState extends State<Accueil> {
   var currentPage = DrawersSection.Accueil;
+
   @override
   Widget build(BuildContext context) {
     //images dans le carousel
@@ -39,25 +43,25 @@ class _AccueilState extends State<Accueil> {
       "asset/images/sliders/slider16.png",
       "asset/images/sliders/slider17.png",
     ];
-    var Container1;
+    /* //Widget Container1 = Accueil();
     if (currentPage == DrawersSection.Accueil) {
-      Container1 = Accueil();
+     Navigator.push(context, MaterialPageRoute(builder: (context)=>Accueil()));
     } else if (currentPage == DrawersSection.Parametre) {
-      Container1 = ParametrePage();
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>ParametrePage()));;
     } else if (currentPage == DrawersSection.Apropos) {
-      Container1 = ParametrePage();
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>ApproposApplication()));;
     } else if (currentPage == DrawersSection.Contacter_le_Supports) {
-      Container1 = ParametrePage();
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>ContacterSupport()));;
     } else if (currentPage == DrawersSection.Aide) {
-      Container1 = ParametrePage();
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>ParametrePage()));
     } else if (currentPage == DrawersSection.Partager_lapplication) {
-      Container1 = PartagerApplication();
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>ParametrePage()));
     } else if (currentPage == DrawersSection.noter) {
-      Container1 = ParametrePage();
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>ParametrePage()));
     } else if (currentPage == DrawersSection.Se_Deconnecter) {
-      Container1 = ParametrePage();
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>ParametrePage()));
     }
-
+*/
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -77,53 +81,59 @@ class _AccueilState extends State<Accueil> {
                 ),
                 scrollDirection: Axis.vertical,
                 children: [
-                Card(
-                clipBehavior: Clip.hardEdge,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                elevation: 10,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>MesDemndes()));
-                  },
-                  child: Container(
-               //     color: Colors.grey,
-                    child: Column(
-                      children: [
-                        Image.asset("asset/images/demande.jpg",height: 125,),
-                          FittedBox(
-                            child: Text(
-                              "Mes Demandes",
-                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  Card(
+                    clipBehavior: Clip.hardEdge,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    elevation: 10,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (
+                            context) => MesDemndes()));
+                      },
+                      child: Container(
+                        //     color: Colors.grey,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              "asset/images/demande.jpg", height: 125,),
+                            FittedBox(
+                              child: Text(
+                                "Mes Demandes",
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
                             ),
-                          ),
-                        //IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios_rounded,color: Colors.green,),)
-                      ],
+                            //IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios_rounded,color: Colors.green,),)
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
 
-                InkWell(
+                  InkWell(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Formations()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => Formations()));
                     },
                     child: Card(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0)),
                         elevation: 10,
                         child: Container(
-                    //      color: Colors.grey,
+                          //      color: Colors.grey,
                           child: Column(
                             children: [
-                              Image.asset("asset/images/formations2.jpg",height: 125,),
+                              Image.asset(
+                                "asset/images/formations2.jpg", height: 125,),
                               FittedBox(
                                 child: Text(
                                   "Formations",
                                   style: TextStyle(
-                                      fontSize: 15, fontWeight: FontWeight.bold),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               )
                             ],
@@ -132,7 +142,8 @@ class _AccueilState extends State<Accueil> {
                   ),
                   InkWell(
                     onTap: () {
-                       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>OffreAProximite()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => OffreAProximite()));
                     },
                     child: Card(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -143,12 +154,14 @@ class _AccueilState extends State<Accueil> {
                           //color: Colors.grey,
                           child: Column(
                             children: [
-                              Image.asset("asset/images/proximite2.jpg",height: 125,),
+                              Image.asset(
+                                "asset/images/proximite2.jpg", height: 125,),
                               FittedBox(
                                 child: Text(
                                   "Offre à proximité",
                                   style: TextStyle(
-                                      fontSize: 15, fontWeight: FontWeight.bold),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               )
                             ],
@@ -157,7 +170,8 @@ class _AccueilState extends State<Accueil> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Forums()));
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => Forums()));
                     },
                     child: Card(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -165,15 +179,17 @@ class _AccueilState extends State<Accueil> {
                             borderRadius: BorderRadius.circular(15.0)),
                         elevation: 10,
                         child: Container(
-                         // color: Colors.grey,
+                          // color: Colors.grey,
                           child: Column(
                             children: [
-                              Image.asset("asset/images/forums2.jpg",height: 125,),
+                              Image.asset(
+                                "asset/images/forums2.jpg", height: 125,),
                               FittedBox(
                                 child: Text(
                                   "Forums de Discutions",
                                   style: TextStyle(
-                                      fontSize: 15, fontWeight: FontWeight.bold),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               )
                             ],
@@ -182,7 +198,8 @@ class _AccueilState extends State<Accueil> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Messages()));
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => Messages()));
                     },
                     child: Card(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -190,15 +207,17 @@ class _AccueilState extends State<Accueil> {
                             borderRadius: BorderRadius.circular(15.0)),
                         elevation: 10,
                         child: Container(
-                        //  color: Colors.grey,
+                          //  color: Colors.grey,
                           child: Column(
                             children: [
-                              Image.asset("asset/images/message23.jpg",height: 125,),
+                              Image.asset(
+                                "asset/images/message23.jpg", height: 125,),
                               FittedBox(
                                 child: Text(
                                   "Messages",
                                   style: TextStyle(
-                                      fontSize: 15, fontWeight: FontWeight.bold),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               )
                             ],
@@ -217,7 +236,7 @@ class _AccueilState extends State<Accueil> {
                 children: [
                   MonHearderDrawer(),
                   MonheaderDrawerList(),
-                 /* Container(
+                  /* Container(
                     child: Container1,
                   )*/
                 ],
@@ -260,29 +279,33 @@ class _AccueilState extends State<Accueil> {
   Widget content(BuildContext context, List<String> images) {
     return Container(
         child: CarouselSlider(
-      items: images.map((imagePath) {
-        return Container(
-          width: MediaQuery.of(context).size.width,
-          margin: EdgeInsets.symmetric(horizontal: 5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Center(
-            child: Image.asset(
-              (imagePath),
-            ),
-          ),
-        );
-      }).toList(),
-      options: CarouselOptions(
+          items: images.map((imagePath) {
+            return Container(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
+              margin: EdgeInsets.symmetric(horizontal: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Image.asset(
+                  (imagePath),
+                ),
+              ),
+            );
+          }).toList(),
+          options: CarouselOptions(
 //        height: 00,
-        autoPlay: true,
-        aspectRatio: 16 / 9,
-        viewportFraction: 1,
-        autoPlayCurve: Curves.easeInCubic,
-      ),
-    ));
+            autoPlay: true,
+            aspectRatio: 16 / 9,
+            viewportFraction: 1,
+            autoPlayCurve: Curves.easeInCubic,
+          ),
+        ));
   }
+
 //side bare widget
   Widget MonheaderDrawerList() {
     return Container(
@@ -298,9 +321,11 @@ class _AccueilState extends State<Accueil> {
               currentPage == DrawersSection.Parametre ? true : false),
           menuItem(3, "Apropos", Icons.info_outline,
               currentPage == DrawersSection.Apropos ? true : false),
-          menuItem(4,"Contacter le Support",
+          menuItem(4, "Contacter le Support",
               Icons.contact_support_outlined,
-              currentPage == DrawersSection.Contacter_le_Supports ? true : false),
+              currentPage == DrawersSection.Contacter_le_Supports
+                  ? true
+                  : false),
           menuItem(5, "Aide", Icons.add_task,
               currentPage == DrawersSection.Aide ? true : false),
           menuItem(6, "Partager l'Application",
@@ -350,10 +375,10 @@ class _AccueilState extends State<Accueil> {
               //taille de l'icone side
               Expanded(
                   child: Icon(
-                icon,
-                size: 30,
-                color: Colors.black87,
-              )),
+                    icon,
+                    size: 30,
+                    color: Colors.black87,
+                  )),
               //taille du texte side
               Expanded(
                 flex: 3,

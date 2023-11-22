@@ -79,7 +79,7 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 35.0),
                         child: TextFormField(
-                         obscureText: nonVisible,
+                          obscureText: nonVisible,
                           controller: _passWordController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -90,24 +90,24 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                               return null;}
                           },
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(vertical: 20),
-                            labelText: "Mot de Passe",
-                            border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(10.0)),
-                            ),
-                            prefixIcon:
-                            Icon(Icons.lock, color: Color(0xA8008000)),
-                            suffixIcon: IconButton(
-                              onPressed: (){
-                                setState(() {
-                                  nonVisible=!nonVisible;
-                                });
-                              },
-                              icon: Icon(
-                                nonVisible==true?Icons.visibility_off:Icons.visibility
+                              contentPadding: EdgeInsets.symmetric(vertical: 20),
+                              labelText: "Mot de Passe",
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
                               ),
-                            )
+                              prefixIcon:
+                              Icon(Icons.lock, color: Color(0xA8008000)),
+                              suffixIcon: IconButton(
+                                onPressed: (){
+                                  setState(() {
+                                    nonVisible=!nonVisible;
+                                  });
+                                },
+                                icon: Icon(
+                                    nonVisible==true?Icons.visibility_off:Icons.visibility
+                                ),
+                              )
                           ),
                           keyboardType: TextInputType.name,
                         ),
@@ -211,8 +211,8 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
       ),
     );
   }
-  //FONCTION pour faire appel a la methode post api
+//FONCTION pour faire appel a la methode post api
 //Future<void> login() async {
-  //  await http.post(Uri.parse("http://localhost:8080/agriculteur/inscrire"), body: ({}));
+//  await http.post(Uri.parse("http://localhost:8080/agriculteur/inscrire"), body: ({}));
 //}
 }
