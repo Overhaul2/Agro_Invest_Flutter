@@ -60,7 +60,7 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                           backgroundImage: AssetImage("asset/images/carteid.png"),),
                           Positioned(child: IconButton(
                           onPressed: (){
-                            showModalBottomSheet(context: context, builder: ((builder)=>bottomSheet()));
+
                           }  
                           ,
                             icon: Icon(Icons.camera_alt_outlined,),
@@ -389,6 +389,8 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
   }
 }
 
+
+/*
 Widget bottomSheet(){
   return Container(
     height: 100.0,
@@ -414,3 +416,4 @@ Widget bottomSheet(){
     ),
   );
 }
+*/

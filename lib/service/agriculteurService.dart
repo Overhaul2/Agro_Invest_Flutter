@@ -1,10 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:html';
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:agro_invest/model/Agriculteur.dart';
-import 'package:provider/provider.dart';
 
 import '../Provider/AgriculteurPovider.dart';
 
