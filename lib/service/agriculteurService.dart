@@ -22,7 +22,7 @@ class AgriculteurService {
     required String passWord,
     required String passWordConfirm,
     required String ActiviteMenee,
-    File ? image,
+     //File ? image,
   }) async {
     try {
       var request = http.MultipartRequest(
@@ -53,7 +53,7 @@ class AgriculteurService {
         'residense': residense,
         'activiteMenee': ActiviteMenee,
         'telephone': telephone,
-        'image': "",
+        //'image': "",
         'passWord': passWord,
         'passWordConfirm': passWordConfirm,
       });

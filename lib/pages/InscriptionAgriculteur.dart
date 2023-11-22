@@ -59,7 +59,10 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                           CircleAvatar(radius: 64,
                           backgroundImage: AssetImage("asset/images/carteid.png"),),
                           Positioned(child: IconButton(
-                            onPressed: (){},
+                          onPressed: (){
+                            showModalBottomSheet(context: context, builder: ((builder)=>bottomSheet()));
+                          }  
+                          ,
                             icon: Icon(Icons.camera_alt_outlined,),
                           ),bottom:
                             -10,
@@ -384,4 +387,30 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
       ),
     );
   }
+}
+
+Widget bottomSheet(){
+  return Container(
+    height: 100.0,
+    width: 100,
+    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+    child: Column(
+      children: <Widget>[
+        Text("Choisir une Photo de Profile", style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: MesCouleur().couleurPrincipal
+        ),),
+        SizedBox(height: 20,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextButton(onPressed: (){}, child: Icon(Icons.camera_alt)),
+            TextButton(onPressed: (){}, child: Icon(Icons.image)),
+
+          ],
+        )
+      ],
+    ),
+  );
 }
