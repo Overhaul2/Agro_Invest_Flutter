@@ -1,6 +1,12 @@
+import 'package:agro_invest/Provider/InvestisseurProvider.dart';
 import 'package:agro_invest/configuration/configurationCouleur.dart';
+import 'package:agro_invest/pages/Investisseur/AccueilInvestisseur.dart';
 import 'package:agro_invest/pages/login.dart';
+import 'package:agro_invest/service/investisseurService.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'MotDePasse/CompteCreerEnattente.dart';
 
 class InscriptionInvestisseur extends StatefulWidget {
   const InscriptionInvestisseur({Key? key}) : super(key: key);
@@ -73,14 +79,14 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                                 BorderRadius.all(Radius.circular(10.0)),
                           ),
                           prefixIcon:
-                              Icon(Icons.person, color: Color(0xA8008000)),
+                              Icon(Icons.person),
                         ),
                         keyboardType: TextInputType.name,
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 35.0),
@@ -104,13 +110,13 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         ),
                         prefixIcon:
-                            Icon(Icons.email_rounded, color: Color(0xA8008000)),
+                            Icon(Icons.email_rounded),
                       ),
                       keyboardType: TextInputType.emailAddress,
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Container(
                     child: Padding(
@@ -141,8 +147,36 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                      child: TextFormField(
+                        onTapOutside: (e) => FocusScope.of(context).unfocus(),
+                        controller: _residenseController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Veillez saisir votre vile de residense !';
+                          }if(value.length<=3){
+                            return "veillez saisir un nom de résidense correct";
+                          }else{
+                            return null;}
+                        },
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(vertical: 20),
+                          labelText: "Résidence",
+                          border: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                          prefixIcon:
+                          Icon(Icons.house),
+                        ),
+                        keyboardType: TextInputType.name,
+                      ),
+                    ),
+                  ),SizedBox(height: 15,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 35.0),
                     child: TextFormField(
@@ -155,7 +189,7 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                         }else{
                           return null;}
                       },
-                      obscureText: nonVisible,
+                      obscureText: !nonVisible,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(vertical: 20),
                         labelText: "Mot de Passe",
@@ -176,7 +210,7 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 35.0),
@@ -190,14 +224,14 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                         }else{
                           return null;}
                       },
-                      obscureText: nonVisible2,
+                      obscureText: !nonVisible2,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(vertical: 20),
                         labelText: "Confirmer le Mot de Passe",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         ),
-                        prefixIcon: Icon(Icons.lock, color: Color(0xA8008000)),
+                        prefixIcon: Icon(Icons.lock),
                         suffixIcon: IconButton(
                           onPressed: (){
                             setState(() {
@@ -205,14 +239,14 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                             });
 
                           },
-                          icon: Icon(nonVisible==true?Icons.visibility_off:Icons.visibility),
+                          icon: Icon(nonVisible2==true?Icons.visibility_off:Icons.visibility),
                         ),
                       ),
                       keyboardType: TextInputType.text,
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Container(
                     child: ElevatedButton(
@@ -222,9 +256,38 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                           backgroundColor: Color(0xA8008000),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15))),
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => LoginAgriculteur()));
+                      onPressed: () async {
+                        if( _formkey.currentState!.validate()){
+                          try{
+                            final nomPrenom = _nomPrenomController.text;
+                            final email = _emailController.text;
+                            final telephone = _telephoneController.text;
+                            final residense = _residenseController.text;
+                            final passWord = _passWordController.text;
+                            final passWordConfirm = _passWordConfirmController
+                                .text;
+                            final result = await InvestisseurService().inscrire(
+                                nomPrenom: nomPrenom,
+                                email: email,
+                                telephone: telephone,
+                                residense: residense,
+                                passWord: passWord,
+                                passWordConfirm: passWordConfirm);
+                            print('Investisseur inscrit:${result.toString()}');
+                            print(('idInv:${result.idInv}'));
+                            Provider.of<InvestisseurProvider>(context, listen: false).setInvestisseur(result);
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (context) =>
+                                    AccueilInves()));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(
+                                    "Inscription Effectuer avec Succès !!! ")));
+                          }catch(e){
+                            print('Erreur API: $e');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Erreur:$e")));
+                          }
+                        }
                       },
                       child: Text(
                         "S'inscrire",

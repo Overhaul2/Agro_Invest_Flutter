@@ -1,97 +1,120 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
+import 'package:agro_invest/model/Agriculteur.dart';
+import 'package:agro_invest/model/Investisseur.dart';
+
 class Credit {
-  int? _idCredit;
-  String? _titre;
-  String? _montant;
-  String? _dateDebut;
-  int? _durre;
-  String? _description;
-  Null? _audioDescriptionPath;
-  Null? _agriculteur;
-  Null? _offreInvestisseur;
+  int? idCredit;
+  String? titre;
+  String? montant;
+  String? dateDebut;
+  int? durre;
+  String? description;
+  String? audioDescriptionPath;
+  Agriculteur? agriculteur;
+  Investisseur? offreInvestisseur;
 
-  Credit(
-      {int? idCredit,
-        String? titre,
-        String? montant,
-        String? dateDebut,
-        int? durre,
-        String? description,
-        Null? audioDescriptionPath,
-        Null? agriculteur,
-        Null? offreInvestisseur}) {
-    if (idCredit != null) {
-      this._idCredit = idCredit;
-    }
-    if (titre != null) {
-      this._titre = titre;
-    }
-    if (montant != null) {
-      this._montant = montant;
-    }
-    if (dateDebut != null) {
-      this._dateDebut = dateDebut;
-    }
-    if (durre != null) {
-      this._durre = durre;
-    }
-    if (description != null) {
-      this._description = description;
-    }
-    if (audioDescriptionPath != null) {
-      this._audioDescriptionPath = audioDescriptionPath;
-    }
-    if (agriculteur != null) {
-      this._agriculteur = agriculteur;
-    }
-    if (offreInvestisseur != null) {
-      this._offreInvestisseur = offreInvestisseur;
-    }
+  Credit({
+    this.idCredit,
+    this.titre,
+    this.montant,
+    this.dateDebut,
+    this.durre,
+    this.description,
+    this.audioDescriptionPath,
+    this.agriculteur,
+    this.offreInvestisseur,
+  });
+
+
+  Credit copyWith({
+    int? idCredit,
+    String? titre,
+    String? montant,
+    String? dateDebut,
+    int? duree,
+    String? description,
+    String? audioDescriptionPath,
+    Agriculteur? agriculteur,
+    Investisseur? offreInvestisseur,
+  }) {
+    return Credit(
+      idCredit: idCredit ?? this.idCredit,
+      titre: titre ?? this.titre,
+      montant: montant ?? this.montant,
+      dateDebut: dateDebut ?? this.dateDebut,
+      durre: duree ?? this.durre,
+      description: description ?? this.description,
+      audioDescriptionPath: audioDescriptionPath ?? this.audioDescriptionPath,
+      agriculteur: agriculteur ?? this.agriculteur,
+      offreInvestisseur: offreInvestisseur ?? this.offreInvestisseur,
+    );
   }
 
-  int? get idCredit => _idCredit;
-  set idCredit(int? idCredit) => _idCredit = idCredit;
-  String? get titre => _titre;
-  set titre(String? titre) => _titre = titre;
-  String? get montant => _montant;
-  set montant(String? montant) => _montant = montant;
-  String? get dateDebut => _dateDebut;
-  set dateDebut(String? dateDebut) => _dateDebut = dateDebut;
-  int? get durre => _durre;
-  set durre(int? durre) => _durre = durre;
-  String? get description => _description;
-  set description(String? description) => _description = description;
-  Null? get audioDescriptionPath => _audioDescriptionPath;
-  set audioDescriptionPath(Null? audioDescriptionPath) =>
-      _audioDescriptionPath = audioDescriptionPath;
-  Null? get agriculteur => _agriculteur;
-  set agriculteur(Null? agriculteur) => _agriculteur = agriculteur;
-  Null? get offreInvestisseur => _offreInvestisseur;
-  set offreInvestisseur(Null? offreInvestisseur) =>
-      _offreInvestisseur = offreInvestisseur;
-
-  Credit.fromJson(Map<String, dynamic> json) {
-    _idCredit = json['idCredit'];
-    _titre = json['titre'];
-    _montant = json['montant'];
-    _dateDebut = json['dateDebut'];
-    _durre = json['durre'];
-    _description = json['description'];
-    _audioDescriptionPath = json['audioDescriptionPath'];
-    _agriculteur = json['agriculteur'];
-    _offreInvestisseur = json['offreInvestisseur'];
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'idCredit': idCredit,
+      'titre': titre,
+      'montant': montant,
+      'dateDebut': dateDebut,
+      'durre': durre,
+      'description': description,
+      'audioDescriptionPath': audioDescriptionPath,
+      'agriculteur': agriculteur?.toJson(),
+      'offreInvestisseur': offreInvestisseur?.toJson(),
+    };
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['idCredit'] = this._idCredit;
-    data['titre'] = this._titre;
-    data['montant'] = this._montant;
-    data['dateDebut'] = this._dateDebut;
-    data['durre'] = this._durre;
-    data['description'] = this._description;
-    data['audioDescriptionPath'] = this._audioDescriptionPath;
-    data['agriculteur'] = this._agriculteur;
-    data['offreInvestisseur'] = this._offreInvestisseur;
-    return data;
+  factory Credit.fromMap(Map<String, dynamic> map) {
+    return Credit(
+      idCredit: map['idCredit'] != null ? map['idCredit'] as int : null,
+      titre: map['titre'] != null ? map['titre'] as String : null,
+      montant: map['montant'] != null ? map['montant'] as String : null,
+      dateDebut: map['dateDebut'] != null ? map['dateDebut'] as String : null,
+      durre: map['duree'] != null ? map['durre'] as int : null,
+      description: map['description'] != null ? map['description'] as String : null,
+      audioDescriptionPath: map['audioDescriptionPath'] != null ? map['audioDescriptionPath'] as String : null,
+      agriculteur: map['agriculteur'] != null ? Agriculteur.fromJson(map['agriculteur'] as Map<String,dynamic>) : null,
+      offreInvestisseur: map['offreInvestisseur'] != null ? Investisseur.fromJson(map['offreInvestisseur'] as Map<String,dynamic>) : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Credit.fromJson(String source) => Credit.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'Credit(idCredit: $idCredit, titre: $titre, montant: $montant, dateDebut: $dateDebut, duree: $durre, description: $description, audioDescriptionPath: $audioDescriptionPath, agriculteur: $agriculteur, offreInvestisseur: $offreInvestisseur)';
+  }
+
+  @override
+  bool operator ==(covariant Credit other) {
+    if (identical(this, other)) return true;
+  
+    return 
+      other.idCredit == idCredit &&
+      other.titre == titre &&
+      other.montant == montant &&
+      other.dateDebut == dateDebut &&
+      other.durre == durre &&
+      other.description == description &&
+      other.audioDescriptionPath == audioDescriptionPath &&
+      other.agriculteur == agriculteur &&
+      other.offreInvestisseur == offreInvestisseur;
+  }
+
+  @override
+  int get hashCode {
+    return idCredit.hashCode ^
+      titre.hashCode ^
+      montant.hashCode ^
+      dateDebut.hashCode ^
+      durre.hashCode ^
+      description.hashCode ^
+      audioDescriptionPath.hashCode ^
+      agriculteur.hashCode ^
+      offreInvestisseur.hashCode;
   }
 }

@@ -7,7 +7,7 @@ import 'dart:convert';
 
 import '../Provider/AgriculteurPovider.dart';
 
-import '../model/AjouterCredit.dart';
+import '../model/AjouterCreditmodel.dart';
 
 class CreditService{
   final BuildContext context;
@@ -46,7 +46,6 @@ class CreditService{
       print(Provider.of<AgriculteurProvider>(context,listen: false).agriculteur!.toJson());
 
       var response = await request.send();
-
       if (response.statusCode == 200 || response.statusCode == 201) {
         final responseData =
         json.decode(await response.stream.bytesToString());

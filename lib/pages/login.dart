@@ -1,8 +1,11 @@
+import 'package:agro_invest/Provider/InvestisseurProvider.dart';
 import 'package:agro_invest/configuration/configurationCouleur.dart';
 import 'package:agro_invest/pages/Agriculteur/Accueil.dart';
 import 'package:agro_invest/pages/Demarrage/Demo2.dart';
+import 'package:agro_invest/pages/Investisseur/AccueilInvestisseur.dart';
 import 'package:agro_invest/pages/MotDePasse/MotDePasseOublier.dart';
 import 'package:agro_invest/service/agriculteurService.dart';
+import 'package:agro_invest/service/investisseurService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +25,7 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
   final _emailController = TextEditingController();
   final _passWordController = TextEditingController();
   AgriculteurService _agriculteurService = AgriculteurService();
+  InvestisseurService _investisseurService= InvestisseurService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,6 +160,7 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                               final password = _passWordController.text;
 
                               final success = await _agriculteurService.loginAgriculteur(email, password);
+                              final success1 = await _investisseurService.loginInvestisseur(email, password);
 
                               if (success!=null) {
                                 //effacer l'ancien donné s'il existe
@@ -164,14 +169,24 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                                 print(success);
                                 Provider.of<AgriculteurProvider>(context, listen: false).setAgriculteur(success);
                                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Accueil()));
-                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Connecter avec succè")));
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Email ou mot de passe incorrect")));
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Connecté avec succès en tant qu'agriculteur")));
+                              } else if(success1!=null) {
+
+                                //effacer l'ancien donné s'il existe
+                                Provider.of<InvestisseurProvider>(context, listen: false).clearInvestisseur();
+                                //stocker les nouvvelle donné
+                                print(success);
+                                Provider.of<InvestisseurProvider>(context, listen: false).setInvestisseur(success1);
+                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AccueilInves()));
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Connecté avec succès en tant qu'investisseur")));
+                              }else{
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text("adress email ou mot de passe incorrect")));
                               }
                             } catch (e) {
                               // gestion des erreurs de la requête API
                               print('Erreur API: $e');
-                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Une erreur s'est produite")));
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Connecté avec succès en tant qu'investisseur")));
                             }
                           }
                         },
