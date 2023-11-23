@@ -99,7 +99,6 @@ class AgriculteurService {
       return null;
     }
   }
-List<Credit> ListeCredit = [];
   //liste des demande effectuer
 
   List<Credit> parseCredit(String responseBody) {
@@ -147,7 +146,7 @@ List<Credit> ListeCredit = [];
 
   Future<List<Credit>> getCreditByAgriculteurId(int idAgr) async {
     final response = await http
-        .get(Uri.parse("http://10.175.48.77:8080/Credit/affichertout"));
+        .get(Uri.parse("http://10.0.2.2:8080/Credit/affichertout"));
 
     if (response.statusCode == 200) {
       final List<Credit> tousLesCredits = parseCredit(response.body);
