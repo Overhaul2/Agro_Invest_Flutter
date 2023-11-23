@@ -1,5 +1,6 @@
 
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:agro_invest/configuration/configurationCouleur.dart';
 import 'package:agro_invest/pages/login.dart';
@@ -19,8 +20,8 @@ class InscriptionAgriculteur extends StatefulWidget {
 }
 
 class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
-  late XFile _imageFile;
-  final ImagePicker _picker = ImagePicker();
+  Uint8List? _image;
+  File? selectedIMage;
 
   bool nonVisibles = false;
   bool nonVisible2 = false;
@@ -66,21 +67,32 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                     children: [
                       Stack(
                         children: <Widget>[
-                         Stack(
-                           children: [
-                             InkWell(
-                               onTap: () {
-                                 showModalBottomSheet(context: context,
-                                     builder: ((builder) => bottomSheet()));
-                               },
-                               child: CircleAvatar(radius: 64,
-                                 child:Image.asset("asset/images/user1.png"),
-
-                                   //image: (imageFile != null) ? FileImage(imageFile!) as ImageProvider : AssetImage("assets/xxx.png")
-                               ),
-                             ),
-                           ],
-                         )
+                          Stack(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                },
+                                child: CircleAvatar(radius: 64,
+                                  child: Center(
+                                    child: InkWell(
+                                      onTap: (){showImagePickerOption(context);},
+                                      child: Stack(
+                                        children: [
+                                          _image != null
+                                              ? CircleAvatar(
+                                              radius: 100, backgroundImage: MemoryImage(_image!))
+                                              : const CircleAvatar(
+                                            radius: 100,
+                                            backgroundImage: AssetImage("asset/images/user1.jpg"),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                       FittedBox(child: Text(
@@ -453,46 +465,85 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
     );
   }
 
-//prendre la photo choisi par user
-  void takePhoto(ImageSource source) async {
-    final pickedFile = await _picker.pickImage(
-      source: source,
-    );
-
-    setState(() {
-      _imageFile = pickedFile as XFile;
-    });
+  void showImagePickerOption(BuildContext context) {
+    showModalBottomSheet(
+        backgroundColor: Colors.blue[100],
+        context: context,
+        builder: (builder) {
+          return Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 4.5,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        _pickImageFromGallery();
+                      },
+                      child: const SizedBox(
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.image,
+                              size: 70,
+                            ),
+                            Text("Gallery")
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        _pickImageFromCamera();
+                      },
+                      child: const SizedBox(
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.camera_alt,
+                              size: 70,
+                            ),
+                            Text("Camera")
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 
 
-  Widget bottomSheet() {
-    return Container(
-      height: 100.0,
-      width: 100,
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      child: Column(
-        children: <Widget>[
-          Text("Choisir une Photo de Profile", style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: MesCouleur().couleurPrincipal
-          ),),
-          SizedBox(height: 20,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextButton(onPressed: () {
-                takePhoto(ImageSource.camera);
-              }, child: Icon(Icons.camera_alt)),
 
-              TextButton(onPressed: () {
-                takePhoto(ImageSource.gallery);
-              }, child: Icon(Icons.image)),
-
-            ],
-          )
-        ],
-      ),
-    );
-  }
+//Gallery
+Future _pickImageFromGallery() async {
+  final returnImage =
+  await ImagePicker().pickImage(source: ImageSource.gallery);
+  if (returnImage == null) return;
+  setState(() {
+    selectedIMage = File(returnImage.path);
+    _image = File(returnImage.path).readAsBytesSync();
+  });
+  Navigator.of(context).pop(); //close the model sheet
 }
+
+//Camera
+Future _pickImageFromCamera() async {
+  final returnImage =
+  await ImagePicker().pickImage(source: ImageSource.camera);
+  if (returnImage == null) return;
+  setState(() {
+    selectedIMage = File(returnImage.path);
+    _image = File(returnImage.path).readAsBytesSync();
+  });
+  Navigator.of(context).pop();
+}
+}
+

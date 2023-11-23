@@ -160,7 +160,7 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                               final password = _passWordController.text;
 
                               final success = await _agriculteurService.loginAgriculteur(email, password);
-                              final success1 = await _investisseurService.loginInvestisseur(email, password);
+                             // final success1 = await _investisseurService.loginInvestisseur(email, password);
 
                               if (success!=null) {
                                 //effacer l'ancien donné s'il existe
@@ -170,7 +170,7 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                                 Provider.of<AgriculteurProvider>(context, listen: false).setAgriculteur(success);
                                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Accueil()));
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Connecté avec succès en tant qu'agriculteur")));
-                              } else if(success1!=null) {
+                              }/* else if(success1!=null) {
 
                                 //effacer l'ancien donné s'il existe
                                 Provider.of<InvestisseurProvider>(context, listen: false).clearInvestisseur();
@@ -179,7 +179,7 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                                 Provider.of<InvestisseurProvider>(context, listen: false).setInvestisseur(success1);
                                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AccueilInves()));
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Connecté avec succès en tant qu'investisseur")));
-                              }else{
+                              }*/else{
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text("adress email ou mot de passe incorrect")));
                               }
