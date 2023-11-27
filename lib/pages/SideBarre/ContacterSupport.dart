@@ -10,10 +10,9 @@ class ContacterSupport extends StatefulWidget {
 class _ContacterSupportState extends State<ContacterSupport> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Support technique"),
-      ),
+    return  Container(
+      child: Text("Contacter"),
+
     );
   }
 }

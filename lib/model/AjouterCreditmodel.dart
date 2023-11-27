@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:agro_invest/model/Agriculteur.dart';
@@ -33,7 +32,7 @@ class Credit {
     String? titre,
     String? montant,
     String? dateDebut,
-    int? duree,
+    int? durre,
     String? description,
     String? audioDescriptionPath,
     Agriculteur? agriculteur,
@@ -44,7 +43,7 @@ class Credit {
       titre: titre ?? this.titre,
       montant: montant ?? this.montant,
       dateDebut: dateDebut ?? this.dateDebut,
-      durre: duree ?? this.durre,
+      durre: durre ?? this.durre,
       description: description ?? this.description,
       audioDescriptionPath: audioDescriptionPath ?? this.audioDescriptionPath,
       agriculteur: agriculteur ?? this.agriculteur,
@@ -72,7 +71,7 @@ class Credit {
       titre: map['titre'] != null ? map['titre'] as String : null,
       montant: map['montant'] != null ? map['montant'] as String : null,
       dateDebut: map['dateDebut'] != null ? map['dateDebut'] as String : null,
-      durre: map['duree'] != null ? map['durre'] as int : null,
+      durre: map['durre'] != null ? map['durre'] as int : null,
       description: map['description'] != null ? map['description'] as String : null,
       audioDescriptionPath: map['audioDescriptionPath'] != null ? map['audioDescriptionPath'] as String : null,
       agriculteur: map['agriculteur'] != null ? Agriculteur.fromJson(map['agriculteur'] as Map<String,dynamic>) : null,
@@ -82,7 +81,9 @@ class Credit {
 
   String toJson() => json.encode(toMap());
 
+ // factory Credit.fromJson(String source) => Credit.fromMap(json.decode(source) as Map<String, dynamic>);
   factory Credit.fromJson(String source) => Credit.fromMap(json.decode(source) as Map<String, dynamic>);
+
 
   @override
   String toString() {

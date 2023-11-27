@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:agro_invest/model/Agriculteur.dart';
 import 'package:agro_invest/model/AjouterCreditmodel.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+import 'package:path/path.dart';
 
 class AgriculteurService {
   //creation de la methode inscrire agriculteur
@@ -19,30 +22,39 @@ class AgriculteurService {
     required String passWord,
     required String passWordConfirm,
     required String ActiviteMenee,
-    //File ? image,
+    File? image,
   }) async {
     try {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://10.175.48.77:8080/agriculteur/inscrire'),
+        Uri.parse('http://10.0.2.2:8080/agriculteur/inscrire'),
       );
 
+     if (image != null) {
+        try {
+          var imageBytes = await image.readAsBytes();
+          request.files.add(http.MultipartFile(
+            'image',
+            ByteStream.fromBytes(imageBytes), // Utilisez ByteStream.fromBytes ici
+            imageBytes.length,
+          ));
+        } catch (e) {
+          print('Erreur lors de la lecture de l\'image : $e');
+          // Gérer l'erreur d'une manière appropriée (ex: montrer un message à l'utilisateur)
+          throw Exception('Erreur lors de la lecture de l\'image : $e');
+        }
+      }
+
+
       /*if (image != null) {
-      try {
-        var imageBytes = await image.readAsBytes();
         request.files.add(http.MultipartFile(
-          'image',
-          imageBytes.asStream(),
-          imageBytes.length,
+          'images',
+          image.readAsBytes().asStream(),
+          image.lengthSync(),
           filename: basename(image.path),
         ));
-      } catch (e) {
-        print('Erreur lors de la lecture de l\'image : $e');
-        // Gérer l'erreur d'une manière appropriée (ex: montrer un message à l'utilisateur)
-        throw Exception('Erreur lors de la lecture de l\'image : $e');
       }
-    }*/
-
+*/
       request.fields['agriculteur'] = json.encode({
         'nomPrenom': nomPrenom,
         'email': email,
@@ -107,17 +119,17 @@ class AgriculteurService {
   }
 
   Future<List<Credit>>  affichertout() async {
-    print('Avant recuperation');
+    //print('Avant recuperation');
     final response = await http.get(Uri.parse("http://10.0.2.2:8080/Credit/affichertout"));
-    print('Apres recup : ${response.statusCode}');
+   // print('Apres recup : ${response.statusCode}');
 
     if (response.statusCode == 200) {
-      print("on est a 200" );
+     // print("on est a 200" );
       final responseData = jsonDecode(response.body) as List;
       List<Credit> credits = responseData
           .map((credit) => Credit.fromMap(credit))
           .toList();
-      print("data================");
+     // print("data================");
 
 
       // //final List<Credit> affichertout = parseCredit(response.body);
@@ -144,7 +156,7 @@ class AgriculteurService {
 
 //filtrer les credit selon l'id de user
 
-  Future<List<Credit>> getCreditByAgriculteurId(int idAgr) async {
+  /*Future<List<Credit>> CreditAgriculteur(int idAgr) async {
     final response = await http
         .get(Uri.parse("http://10.0.2.2:8080/Credit/affichertout"));
 
@@ -153,12 +165,34 @@ class AgriculteurService {
 
       // Filtrer les crédits pour ceux liés à l'agriculteur spécifié
       final creditsDeLagriculteur = tousLesCredits
-          .where((credit) => credit.agriculteur == idAgr)
+          .where((credit) => credit.agriculteur?.idAgr == idAgr)
           .toList();
 
       return creditsDeLagriculteur;
     } else {
       throw Exception('Impossible de récupérer les crédits');
     }
+  }*/
+
+
+  Future<List<Credit>> CreditAgriculteur(int idAgr) async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8080/Credit/list/$idAgr'));
+
+    if (response.statusCode == 200) {
+      print(response);
+      //print("object====================");
+      // La requête a réussi,
+      List<dynamic> data = jsonDecode(response.body);
+     // print("azertyuiop");
+      List<Credit> credits = data.map((creditData) => Credit.fromMap(creditData)).toList();
+     // print("qsdfghjklm");
+      return credits;
+    } else {
+      // Si la requête ne réussit pas, lancez une exception
+      //throw Exception('Vous n\'avez effectuer aucune demande');
+      throw Exception('Vous n\'avez effectuer aucune demande');
+    }
   }
+
+
 }

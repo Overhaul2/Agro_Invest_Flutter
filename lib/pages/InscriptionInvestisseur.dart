@@ -1,12 +1,12 @@
 import 'package:agro_invest/Provider/InvestisseurProvider.dart';
 import 'package:agro_invest/configuration/configurationCouleur.dart';
 import 'package:agro_invest/pages/Investisseur/AccueilInvestisseur.dart';
-import 'package:agro_invest/pages/login.dart';
 import 'package:agro_invest/service/investisseurService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'MotDePasse/CompteCreerEnattente.dart';
+import 'Agriculteur/login.dart';
+
 
 class InscriptionInvestisseur extends StatefulWidget {
   const InscriptionInvestisseur({Key? key}) : super(key: key);
@@ -24,11 +24,11 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
   final _nomPrenomController = TextEditingController();
   final _emailController = TextEditingController();
   final _telephoneController = TextEditingController();
-  final _ageController = TextEditingController();
+  //final _ageController = TextEditingController();
   final _residenseController = TextEditingController();
-  final _ActiviteMeneeController = TextEditingController();
+ /* final _ActiviteMeneeController = TextEditingController();
   final _imageController = TextEditingController();
-  final _passWordController = TextEditingController();
+  */final _passWordController = TextEditingController();
   final _passWordConfirmController = TextEditingController();
 
   @override

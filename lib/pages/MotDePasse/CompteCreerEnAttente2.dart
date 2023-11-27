@@ -1,5 +1,6 @@
-import 'package:agro_invest/pages/login.dart';
 import 'package:flutter/material.dart';
+
+import '../Agriculteur/login.dart';
 
 class CompteCreerEnAttente2 extends StatefulWidget {
   const CompteCreerEnAttente2({Key? key}) : super(key: key);

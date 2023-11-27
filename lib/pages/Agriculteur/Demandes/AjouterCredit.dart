@@ -1,10 +1,7 @@
-import 'package:agro_invest/pages/Demarrage/DemandeEnCourPage.dart';
+import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
 import 'package:flutter/material.dart';
 import 'package:agro_invest/service/CreditService.dart';
-import 'package:provider/provider.dart';
-import '../../../Provider/AgriculteurPovider.dart';
 import '../../../configuration/configurationCouleur.dart';
-
 class FaireUneDemane extends StatefulWidget {
   const FaireUneDemane({Key? key}) : super(key: key);
 
@@ -23,11 +20,10 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
   final _audioController=TextEditingController();
 
 
-
   @override
   Widget build(BuildContext context) {
-    AgriculteurProvider agriculteurProvider = Provider.of<AgriculteurProvider>(context, listen: false);
-    CreditService creditService = CreditService(context);
+   // AgriculteurProvider agriculteurProvider = Provider.of<AgriculteurProvider>(context, listen: false);
+  //  CreditService creditService = CreditService(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -151,8 +147,8 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                         controller: _descriptionController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Veillez donner un titre a votre demande !';
-                          }if(value.length<=20){
+                            return 'Veillez donner une description a votre demande !';
+                          }if(value.length<=10){
                             return "description trop court";
                           }else{
                             return null;}
@@ -194,13 +190,13 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15))),
                         onPressed: ()  async {
-                          AgriculteurProvider agriculteurProvider = Provider.of<AgriculteurProvider>(context, listen: false);
+                          //AgriculteurProvider agriculteurProvider = Provider.of<AgriculteurProvider>(context, listen: false);
                           CreditService creditService = CreditService(context);
                            if (_formkey.currentState!.validate()) {
                              try{
                                final titre= _nomController.text;
-                               final montant= _montantController.text;
-                               final durre= _durreController.text;
+                               final montant= int.parse (_montantController.text);
+                               final durre= int.parse(_durreController.text);
                                final dateDebut = _dateDebuitController.text;
                                //final audioDescriptionPath=_audioController.text;
                                final description = _descriptionController.text;
@@ -211,16 +207,19 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                                    dateDebut: dateDebut );
                                print('Demande effectuer avec succes : ${result.toString()}');
                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Demande effectuer avec succès")));
-                               Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DemandeEnCour()));
+                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DemandeEnCour()));
 
-                             }catch(e){
-                               print('Erreur API: $e');
-                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Une erreur s'est produite ; veillez verifier toute vos information; Vous ne pouver pas envoyer deux demande avec le même nom")));
-
+                             } catch (e) {
+                               if (e is String) {
+                                 // Gérer le cas où la réponse est une chaîne de caractères
+                                 print('Réponse du serveur : $e');
+                               } else {
+                                 // Gérer d'autres types d'erreurs
+                                 print('Erreur API: $e');
+                               }
+                               // Afficher une Snackbar ou faire d'autres actions en fonction du type d'erreur
                              }
                            }
-
-
                         },
                         child: Text(
                           "Enregistrer",

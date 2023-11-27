@@ -1,12 +1,15 @@
+
 import 'package:flutter/foundation.dart';
 import 'package:agro_invest/model/Agriculteur.dart';
 
 class AgriculteurProvider with ChangeNotifier {
   Agriculteur? _agriculteur;
-  String? _idAgr;
+  int? _idAgr;
+  //String? _nomPrenom;
 
   Agriculteur? get agriculteur => _agriculteur;
-  String? get userId => _idAgr;
+  int? get idAgr => _idAgr;
+ // String? get nomPrenom => _nomPrenom;
 
   void setAgriculteur(Agriculteur agriculteur) {
     _agriculteur = agriculteur;

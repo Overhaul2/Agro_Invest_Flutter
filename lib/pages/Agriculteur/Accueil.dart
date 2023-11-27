@@ -1,17 +1,17 @@
-import 'package:agro_invest/pages/Formations/Formations.dart';
-import 'package:agro_invest/pages/Forum.dart';
-import 'package:agro_invest/pages/Messages.dart';
-import 'package:agro_invest/pages/OffreAProximite.dart';
-import 'package:agro_invest/pages/SideBar.dart';
+import 'package:agro_invest/pages/Agriculteur/AccueiltestContent.dart';
 import 'package:agro_invest/pages/SideBarre/Aide.dart';
 import 'package:agro_invest/pages/SideBarre/Appropos.dart';
 import 'package:agro_invest/pages/SideBarre/ContacterSupport.dart';
+import 'package:agro_invest/pages/SideBarre/NoterApplication.dart';
 import 'package:agro_invest/pages/SideBarre/Parametre.dart';
 import 'package:agro_invest/pages/SideBarre/PartagerApplication.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'Demandes/MesDemandes.dart';
+import '../../Provider/AgriculteurPovider.dart';
+import 'OffreAProximite.dart';
+import 'SideBar.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({Key? key}) : super(key: key);
@@ -25,228 +25,55 @@ class _AccueilState extends State<Accueil> {
 
   @override
   Widget build(BuildContext context) {
-    //images dans le carousel
-    List<String> imagePath = [
-      "asset/images/sliders/slider1.png",
-      "asset/images/sliders/slider2.png",
-      "asset/images/sliders/slider3.png",
-      "asset/images/sliders/slider4.png",
-      "asset/images/sliders/slider5.png",
-      "asset/images/sliders/slider6.png",
-      "asset/images/sliders/slider7.png",
-      "asset/images/sliders/slider8.png",
-      "asset/images/sliders/slider9.png",
-      "asset/images/sliders/slider11.png",
-      "asset/images/sliders/slider12.png",
-      "asset/images/sliders/slider13.png",
-      "asset/images/sliders/slider14.png",
-      "asset/images/sliders/slider15.png",
-      "asset/images/sliders/slider16.png",
-      "asset/images/sliders/slider17.png",
-    ];
-    /* //Widget Container1 = Accueil();
+    Widget container = Accueil();
     if (currentPage == DrawersSection.Accueil) {
-     Navigator.push(context, MaterialPageRoute(builder: (context)=>Accueil()));
+      container = Accueiltest();
     } else if (currentPage == DrawersSection.Parametre) {
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>ParametrePage()));;
+      container = ParametrePage();
     } else if (currentPage == DrawersSection.Apropos) {
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>ApproposApplication()));;
+      container = ApproposApplication();
     } else if (currentPage == DrawersSection.Contacter_le_Supports) {
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>ContacterSupport()));;
+      container = ContacterSupport();
     } else if (currentPage == DrawersSection.Aide) {
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>ParametrePage()));
+      container = Aide();
     } else if (currentPage == DrawersSection.Partager_lapplication) {
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>ParametrePage()));
+      container = PartagerApplication();
     } else if (currentPage == DrawersSection.noter) {
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>ParametrePage()));
+      container = NoterApliccation();
     } else if (currentPage == DrawersSection.Se_Deconnecter) {
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>ParametrePage()));
+      container = OffreAProximite();
     }
-*/
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Center(child: Text("Accueil")),
-        ),
-        body: Column(
-          children: [
-            Container(
-              child: content(context, imagePath),
-            ),
-            //les cards  sur la page d'accueil
-            Expanded(
-              child: GridView(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1.1,
-                ),
-                scrollDirection: Axis.vertical,
-                children: [
-                  Card(
-                    clipBehavior: Clip.hardEdge,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    elevation: 10,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (
-                            context) => MesDemndes()));
-                      },
-                      child: Container(
-                        //     color: Colors.grey,
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              "asset/images/demande.jpg", height: 125,),
-                            FittedBox(
-                              child: Text(
-                                "Mes Demandes",
-                                style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            //IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios_rounded,color: Colors.green,),)
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => Formations()));
-                    },
-                    child: Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        elevation: 10,
-                        child: Container(
-                          //      color: Colors.grey,
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                "asset/images/formations2.jpg", height: 125,),
-                              FittedBox(
-                                child: Text(
-                                  "Formations",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              )
-                            ],
-                          ),
-                        )),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => OffreAProximite()));
-                    },
-                    child: Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        elevation: 10,
-                        child: Container(
-                          //color: Colors.grey,
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                "asset/images/proximite2.jpg", height: 125,),
-                              FittedBox(
-                                child: Text(
-                                  "Offre à proximité",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              )
-                            ],
-                          ),
-                        )),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => Forums()));
-                    },
-                    child: Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        elevation: 10,
-                        child: Container(
-                          // color: Colors.grey,
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                "asset/images/forums2.jpg", height: 125,),
-                              FittedBox(
-                                child: Text(
-                                  "Forums de Discutions",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              )
-                            ],
-                          ),
-                        )),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => Messages()));
-                    },
-                    child: Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        elevation: 10,
-                        child: Container(
-                          //  color: Colors.grey,
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                "asset/images/message23.jpg", height: 125,),
-                              FittedBox(
-                                child: Text(
-                                  "Messages",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              )
-                            ],
-                          ),
-                        )),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-        drawer: Drawer(
-          child: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                children: [
-                  MonHearderDrawer(),
-                  MonheaderDrawerList(),
-                  /* Container(
-                    child: Container1,
-                  )*/
-                ],
-              ),
-            ),
+        child: Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Consumer<AgriculteurProvider>(
+            builder: (context, agriculteurProvider, _) {
+              if (agriculteurProvider.agriculteur != null) {
+                String? nomPrenom = agriculteurProvider.agriculteur!.nomPrenom;
+                if (nomPrenom != null) {
+                  return Text("Agriculteur $nomPrenom");
+                } else {
+                  return Text("Aucun Utilisateur Connecté",
+                      style: TextStyle(color: Colors.black87));
+                }
+              } else {
+                return Text("");
+              }
+            },
           ),
         ),
       ),
-    );
+      body: container,
+      drawer: Drawer(
+        child: SingleChildScrollView(
+          child: Container(
+              child: Column(
+            children: [MonHearderDrawer(), MonheaderDrawerList()],
+          )),
+        ),
+      ),
+    ));
   }
 
   /*itemDashbord(String title, String image) => Container(
@@ -280,31 +107,28 @@ class _AccueilState extends State<Accueil> {
   Widget content(BuildContext context, List<String> images) {
     return Container(
         child: CarouselSlider(
-          items: images.map((imagePath) {
-            return Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              margin: EdgeInsets.symmetric(horizontal: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: Image.asset(
-                  (imagePath),
-                ),
-              ),
-            );
-          }).toList(),
-          options: CarouselOptions(
-//        height: 00,
-            autoPlay: true,
-            aspectRatio: 16 / 9,
-            viewportFraction: 1,
-            autoPlayCurve: Curves.easeInCubic,
+      items: images.map((imagePath) {
+        return Container(
+          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.symmetric(horizontal: 5),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
           ),
-        ));
+          child: Center(
+            child: Image.asset(
+              (imagePath),
+            ),
+          ),
+        );
+      }).toList(),
+      options: CarouselOptions(
+//        height: 00,
+        autoPlay: true,
+        aspectRatio: 16 / 9,
+        viewportFraction: 1,
+        autoPlayCurve: Curves.easeInCubic,
+      ),
+    ));
   }
 
 //side bare widget
@@ -322,17 +146,22 @@ class _AccueilState extends State<Accueil> {
               currentPage == DrawersSection.Parametre ? true : false),
           menuItem(3, "Apropos", Icons.info_outline,
               currentPage == DrawersSection.Apropos ? true : false),
-          menuItem(4, "Contacter le Support",
+          menuItem(
+              4,
+              "Contacter le Support",
               Icons.contact_support_outlined,
               currentPage == DrawersSection.Contacter_le_Supports
                   ? true
                   : false),
           menuItem(5, "Aide", Icons.add_task,
               currentPage == DrawersSection.Aide ? true : false),
-          menuItem(6, "Partager l'Application",
+          menuItem(
+              6,
+              "Partager l'Application",
               Icons.share,
               currentPage == DrawersSection.Partager_lapplication
-                  ? true : false),
+                  ? true
+                  : false),
           menuItem(7, "Noter l'Application", Icons.feedback_outlined,
               currentPage == DrawersSection.noter ? true : false),
           menuItem(8, "Se Deconnecter", Icons.logout,
@@ -376,10 +205,10 @@ class _AccueilState extends State<Accueil> {
               //taille de l'icone side
               Expanded(
                   child: Icon(
-                    icon,
-                    size: 30,
-                    color: Colors.black87,
-                  )),
+                icon,
+                size: 30,
+                color: Colors.black87,
+              )),
               //taille du texte side
               Expanded(
                 flex: 3,

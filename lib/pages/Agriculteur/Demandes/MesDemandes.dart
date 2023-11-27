@@ -1,11 +1,9 @@
 import 'package:agro_invest/configuration/configurationCouleur.dart';
-import 'package:agro_invest/pages/Demarrage/DemandeEnCourPage.dart';
+import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-
-import '../../Investisseur/OffreCredit.dart';
+import 'AjouterCredit.dart';
 import 'HistoriqueDemande.dart';
-
 class MesDemndes extends StatefulWidget {
   const MesDemndes({Key? key}) : super(key: key);
 
@@ -16,6 +14,10 @@ class MesDemndes extends StatefulWidget {
 class _MesDemndesState extends State<MesDemndes> {
   @override
   Widget build(BuildContext context) {
+    //final agriculteurServices = AgriculteurService();
+    //final idAgr = Provider.of<AgriculteurProvider>(context, listen: false).agriculteur!.idAgr;
+
+
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -135,6 +137,7 @@ class _MesDemndesState extends State<MesDemndes> {
                       },
                     ),
                   )*/
+
                 ]
             )
         )

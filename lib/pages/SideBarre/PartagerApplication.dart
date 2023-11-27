@@ -5,8 +5,8 @@ class PartagerApplication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder(
-      child: Text("bonjour"),
+    return Container(
+        child: Text("Partager"),
     );
   }
 }

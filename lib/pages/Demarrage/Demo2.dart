@@ -1,7 +1,7 @@
-import 'package:agro_invest/pages/InscriptionAgriculteur.dart';
 import 'package:agro_invest/pages/InscriptionInvestisseur.dart';
-import 'package:agro_invest/pages/login.dart';
 import 'package:flutter/material.dart';
+
+import '../Agriculteur/InscriptionAgriculteur.dart';
 
 class DemoPage2 extends StatefulWidget {
   const DemoPage2({Key? key}) : super(key: key);

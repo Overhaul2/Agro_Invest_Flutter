@@ -1,8 +1,12 @@
+import 'package:agro_invest/Provider/AgriculteurPovider.dart';
+import 'package:agro_invest/pages/Agriculteur/Demandes/RchercheCredit.dart';
 import 'package:agro_invest/service/agriculteurService.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../configuration/configurationCouleur.dart';
 import '../../../model/AjouterCreditmodel.dart';
+import 'CreditDetaillePage.dart';
 
 class HistoriqueDemande extends StatefulWidget {
   const HistoriqueDemande({Key? key}) : super(key: key);
@@ -12,12 +16,22 @@ class HistoriqueDemande extends StatefulWidget {
 }
 
 class _HistoriqueDemandeState extends State<HistoriqueDemande> {
-  AgriculteurService agriculteurService = AgriculteurService();
+
+ // AgriculteurService agriculteurService = AgriculteurService();
   @override
   Widget build(BuildContext context) {
+    final agriculteurServices = AgriculteurService();
+    final idAgr = Provider.of<AgriculteurProvider>(context, listen: false).agriculteur!.idAgr;
+
     return Scaffold(
       appBar: AppBar(
         leading: (BackButton()),
+        actions: [
+          IconButton(onPressed: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RechercheCredit()));
+          },
+              icon: Icon(Icons.search_outlined))
+        ],
       ),
       body: Center(
         child: Column(
@@ -45,7 +59,7 @@ class _HistoriqueDemandeState extends State<HistoriqueDemande> {
               ),
             ),
             FutureBuilder(
-              future: agriculteurService.affichertout(),
+              future: agriculteurServices.CreditAgriculteur(idAgr!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
@@ -56,15 +70,45 @@ class _HistoriqueDemandeState extends State<HistoriqueDemande> {
 
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: credits.length,
+                      itemCount: (credits==null)?0:credits.length,
                       itemBuilder: (context, index) {
                         Credit credit = credits[index];
                        // print(credits[index]);
-                        return ListTile(
-                          title: Text('${credit.titre}'),
-                          subtitle: Text(
-                              'Durée${credit.idCredit} mois, ${credit.agriculteur?.idAgr}'),
-                          // Ajoutez d'autres éléments d'interface utilisateur selon vos besoins
+                        return Card(
+                          clipBehavior: Clip.hardEdge,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          elevation: 10,
+                          color: Color(0xB26DC76D),
+                          child: ListTile(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>CreditDetaille(credit: credit)));
+                              },
+                            title: Row(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: credit.agriculteur?.image != null
+                                      ? NetworkImage("${credit.agriculteur?.image}") as ImageProvider<Object>?
+                                      : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
+                                  radius: 40,
+                                ),
+                                SizedBox(width: 10,),
+                                Container(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      FittedBox(child: Text(" ${credit.titre} ")),
+                                      SizedBox(height: 20,),
+                                      FittedBox(child: Text("Montant : ${credit.montant} Fcfa ")),
+                                      FittedBox(child: Text("Durrée ${credit.durre} mois ")),
+
+                                    ],
+                                  ),
+                                )
+                              ],
+                            )
+                          ),
                         );
                       },
                     ),

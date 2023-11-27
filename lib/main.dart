@@ -1,13 +1,13 @@
-
 import 'package:agro_invest/configuration/configurationCouleur.dart';
 import 'package:agro_invest/pages/Agriculteur/Accueil.dart';
-import 'package:agro_invest/pages/login.dart';
+import 'package:agro_invest/pages/Agriculteur/login.dart';
+import 'package:agro_invest/pages/Investisseur/AccueilInvestisseur.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Provider/AgriculteurPovider.dart';
 import 'Provider/InvestisseurProvider.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(
@@ -21,32 +21,40 @@ void main() {
   );
 }
 
-
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isUserLoggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    getSharedPreferenceValue();
+  }
+
+  void getSharedPreferenceValue() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      isUserLoggedIn = pref.getBool("isUserLoggedIn") ?? false;
+      print("Valeur de isUserLoggedIn dans getSharedPreferenceValue : $isUserLoggedIn");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       title: "",
       theme: ThemeData(
         splashColor: MesCouleur().couleurPrincipal,
         primarySwatch: Colors.green,
-
       ),
       debugShowCheckedModeBanner: false,
-      routes: {
-        "/":(context)=>LoginAgriculteur(),
-      },
-      //home:
-            //  SplashScreen(),
-              //Accueil()
-              //CompteCreerEnAttente2(),
-              //Accueil(),
-
-
+      home: /*isUserLoggedIn ? Accueil():*/LoginAgriculteur(),
     );
   }
 }
-

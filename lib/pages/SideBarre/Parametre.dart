@@ -10,8 +10,8 @@ class ParametrePage extends StatefulWidget {
 class _ParametrePageState extends State<ParametrePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Parametre"),),
+    return Container(
+      child: Text("Parametre"),
     );
   }
 }

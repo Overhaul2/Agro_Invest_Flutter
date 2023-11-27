@@ -44,6 +44,7 @@ dependencies:
   provider: ^6.1.1
   connectivity_plus: ^5.0.1
   dio: ^5.3.4
+  path: ^1.8.3
 
 
 dev_dependencies:
@@ -70,6 +71,9 @@ flutter_launcher_icons:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+event_id:
+  -
+event_data:
 flutter:
   fonts:
     - family: Inika
@@ -86,6 +90,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - asset/images/
+   - asset/videos/
    - asset/images/sliders/
    - asset/fonts/
   #   - images/a_dot_ham.jpeg

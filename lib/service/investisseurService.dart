@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:agro_invest/model/Investisseur.dart';
 import 'package:http/http.dart' as http;
 import 'package:agro_invest/model/Agriculteur.dart';
@@ -8,7 +9,7 @@ import '../Provider/AgriculteurPovider.dart';
 
 class InvestisseurService {
   //creation de la methode inscrire investisseur
-  static const String baseUrl = "http://10.175.48.77:8080/investisseur/inscrire";
+  static const String baseUrl = "http://10.0.2.2:8080/investisseur/inscrire";
 
   Future<Investisseur> inscrire({
     // required BuildContext context,
@@ -23,7 +24,7 @@ class InvestisseurService {
     try {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://10.175.48.77:8080/investisseur/inscrire'),
+        Uri.parse('http://10.0.2.2:8080/investisseur/inscrire'),
       );
 
       /*if (image != null) {
@@ -82,7 +83,7 @@ class InvestisseurService {
 
   Future<Investisseur?> loginInvestisseur(String email, String password) async {
     //const apiUrl = "http://localhost:8080/investisseur/connexion";
-    const apiUrl = "http://10.175.48.77:8080/investisseur/connexion";
+    const apiUrl = "http://10.0.2.2:8080/investisseur/connexion";
 
     final response =
     await http.get(Uri.parse("$apiUrl?email=$email&password=$password"));
@@ -96,4 +97,24 @@ class InvestisseurService {
       return null;
     }
   }
+
+  Future<List<Offre>> OffreInvestisseur(int idInv) async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8080/offre/list/$idInv'));
+
+    if (response.statusCode == 200) {
+      print(response);
+      //print("object====================");
+      // La requête a réussi,
+      List<dynamic> data = jsonDecode(response.body);
+      // print("azertyuiop");
+      List<Offre> offres = data.map((offreData) => Offre.fromMap(offreData)).toList();
+      // print("qsdfghjklm");
+      return offres;
+    } else {
+      // Si la requête ne réussit pas, lancez une exception
+      //throw Exception('Vous n\'avez effectuer aucune demande');
+      throw Exception('Vous n\'avez effectuer aucune Offre');
+    }
+  }
+
 }

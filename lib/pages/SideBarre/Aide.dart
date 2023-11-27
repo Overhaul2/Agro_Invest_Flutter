@@ -10,10 +10,8 @@ class Aide extends StatefulWidget {
 class _AideState extends State<Aide> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Aide"),
-      ),
+    return Container(
+      child: Text("AIde"),
     );
   }
 }

@@ -10,10 +10,8 @@ class NoterApliccation extends StatefulWidget {
 class _NoterApliccationState extends State<NoterApliccation> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Noter l'Application"),
-      ),
+    return Container(
+      child: Text("Noter"),
     );
   }
 }

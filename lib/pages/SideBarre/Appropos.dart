@@ -10,10 +10,8 @@ class ApproposApplication extends StatefulWidget {
 class _ApproposApplicationState extends State<ApproposApplication> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Appropos de Agro Inves"),
-      ),
+    return  Container(
+      child: Text("Appropos"),
     );
   }
 }
