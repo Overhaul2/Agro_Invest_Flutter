@@ -1,5 +1,7 @@
 import 'package:agro_invest/configuration/configurationCouleur.dart';
 import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
+import 'package:agro_invest/pages/Investisseur/Offre/OffreEffectuer.dart';
+import 'package:agro_invest/pages/Investisseur/Offre/OffreEncour.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import '../ProjetAgricole.dart';
@@ -53,7 +55,7 @@ class _MesOffresState extends State<MesOffres> {
             child: InkWell(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DemandeEnCour()));
+                    MaterialPageRoute(builder: (context) => OffreEnCour()));
               },
               child: SizedBox(
                 width: 350,
@@ -86,7 +88,7 @@ class _MesOffresState extends State<MesOffres> {
             child: InkWell(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DemandeEnCour()));
+                    MaterialPageRoute(builder: (context) => OffreEffectuer()));
               },
               child: SizedBox(
                 width: 350,
@@ -121,7 +123,7 @@ class _MesOffresState extends State<MesOffres> {
             child: InkWell(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => HistoriqueDemande()));
+                    builder: (context) => OffreEffectuer()));
               },
               child: SizedBox(
                 width: 350,

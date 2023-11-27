@@ -1,3 +1,6 @@
+import 'package:agro_invest/Provider/InvestisseurProvider.dart';
+import 'package:agro_invest/model/AjouterOffremodel.dart';
+import 'package:agro_invest/service/investisseurService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,8 +20,8 @@ class _OffreEnCourState extends State<OffreEnCour> {
   @override
   Widget build(BuildContext context) {
 
-    final agriculteurServices = AgriculteurService();
-    final idAgr = Provider.of<AgriculteurProvider>(context, listen: false).agriculteur!.idAgr;
+    final investisseurServices = InvestisseurService();
+    final idInv = Provider.of<InvestisseurProvider>(context, listen: false).investisseur!.idInv;
 
     return Scaffold(
       appBar: AppBar(leading: (BackButton()),),
@@ -37,20 +40,20 @@ class _OffreEnCourState extends State<OffreEnCour> {
                 fontSize: 30, color: MesCouleur().couleurPrincipal),),),
 
             FutureBuilder(
-              future: agriculteurServices.CreditAgriculteur(idAgr!),
+              future: investisseurServices.OffreInvestisseur(idInv!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Text('Erreur: ${snapshot.error}');
                 } else {
-                  List<Credit> credits = snapshot.data!;
+                  List<Offre> offres = snapshot.data!;
 
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: (credits==null)?0:credits.length,
+                      itemCount: (offres==null)?0:offres.length,
                       itemBuilder: (context, index) {
-                        Credit credit = credits[index];
+                        Offre offre = offres[index];
                         // print(credits[index]);
                         return Card(
                           clipBehavior: Clip.hardEdge,
@@ -63,14 +66,14 @@ class _OffreEnCourState extends State<OffreEnCour> {
                               title: Row(
                                 children: [
                                   CircleAvatar(
-                                    backgroundImage: credit.agriculteur?.image != null
-                                        ? NetworkImage("${credit.agriculteur?.image}") as ImageProvider<Object>?
+                                    backgroundImage: offre.agriculteur?.image != null
+                                        ? NetworkImage("${offre.agriculteur?.image}") as ImageProvider<Object>?
                                         : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
                                     radius: 40,
                                   ),
                                   Row(
                                     children: [
-                                      FittedBox(child: Text(" ${credit.titre} mois")),
+                                      FittedBox(child: Text(" ${offre.titre} mois")),
                                     ],
                                   )
                                 ],
