@@ -61,7 +61,6 @@ class _OffreEnCourState extends State<OffreEnCour> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           elevation: 10,
-                          color: Colors.green,
                           child: ListTile(
                               title: Row(
                                 children: [
