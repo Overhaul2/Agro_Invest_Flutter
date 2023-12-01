@@ -1,5 +1,10 @@
+import 'package:agro_invest/Provider/InvestisseurProvider.dart';
 import 'package:agro_invest/model/AjouterOffremodel.dart';
+import 'package:agro_invest/pages/Investisseur/Offre/MesOffres.dart';
+import 'package:agro_invest/service/CreditService.dart';
+import 'package:agro_invest/service/investisseurService.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../model/AjouterCreditmodel.dart';
 
 class ProjetsDetail extends StatefulWidget {
@@ -11,6 +16,12 @@ class ProjetsDetail extends StatefulWidget {
 }
 
 class _ProjetsDetailState extends State<ProjetsDetail> {
+  InvestisseurService investisseurService =InvestisseurService();
+  void _accepter() {
+    final idCredit = widget.credit.idCredit; // Remplacez par l'ID de votre crédit
+    final idInv = Provider.of<InvestisseurProvider>(context ,listen: false).investisseur!.idInv; // Remplacez par l'ID de votre investisseur
+    investisseurService.accepterDemandeCredit(idCredit!, idInv!);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,7 +134,10 @@ class _ProjetsDetailState extends State<ProjetsDetail> {
             "En enpuiyant sur \"Valider\" ....."),
         actions: [
           TextButton(onPressed: resset, child: Text("Annuler")),
-          TextButton(onPressed: resset, child: Text("Valider")),
+          TextButton(onPressed: () {
+            _accepter;
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MesOffres()));
+          }, child: Text("Valider")),
         ],
       ));
 

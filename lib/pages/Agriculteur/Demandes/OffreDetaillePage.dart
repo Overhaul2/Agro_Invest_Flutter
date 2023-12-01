@@ -1,7 +1,11 @@
+import 'package:agro_invest/Provider/AgriculteurPovider.dart';
 import 'package:agro_invest/model/AjouterOffremodel.dart';
+import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
 import 'package:agro_invest/pages/Agriculteur/Demandes/ModifierCredit.dart';
+import 'package:agro_invest/service/agriculteurService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../model/AjouterCreditmodel.dart';
 
 class OffreDetailleAgriculteur extends StatefulWidget {
@@ -13,6 +17,12 @@ class OffreDetailleAgriculteur extends StatefulWidget {
 }
 
 class _OffreDetailleAgriculteurState extends State<OffreDetailleAgriculteur> {
+  AgriculteurService agriculteurService =AgriculteurService();
+  void _accepterOffre() {
+    final idOf = widget.offre.idOf; // Remplacez par l'ID de votre crédit
+    final idAgr = Provider.of<AgriculteurProvider>(context ,listen: false).agriculteur!.idAgr; // Remplacez par l'ID de votre investisseur
+    agriculteurService.accepterOffreCredit(idOf!, idAgr!);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,7 +114,9 @@ class _OffreDetailleAgriculteurState extends State<OffreDetailleAgriculteur> {
                             SizedBox(height: 40,),
                             Container(alignment: Alignment.center,
                                 child: ElevatedButton(onPressed: (){
-                                //  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ModiffierDemane(credit: widget.offre)));
+                                  _accepterOffre();
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>DemandeEnCour()));
+
                                 }, child: Text("Accepter")))
                           ],
                         ),

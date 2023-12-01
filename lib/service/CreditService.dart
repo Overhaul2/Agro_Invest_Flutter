@@ -1,13 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-import 'dart:convert';
-
 import '../Provider/AgriculteurPovider.dart';
-
 import '../model/AjouterCreditmodel.dart';
 
 class CreditService {
@@ -68,36 +66,34 @@ class CreditService {
       throw Exception('ERREUR : $e');
     }
   }
-  static const String baseUrl2 = "http://10.0.2.2:8080/Credit/modiffier/";
-  Future<Credit> modifier({
+
+  Future<Credit> modifierCredit({
+    required int idCredit,
     required String titre,
     required int montant,
     required String dateDebut,
     required int durre,
     required String description,
     File? audio,
+    //required int idAgriculteur, // Ajouter le paramètre idAgriculteur
   }) async {
     try {
-      AgriculteurProvider agriculteurProvider =
-      Provider.of<AgriculteurProvider>(context, listen: false);
-      if (agriculteurProvider.agriculteur == null) {
-        throw Exception("Agriculteur non trouvé");
-      }
-
-      var request = http.MultipartRequest('PUT', Uri.parse(baseUrl2));
+      var request = http.MultipartRequest(
+        'PUT',
+        Uri.parse("http://10.0.2.2:8080/Credit/modifier/$idCredit"), // Correction de l'URL
+      );
 
       if (audio != null) {
-        // Ajoute du fichier audio au champ
-        request.files.add(await http.MultipartFile.fromPath(
-          'audioDescriptionPath',
-          audio.path,
-        ));
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            'audioDescriptionPath',
+            audio.path,
+          ),
+        );
       }
 
       request.fields.addAll({
-        "agriculteur": json.encode(
-          agriculteurProvider.agriculteur!.toJson(),
-        ),
+       // "idAgriculteur": idAgriculteur.toString(), // Ajouter l'ID de l'agriculteur
         "titre": titre,
         "montant": montant.toString(),
         "dateDebut": dateDebut,
@@ -106,10 +102,10 @@ class CreditService {
       });
 
       var response = await request.send();
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         final responseData =
         json.decode(await response.stream.bytesToString());
-        print("id Agriculteur: ${agriculteurProvider.agriculteur?.idAgr}");
         return Credit.fromMap(responseData);
       } else {
         final errorResponse = await response.stream.bytesToString();
@@ -119,8 +115,10 @@ class CreditService {
         throw Exception('Échec : $errorResponse');
       }
     } catch (e) {
+      print('ERREUR : $e');
       throw Exception('ERREUR : $e');
     }
   }
 
 }
+

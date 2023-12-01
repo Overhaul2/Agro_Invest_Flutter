@@ -22,72 +22,77 @@ class _OffreAProximiteState extends State<OffreAProximite> {
         title: Text("Offre A Proximite"),
       ),
       body: SingleChildScrollView(
-        child: Center( child:
-        Container(
-          child: FutureBuilder(
-            future: investisseurService.OffreSansAgriculteurs(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
-              } else if (snapshot.hasError) {
-                return Text('Erreur: ${snapshot.error}');
-              } else {
-                List<Offre> offres = snapshot.data!;
+        child: Center(
+          child: Column(
+            children: [
+              FutureBuilder(
+                future: investisseurService.OffreSansAgriculteurs(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text('Erreur: ${snapshot.error}');
+                  } else {
+                    List<Offre> offres = snapshot.data!;
 
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: (offres==null)?0:offres.length,
-                    itemBuilder: (context, index) {
-                      Offre offre = offres[index];
-                      // print(credits[index]);
-                      return Card(
-                        clipBehavior: Clip.hardEdge,
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                              color: MesCouleur().couleurPrincipal
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        elevation: 10,
-                        // color: Color(0xB26DC76D),
-                        child: ListTile(
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>OffreDetailleAgriculteur(offre: offre)));
-                            },
-                            title: Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage: offre.agriculteur?.image != null
-                                      ? NetworkImage("${offre.agriculteur?.image}") as ImageProvider<Object>?
-                                      : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
-                                  radius: 40,
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: MediaQuery.of(context).size.height - 100, // Ajustez la hauteur selon vos besoins
+                        child: ListView.builder(
+                          itemCount: (offres == null) ? 0 : offres.length,
+                          itemBuilder: (context, index) {
+                            Offre offre = offres[index];
+                            return  Card(
+                              clipBehavior: Clip.hardEdge,
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    color: MesCouleur().couleurPrincipal
                                 ),
-                                SizedBox(width: 10,),
-                                Container(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              elevation: 10,
+                              // color: Color(0xB26DC76D),
+                              child: ListTile(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>OffreDetailleAgriculteur(offre: offre)));
+                                  },
+                                  title: Row(
                                     children: [
-                                      FittedBox(child: SizedBox(
-                                          width: 280,
-                                          child: Text(" ${offre.titre} "))),
-                                      FittedBox(child: Text("Montant : ${offre.montant} Fcfa ")),
-                                      FittedBox(child: Text("Durrée ${offre.durre} mois ")),
+                                      CircleAvatar(
+                                        backgroundImage: offre.agriculteur?.image != null
+                                            ? NetworkImage("${offre.agriculteur?.image}") as ImageProvider<Object>?
+                                            : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
+                                        radius: 40,
+                                      ),
+                                      SizedBox(width: 10,),
+                                      Container(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            FittedBox(child: SizedBox(
+                                                width: 265,
+                                                child: Text(" ${offre.titre} "))),
+                                            FittedBox(child: Text("Montant : ${offre.montant} Fcfa ")),
+                                            FittedBox(child: Text("Durrée ${offre.durre} mois ")),
 
+                                          ],
+                                        ),
+                                      )
                                     ],
-                                  ),
-                                )
-                              ],
-                            )
+                                  )
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
-                );
-              }
-            },
+                      ),
+                    );
+                  }
+                },
+              ),
+            ],
           ),
         ),
-        ),
-    )
+      ),
     );}
 }

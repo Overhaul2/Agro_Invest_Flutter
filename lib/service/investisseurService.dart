@@ -3,14 +3,12 @@ import 'dart:convert';
 import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:agro_invest/model/Investisseur.dart';
 import 'package:http/http.dart' as http;
-import 'package:agro_invest/model/AgriculteurModele.dart';
 
-import '../Provider/AgriculteurPovider.dart';
 
 class InvestisseurService {
   //creation de la methode inscrire investisseur
   static const String baseUrl = "http://10.0.2.2:8080/investisseur/inscrire";
-
+//inscription investisseur
   Future<Investisseur> inscrire({
     // required BuildContext context,
     required String nomPrenom,
@@ -80,7 +78,7 @@ class InvestisseurService {
     }
   }
 
-
+//connection investisseur
   Future<Investisseur?> loginInvestisseur(String email, String password) async {
     //const apiUrl = "http://localhost:8080/investisseur/connexion";
     const apiUrl = "http://10.0.2.2:8080/investisseur/connexion";
@@ -97,7 +95,7 @@ class InvestisseurService {
       return null;
     }
   }
-
+//offres effectuer par un id investisseur
   Future<List<Offre>> OffreInvestisseur(int idInv) async {
     final response = await http.get(Uri.parse('http://10.0.2.2:8080/offre/list/$idInv'));
 
@@ -117,7 +115,7 @@ class InvestisseurService {
     }
   }
 
-  //Affichet tout les offre sans agriculteur qui contient l'id de l'investisseur connecter
+  //Afficher tout les offres effectuer par l'investisseur connecter sans agriculteur
   Future<List<Offre>>  OffreInvestisseurSansAgriculteur(int idInv) async {
     //print('Avant recuperation');
     final response = await http.get(Uri.parse("http://10.0.2.2:8080/offre/offresansagriculteur"));
@@ -135,7 +133,7 @@ class InvestisseurService {
       throw Exception('Impossible de recuperer les offres');
     }
   }
-
+//tout les offres qui existe sans agriculteur(projet Agricole)
   Future<List<Offre>>  OffreSansAgriculteurs() async {
     //print('Avant recuperation');
     final response = await http.get(Uri.parse("http://10.0.2.2:8080/offre/offresansagriculteur"));
@@ -150,6 +148,21 @@ class InvestisseurService {
       return offres;
     } else {
       throw Exception('Impossible de recuperer les offres');
+    }
+  }
+//la methode qui permet a un investisseur d'accepter une demande de credit
+  Future<void> accepterDemandeCredit(int idCredit, int idInv) async {
+    final url = 'http://10.0.2.2:8080/Credit/accepterDemande/$idCredit/$idInv';
+
+    try {
+      final response = await http.put(Uri.parse(url));
+      if (response.statusCode == 200) {
+        print('Investisseur ajouté avec succès au crédit');
+      } else {
+        print('Échec de l\'ajout de l\'investisseur au crédit - ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Erreur lors de la requête : $error');
     }
   }
 

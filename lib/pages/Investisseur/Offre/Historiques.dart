@@ -54,10 +54,10 @@ class _HistoriquesOffresState extends State<HistoriquesOffres> {
             ),
             FittedBox(
               child: Text(
-                "Mes historiques de demande",
+                "Mes historiques d'Investissement",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
+                    fontSize: 25,
                     color: MesCouleur().couleurPrincipal),
               ),
             ),

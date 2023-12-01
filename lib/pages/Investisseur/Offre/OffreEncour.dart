@@ -36,7 +36,7 @@ class _OffreEnCourState extends State<OffreEnCour> {
                       child: Image.asset("asset/images/mesdemandes.jpg",fit: BoxFit.fitWidth,)),)
             ),
             SizedBox(height: 20,),
-            FittedBox(child: Text("Mes demandes en Cours", style: TextStyle(fontWeight: FontWeight.bold,
+            FittedBox(child: Text("Mes Offres en Cours", style: TextStyle(fontWeight: FontWeight.bold,
                 fontSize: 30, color: MesCouleur().couleurPrincipal),),),
 
             FutureBuilder(

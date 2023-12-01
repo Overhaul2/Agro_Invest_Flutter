@@ -75,40 +75,44 @@ class _HistoriqueDemandeState extends State<HistoriqueDemande> {
                       itemBuilder: (context, index) {
                         Credit credit = credits[index];
                        // print(credits[index]);
-                        return Card(
-                          clipBehavior: Clip.hardEdge,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          elevation: 10,
-                         // color: Color(0xB26DC76D),
-                          child: ListTile(
-                              onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoriqueCreditDetaille(credit: credit)));
-                              },
-                            title: Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage: credit.agriculteur?.image != null
-                                      ? NetworkImage("${credit.agriculteur?.image}") as ImageProvider<Object>?
-                                      : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
-                                  radius: 40,
-                                ),
-                                SizedBox(width: 10,),
-                                Container(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      FittedBox(child: Text(" ${credit.titre} ")),
-                                      SizedBox(height: 20,),
-                                      FittedBox(child: Text("Montant : ${credit.montant} Fcfa ")),
-                                      FittedBox(child: Text("Durrée ${credit.durre} mois ")),
-
-                                    ],
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            clipBehavior: Clip.hardEdge,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(color: MesCouleur().couleurPrincipal),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 10,
+                           // color: Color(0xB26DC76D),
+                            child: ListTile(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoriqueCreditDetaille(credit: credit)));
+                                },
+                              title: Row(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: credit.agriculteur?.image != null
+                                        ? NetworkImage("${credit.agriculteur?.image}") as ImageProvider<Object>?
+                                        : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
+                                    radius: 40,
                                   ),
-                                )
-                              ],
-                            )
+                                  SizedBox(width: 10,),
+                                  Container(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        FittedBox(child: Text(" ${credit.titre} ")),
+                                        SizedBox(height: 20,),
+                                        FittedBox(child: Text("Montant : ${credit.montant} Fcfa ")),
+                                        FittedBox(child: Text("Durrée ${credit.durre} mois ")),
+
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )
+                            ),
                           ),
                         );
                       },

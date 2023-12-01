@@ -1,16 +1,17 @@
+import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../model/AjouterCreditmodel.dart';
 
-class OffreDetaille extends StatefulWidget {
-  final Credit credit;
-  const OffreDetaille({Key? key, required this.credit}) : super(key: key);
+class OffreEffectuerDetaille extends StatefulWidget {
+  final Offre offre;
+  const OffreEffectuerDetaille({Key? key, required this.offre}) : super(key: key);
 
   @override
-  State<OffreDetaille> createState() => _OffreDetailleState();
+  State<OffreEffectuerDetaille> createState() => _OffreEffectuerDetailleState();
 }
 
-class _OffreDetailleState extends State<OffreDetaille> {
+class _OffreEffectuerDetailleState extends State<OffreEffectuerDetaille> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,8 +53,8 @@ class _OffreDetailleState extends State<OffreDetaille> {
                             IconButton(alignment: Alignment.topRight,onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.close_sharp)),
                             ListTile(
                               leading: CircleAvatar(
-                                backgroundImage: widget.credit.agriculteur?.image != null
-                                    ? NetworkImage("${widget.credit.agriculteur?.image}") as ImageProvider<Object>
+                                backgroundImage: widget.offre.agriculteur?.image != null
+                                    ? NetworkImage("${widget.offre.agriculteur?.image}") as ImageProvider<Object>
                                     : AssetImage("asset/images/logo.png") as ImageProvider<Object>,
                               radius: 20,),
                               title: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,34 +67,34 @@ class _OffreDetailleState extends State<OffreDetaille> {
                                   Row(
                                     children: [
                                       Text("Nom : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                      Text("${widget.credit.agriculteur?.nomPrenom}"),
+                                      Text("${widget.offre.agriculteur?.nomPrenom}"),
                                     ],
                                   ),
                                   SizedBox(height: 5,),
                                   Row(
                                     children: [
                                       Text("Résidence : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                      Text("${widget.credit.agriculteur?.residense}"),
+                                      Text("${widget.offre.agriculteur?.residense}"),
                                     ],
                                   ),
                                   SizedBox(height: 5,),
                                   Row(
                                     children: [
                                       Text("Téléphone : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                      Text("+223 ${widget.credit.agriculteur?.telephone}"),
+                                      Text("+223 ${widget.offre.agriculteur?.telephone}"),
                                     ],
                                   ),
                                 ],
 
                               ),
                             ),SizedBox(height: 15,),
-                            Text("Titre : ${widget.credit.titre} "),SizedBox(height: 10,),
+                            Text("Titre : ${widget.offre.titre} "),SizedBox(height: 10,),
                             SizedBox(height: 15,),
-                            Text("Montant : ${widget.credit.montant} Fcfa "),
+                            Text("Montant : ${widget.offre.montant} Fcfa "),
                             SizedBox(height: 15,),
-                            Text("Duréé : ${widget.credit.durre} mois "),
+                            Text("Duréé : ${widget.offre.durre} mois "),
                             SizedBox(height: 15,),
-                            Text("Description : ${widget.credit.description} "),
+                            Text("Description : ${widget.offre.description} "),
                             SizedBox(height: 30),
                             Container(alignment: Alignment.center,
                                 child: ElevatedButton(onPressed: (){}, child: Text("Modifier")))

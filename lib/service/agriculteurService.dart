@@ -4,9 +4,9 @@ import 'dart:io';
 
 import 'package:agro_invest/model/AgriculteurModele.dart';
 import 'package:agro_invest/model/AjouterCreditmodel.dart';
+import 'package:get/get.dart' as getx;
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:path/path.dart';
 
 class AgriculteurService {
   //creation de la methode inscrire agriculteur
@@ -25,45 +25,43 @@ class AgriculteurService {
     File? image,
   }) async {
     try {
-      var request = http.MultipartRequest(
-        'POST',
-        Uri.parse('http://10.0.2.2:8080/agriculteur/inscrire'),
-      );
+      print("Debut");
+      getx.FormData data = getx.FormData({'agriculteur': {
+        "nomPrenom": nomPrenom,
+        "email": email,
+        "age": age,
+        "residense": residense,
+        "ActiviteMenee": ActiviteMenee,
+        "telephone": telephone,
+        "passWord": passWord,
+        "passWordConfirm": passWordConfirm,
+      }});
+
 
      if (image != null) {
         try {
-          var imageBytes = await image.readAsBytes();
-          request.files.add(http.MultipartFile(
-            'image',
-            ByteStream.fromBytes(imageBytes), //
-            imageBytes.length,
-          ));
+          data.files.add(MapEntry("image", getx.MultipartFile(image, filename: DateTime.timestamp().toString())));
+
         } catch (e) {
           print('Erreur lors de la lecture de l\'image : $e');
           // Gestion des erreurs
           throw Exception('Erreur lors de la lecture de l\'image : $e');
         }
       }
-      request.fields['agriculteur'] = json.encode({
-        'nomPrenom': nomPrenom,
-        'email': email,
-        'age': age,
-        'residense': residense,
-        'activiteMenee': ActiviteMenee,
-        'telephone': telephone,
-        //'image': image,
-        'passWord': passWord,
-        'passWordConfirm': passWordConfirm,
-      });
 
-      var response = await request.send();
+      print("Envoie");
+      final response = await getx.GetConnect().post('http://10.0.2.2:8080/agriculteur/inscrire', data);
+      // var response = await request.send();
+      print("Envoyé");
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final responseData = json.decode(await response.stream.bytesToString());
-        Agriculteur agriculteur = Agriculteur.fromJson(responseData);
+        // final responseData = json.decode(await response.stream.bytesToString());
+        // Agriculteur agriculteur = Agriculteur.fromMap(responseData);
+        Agriculteur agriculteur = Agriculteur.fromJson(response.bodyString!);
         // context.read<AgriculteurProvider>().setAgriculteur(agriculteur);
         return agriculteur;
       } else {
-        final errorResponse = await response.stream.bytesToString();
+        // final errorResponse = await response.stream.bytesToString();
+        final errorResponse = await response.statusText;
         print(
             'Impossible de créer un compte ${response.statusCode}, Message d\'erreur : $errorResponse');
         throw Exception('Échec : $errorResponse');
@@ -74,6 +72,7 @@ class AgriculteurService {
     }
   }
 
+//connection Agriulteur
   Future<Agriculteur?> loginAgriculteur(String email, String password) async {
     //const apiUrl = "http://localhost:8080/agriculteur/connexion";
     const apiUrl = "http://10.0.2.2:8080/agriculteur/connexion";
@@ -90,7 +89,7 @@ class AgriculteurService {
       return null;
     }
   }
-
+//afficher tout les agriculteur
   Future<List<Agriculteur>>  affichertoutAgriculteur() async {
     //print('Avant recuperation');
     final response = await http.get(Uri.parse("http://10.0.2.2:8080/agriculteur/affichertout"));
@@ -146,6 +145,22 @@ class AgriculteurService {
       return credits;
     } else {
       throw Exception('Vous n\'avez effectuer aucune demande');
+    }
+  }
+
+  //la methode qui permet a un Agriculteur d'accepter une Offre de credit
+  Future<void> accepterOffreCredit(int idOf, int idAgr) async {
+    final url = 'http://10.0.2.2:8080/offre/accepterOffre/$idOf/$idAgr';
+
+    try {
+      final response = await http.put(Uri.parse(url));
+      if (response.statusCode == 200) {
+        print('Agriculteur ajouté avec succès a l\'Offre');
+      } else {
+        print('Échec de l\'ajout de l\'agriculteur a l\'offre - ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Erreur lors de la requête : $error');
     }
   }
 

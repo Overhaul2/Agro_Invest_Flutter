@@ -2,6 +2,7 @@ import 'package:agro_invest/pages/Agriculteur/Demandes/CreditDetaillePage.dart';
 import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
 import 'package:flutter/material.dart';
 import 'package:agro_invest/service/CreditService.dart';
+import 'package:provider/provider.dart';
 import '../../../configuration/configurationCouleur.dart';
 import '../../../model/AjouterCreditmodel.dart';
 class ModiffierDemane extends StatefulWidget {
@@ -214,11 +215,13 @@ class _ModiffierDemaneState extends State<ModiffierDemane> {
                                //final audioDescriptionPath=_audioController.text;
                                final description = _descriptionController.text;
 
-                               final result = await creditService.modifier(titre: titre,
+                               final result = await creditService.modifierCredit(
+                                   titre: titre,
                                    montant: montant,
                                    description: description,
                                    durre: durre,
-                                   dateDebut: dateDebut );
+                                   dateDebut: dateDebut,
+                                   idCredit: widget.credit.idCredit!,);
                                print('Demande Modiffier avec succes : ${result.toString()}');
                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Demande Modiffier avec succès")));
                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DemandeEnCour()));

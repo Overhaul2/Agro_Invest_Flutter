@@ -373,6 +373,7 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15))),
                           onPressed: () async {
+                            print("Ici");
                             if (_formkey.currentState!.validate()) {
                               try {
                                 final nomPrenom = _nomPrenomController.text;
@@ -407,9 +408,9 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
 
                                 //print('Inscription réussie : $result');
 
-                                Navigator.of(context).pushReplacement(
+                               /* Navigator.of(context).push(
                                     MaterialPageRoute(builder: (context) =>
-                                        CompteEnAttente()));
+                                        CompteEnAttente()));*/
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text(
                                         "Inscription Effectuer avec Succès !!!   En attente de verification du compte")));
