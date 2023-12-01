@@ -1,3 +1,4 @@
+import 'package:agro_invest/pages/Investisseur/Offre/AgriculteurAProximite.dart';
 import 'package:agro_invest/pages/Investisseur/Offre/MesOffres.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,6 @@ import 'package:flutter/material.dart';
 import '../Agriculteur/Formations/Formations.dart';
 import '../Agriculteur/Forum.dart';
 import '../Agriculteur/Messages.dart';
-import '../Agriculteur/OffreAProximite.dart';
 import 'Offre/ProjetAgricol.dart';
 
 
@@ -84,7 +84,8 @@ class _AccueilleInvestContentState extends State<AccueilleInvestContent> {
                       ),
                     ),
                   ),
-                ),Card(
+                ),
+                Card(
                   clipBehavior: Clip.hardEdge,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
@@ -146,7 +147,7 @@ class _AccueilleInvestContentState extends State<AccueilleInvestContent> {
                 InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => OffreAProximite()));
+                        builder: (context) => AgriculteurAProximite()));
                   },
                   child: Card(
                       clipBehavior: Clip.antiAliasWithSaveLayer,

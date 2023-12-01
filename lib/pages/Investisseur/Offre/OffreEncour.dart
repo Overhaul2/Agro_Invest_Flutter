@@ -40,7 +40,7 @@ class _OffreEnCourState extends State<OffreEnCour> {
                 fontSize: 30, color: MesCouleur().couleurPrincipal),),),
 
             FutureBuilder(
-              future: investisseurServices.OffreInvestisseur(idInv!),
+              future: investisseurServices.OffreInvestisseurSansAgriculteur(idInv!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();

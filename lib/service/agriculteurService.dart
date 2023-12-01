@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:agro_invest/model/Agriculteur.dart';
+import 'package:agro_invest/model/AgriculteurModele.dart';
 import 'package:agro_invest/model/AjouterCreditmodel.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -35,26 +35,15 @@ class AgriculteurService {
           var imageBytes = await image.readAsBytes();
           request.files.add(http.MultipartFile(
             'image',
-            ByteStream.fromBytes(imageBytes), // Utilisez ByteStream.fromBytes ici
+            ByteStream.fromBytes(imageBytes), //
             imageBytes.length,
           ));
         } catch (e) {
           print('Erreur lors de la lecture de l\'image : $e');
-          // Gérer l'erreur d'une manière appropriée (ex: montrer un message à l'utilisateur)
+          // Gestion des erreurs
           throw Exception('Erreur lors de la lecture de l\'image : $e');
         }
       }
-
-
-      /*if (image != null) {
-        request.files.add(http.MultipartFile(
-          'images',
-          image.readAsBytes().asStream(),
-          image.lengthSync(),
-          filename: basename(image.path),
-        ));
-      }
-*/
       request.fields['agriculteur'] = json.encode({
         'nomPrenom': nomPrenom,
         'email': email,
@@ -62,7 +51,7 @@ class AgriculteurService {
         'residense': residense,
         'activiteMenee': ActiviteMenee,
         'telephone': telephone,
-        //'image': "",
+        //'image': image,
         'passWord': passWord,
         'passWordConfirm': passWordConfirm,
       });
@@ -80,16 +69,6 @@ class AgriculteurService {
         throw Exception('Échec : $errorResponse');
       }
 
-      /*if (response.statusCode == 200 ||response.statusCode == 201 ) {
-        final responseData = json.decode(await response.stream.bytesToString());
-        //debugPrint(responseData.toString());
-        //responseData.printInfo(); // Assurez-vous que cette fonction existe
-        return Agriculteur.fromJson(responseData);
-
-      } else {
-        print('Impossible de créer un compte ${response.statusCode}');
-        throw Exception('Échec :$e');
-      };*/
     } catch (e) {
       throw Exception('ERREUR : $e');
     }
@@ -104,23 +83,43 @@ class AgriculteurService {
 
     if (response.statusCode == 200) {
       // Connexion réussie
-      return Agriculteur.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+      return Agriculteur.fromMap(jsonDecode(utf8.decode(response.bodyBytes)));
     } else {
       print(response.body);
       // Identifiants invalides
       return null;
     }
   }
+
+  Future<List<Agriculteur>>  affichertoutAgriculteur() async {
+    //print('Avant recuperation');
+    final response = await http.get(Uri.parse("http://10.0.2.2:8080/agriculteur/affichertout"));
+    // print('Apres recup : ${response.statusCode}');
+
+    if (response.statusCode == 200) {
+      // print("on est a 200" );
+      final responseData = jsonDecode(response.body) as List;
+      List<Agriculteur> agriculteurs = responseData
+          .map((agriculteur) => Agriculteur.fromMap(agriculteur))
+          .toList();
+
+      print(afficherCreditSansInvestisseur);
+      return agriculteurs;
+    } else {
+      throw Exception('Impossible de recuperer les Agriculteur a proximoté');
+    }
+  }
+
   //liste des demande effectuer
 
   List<Credit> parseCredit(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return parsed.map<Credit>((json) => Credit.fromJson(json)).toList();
   }
-
-  Future<List<Credit>>  affichertout() async {
+//recuperer tout les demandes de crédit agricole ou l'investisseur est null
+  Future<List<Credit>>  afficherCreditSansInvestisseur() async {
     //print('Avant recuperation');
-    final response = await http.get(Uri.parse("http://10.0.2.2:8080/Credit/affichertout"));
+    final response = await http.get(Uri.parse("http://10.0.2.2:8080/Credit/creditsansinvestisseur"));
    // print('Apres recup : ${response.statusCode}');
 
     if (response.statusCode == 200) {
@@ -129,67 +128,23 @@ class AgriculteurService {
       List<Credit> credits = responseData
           .map((credit) => Credit.fromMap(credit))
           .toList();
-     // print("data================");
 
-
-      // //final List<Credit> affichertout = parseCredit(response.body);
-      // List<Map<String, dynamic>> data= json.decode(response.body);
-      // // Convertir la chaîne JSON en une liste d'objets Dart
-
-      // if(data!=null){
-      //   print("liste credi afficher");
-
-      //   List<Credit> jsonList = data.map((json) => Credit.fromMap(json)).toList();
-      //   //ListeCredit= List<Credit>.from(data);
-      //   print("Apres");
-      //   print(jsonList);
-      // }else{
-      //   print('liste de donnée est null');
-      // }
-
-      print(affichertout);
+      print(afficherCreditSansInvestisseur);
      return credits;
     } else {
       throw Exception('Impossible de recuperer les credits');
     }
   }
-
-//filtrer les credit selon l'id de user
-
-  /*Future<List<Credit>> CreditAgriculteur(int idAgr) async {
-    final response = await http
-        .get(Uri.parse("http://10.0.2.2:8080/Credit/affichertout"));
-
-    if (response.statusCode == 200) {
-      final List<Credit> tousLesCredits = parseCredit(response.body);
-
-      // Filtrer les crédits pour ceux liés à l'agriculteur spécifié
-      final creditsDeLagriculteur = tousLesCredits
-          .where((credit) => credit.agriculteur?.idAgr == idAgr)
-          .toList();
-
-      return creditsDeLagriculteur;
-    } else {
-      throw Exception('Impossible de récupérer les crédits');
-    }
-  }*/
-
-
+//recuperer les demande de credit effectuer par l'agriculteur connecter
   Future<List<Credit>> CreditAgriculteur(int idAgr) async {
     final response = await http.get(Uri.parse('http://10.0.2.2:8080/Credit/list/$idAgr'));
 
     if (response.statusCode == 200) {
       print(response);
-      //print("object====================");
-      // La requête a réussi,
       List<dynamic> data = jsonDecode(response.body);
-     // print("azertyuiop");
       List<Credit> credits = data.map((creditData) => Credit.fromMap(creditData)).toList();
-     // print("qsdfghjklm");
       return credits;
     } else {
-      // Si la requête ne réussit pas, lancez une exception
-      //throw Exception('Vous n\'avez effectuer aucune demande');
       throw Exception('Vous n\'avez effectuer aucune demande');
     }
   }

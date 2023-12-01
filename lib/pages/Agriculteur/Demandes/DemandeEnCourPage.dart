@@ -1,3 +1,4 @@
+import 'package:agro_invest/pages/Agriculteur/Demandes/HistoriqueCreditDetaillePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -5,6 +6,8 @@ import '../../../Provider/AgriculteurPovider.dart';
 import '../../../configuration/configurationCouleur.dart';
 import '../../../model/AjouterCreditmodel.dart';
 import '../../../service/agriculteurService.dart';
+import '../../Investisseur/Offre/OffreDetaillePage.dart';
+import 'CreditDetaillePage.dart';
 
 class DemandeEnCour extends StatefulWidget {
   const DemandeEnCour({Key? key}) : super(key: key);
@@ -58,8 +61,11 @@ class _DemandeEnCourState extends State<DemandeEnCour> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           elevation: 10,
-                          color: Colors.green,
+                          // color: Color(0xB26DC76D),
                           child: ListTile(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>CreditDetaille(credit: credit)));
+                              },
                               title: Row(
                                 children: [
                                   CircleAvatar(
@@ -68,16 +74,21 @@ class _DemandeEnCourState extends State<DemandeEnCour> {
                                         : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
                                     radius: 40,
                                   ),
-                                  Row(
-                                    children: [
-                                      FittedBox(child: Text(" ${credit.titre} mois")),
-                                    ],
+                                  SizedBox(width: 10,),
+                                  Container(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        FittedBox(child: Text(" ${credit.titre} ")),
+                                        SizedBox(height: 20,),
+                                        FittedBox(child: Text("Montant : ${credit.montant} Fcfa ")),
+                                        FittedBox(child: Text("Durrée ${credit.durre} mois ")),
+
+                                      ],
+                                    ),
                                   )
                                 ],
                               )
-                            // subtitle: Text(
-                            //   'Durée${credit.idCredit} mois, ${credit.agriculteur?.idAgr}'),
-                            // Ajoutez d'autres éléments d'interface utilisateur selon vos besoins
                           ),
                         );
                       },

@@ -84,7 +84,6 @@ class _AccueiltestState extends State<Accueiltest> {
                     ),
                   ),
                 ),
-
                 InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(

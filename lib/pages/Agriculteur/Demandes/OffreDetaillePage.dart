@@ -1,23 +1,24 @@
+import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:agro_invest/pages/Agriculteur/Demandes/ModifierCredit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../model/AjouterCreditmodel.dart';
 
-class CreditDetaille extends StatefulWidget {
-  final Credit credit;
-  const CreditDetaille({Key? key, required this.credit}) : super(key: key);
+class OffreDetailleAgriculteur extends StatefulWidget {
+  final Offre offre;
+  const OffreDetailleAgriculteur({Key? key, required this.offre}) : super(key: key);
 
   @override
-  State<CreditDetaille> createState() => _CreditDetailleState();
+  State<OffreDetailleAgriculteur> createState() => _OffreDetailleAgriculteurState();
 }
 
-class _CreditDetailleState extends State<CreditDetaille> {
+class _OffreDetailleAgriculteurState extends State<OffreDetailleAgriculteur> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Center(
-            child: Text("Détails du Credit"),
+            child: Text("Détails de L'offre"),
           ),
         ),
         body: Center(
@@ -53,58 +54,58 @@ class _CreditDetailleState extends State<CreditDetaille> {
                             IconButton(alignment: Alignment.topRight,onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.close_sharp)),
                             ListTile(
                               leading: CircleAvatar(
-                                backgroundImage: widget.credit.offreInvestisseur?.image != null
-                                    ? NetworkImage("${widget.credit.offreInvestisseur?.image}") as ImageProvider<Object>
+                                backgroundImage: widget.offre.offreInvestisseur?.image != null
+                                    ? NetworkImage("${widget.offre.offreInvestisseur?.image}") as ImageProvider<Object>
                                     : AssetImage("asset/images/logo.png") as ImageProvider<Object>,
                               radius: 20,),
                               title: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Informations de l'investisseur:", style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
+                                  Text("Informations de l'Agriculteur:", style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
 
                                   SizedBox(height: 10),
-                                  widget.credit.offreInvestisseur != null
+                                  widget.offre.agriculteur != null
                                       ? Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: [
                                           Text("Nom: ",style: TextStyle(fontWeight: FontWeight.bold)),
-                                          Text("${widget.credit.offreInvestisseur?.nomPrenom} "),
+                                          Text("${widget.offre.offreInvestisseur?.nomPrenom} "),
                                         ],
                                       ),
                                       Row(
                                         children: [
                                           Text("Résidence : ",style: TextStyle(fontWeight: FontWeight.bold)),
-                                          Text("${widget.credit.offreInvestisseur?.residense}"),
+                                          Text("${widget.offre.agriculteur?.residense}"),
                                         ],
                                       ),
                                       Row(
                                         children: [
                                           Text("Téléphone : ",style: TextStyle(fontWeight: FontWeight.bold)),
-                                          Text("${widget.credit.offreInvestisseur?.telephone}")
+                                          Text("${widget.offre.agriculteur?.telephone}")
                                         ],
                                       ),
 
                                     ],
                                   )
-                                      : Container(child: Text("Cette demande n'a pas encore d'investisseur!"),),
+                                      : Container(child: Text("Cette Offre n'a pas encore d'Agriculteur!"),),
                                 ],
                               ),
 
                             ),SizedBox(height: 20,),
-                            Text("Titre : ${widget.credit.titre} "),SizedBox(height: 10,),
+                            Text("Titre : ${widget.offre.titre} "),SizedBox(height: 10,),
                             SizedBox(height: 20,),
-                            Text("Montant : ${widget.credit.montant} Fcfa "),
+                            Text("Montant : ${widget.offre.montant} Fcfa "),
                             SizedBox(height: 20,),
-                            Text("Duréé : ${widget.credit.durre} mois "),
+                            Text("Duréé : ${widget.offre.durre} mois "),
                             SizedBox(height: 20,),
-                            Text("Description : ${widget.credit.description} "),
+                            Text("Description : ${widget.offre.description} "),
                             SizedBox(height: 40,),
                             Container(alignment: Alignment.center,
                                 child: ElevatedButton(onPressed: (){
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ModiffierDemane(credit: widget.credit)));
-                                }, child: Text("Modifier")))
+                                //  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ModiffierDemane(credit: widget.offre)));
+                                }, child: Text("Accepter")))
                           ],
                         ),
                       ),

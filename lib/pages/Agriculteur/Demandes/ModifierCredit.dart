@@ -1,15 +1,18 @@
+import 'package:agro_invest/pages/Agriculteur/Demandes/CreditDetaillePage.dart';
 import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
 import 'package:flutter/material.dart';
 import 'package:agro_invest/service/CreditService.dart';
 import '../../../configuration/configurationCouleur.dart';
-class FaireUneDemane extends StatefulWidget {
-  const FaireUneDemane({Key? key}) : super(key: key);
+import '../../../model/AjouterCreditmodel.dart';
+class ModiffierDemane extends StatefulWidget {
+  final Credit credit;
+  const ModiffierDemane({Key? key, required this.credit}) : super(key: key);
 
   @override
-  State<FaireUneDemane> createState() => _FaireUneDemaneState();
+  State<ModiffierDemane> createState() => _ModiffierDemaneState();
 }
 
-class _FaireUneDemaneState extends State<FaireUneDemane> {
+class _ModiffierDemaneState extends State<ModiffierDemane> {
   Map creditData = {};
   final _formkey= GlobalKey<FormState>();
   final _nomController=TextEditingController();
@@ -18,6 +21,16 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
   final _descriptionController=TextEditingController();
   final _durreController=TextEditingController();
   final _audioController=TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _nomController.text = widget.credit.titre!;
+    _montantController.text = widget.credit.montant.toString();
+    _durreController.text = widget.credit.durre.toString();
+    _dateDebuitController.text = widget.credit.dateDebut!;
+    _descriptionController.text = widget.credit.description!;
+  }
 
 
   @override
@@ -36,7 +49,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                 child: SizedBox(
                     child: Image.asset("asset/images/demandecredit.jpg",))
             ),
-            FittedBox(child: Text("Formulaire de demande de micro_crédit", style: TextStyle(fontWeight: FontWeight.bold,
+            FittedBox(child: Text("Formulaire de Modiffication de micro_crédit", style: TextStyle(fontWeight: FontWeight.bold,
                 fontSize: 18, color: MesCouleur().couleurPrincipal),),),
             Expanded(child: SingleChildScrollView(
               child: Form(
@@ -49,16 +62,11 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                         controller: _nomController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Veuillez donner un titre à votre demande !';
-                          } else if (value.length <= 10) {
-                            return "Le titre doit contenir au moins 10 caractères";
-                          } else if (value.length >= 31) {
-                            return "Le titre ne doit pas dépasser 30 caractères";
-                          } else if (RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-                            return "Le titre ne doit contenir que des caractères alphabétiques";
-                          } else {
-                            return null;
-                          }
+                            return 'Veillez donner un titre a votre demande !';
+                          }if(value.length<=10){
+                            return "le titre doit contenir au moins 10 caractère";
+                          }else{
+                            return null;}
                         },
                         onTapOutside: (e) =>FocusScope.of(context).unfocus(),
                         //obscureText: true,
@@ -205,13 +213,14 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                                final dateDebut = _dateDebuitController.text;
                                //final audioDescriptionPath=_audioController.text;
                                final description = _descriptionController.text;
-                               final result = await creditService.ajouter(titre: titre,
+
+                               final result = await creditService.modifier(titre: titre,
                                    montant: montant,
                                    description: description,
                                    durre: durre,
                                    dateDebut: dateDebut );
-                               print('Demande effectuer avec succes : ${result.toString()}');
-                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Demande effectuer avec succès")));
+                               print('Demande Modiffier avec succes : ${result.toString()}');
+                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Demande Modiffier avec succès")));
                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DemandeEnCour()));
 
                              } catch (e) {

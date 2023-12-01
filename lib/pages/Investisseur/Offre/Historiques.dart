@@ -1,11 +1,14 @@
 import 'package:agro_invest/Provider/AgriculteurPovider.dart';
+import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:agro_invest/pages/Agriculteur/Demandes/RchercheCredit.dart';
-import 'package:agro_invest/service/agriculteurService.dart';
+import 'package:agro_invest/service/investisseurService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../Provider/InvestisseurProvider.dart';
 import '../../../configuration/configurationCouleur.dart';
 import '../../../model/AjouterCreditmodel.dart';
+import 'OffreDetailles.dart';
 import 'ProjetDetailles.dart';
 
 class HistoriquesOffres extends StatefulWidget {
@@ -20,8 +23,8 @@ class _HistoriquesOffresState extends State<HistoriquesOffres> {
  // AgriculteurService agriculteurService = AgriculteurService();
   @override
   Widget build(BuildContext context) {
-    final agriculteurServices = AgriculteurService();
-    final idAgr = Provider.of<AgriculteurProvider>(context, listen: false).agriculteur!.idAgr;
+    final investisseurServices = InvestisseurService();
+    final idInv = Provider.of<InvestisseurProvider>(context, listen: false).investisseur!.idInv;
 
     return Scaffold(
       appBar: AppBar(
@@ -59,20 +62,20 @@ class _HistoriquesOffresState extends State<HistoriquesOffres> {
               ),
             ),
             FutureBuilder(
-              future: agriculteurServices.CreditAgriculteur(idAgr!),
+              future: investisseurServices.OffreInvestisseur(idInv!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Text('Erreur: ${snapshot.error}');
                 } else {
-                  List<Credit> credits = snapshot.data!;
+                  List<Offre> offres = snapshot.data!;
 
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: (credits==null)?0:credits.length,
+                      itemCount: (offres==null)?0:offres.length,
                       itemBuilder: (context, index) {
-                        Credit credit = credits[index];
+                        Offre offre = offres[index];
                        // print(credits[index]);
                         return Card(
                           clipBehavior: Clip.hardEdge,
@@ -83,13 +86,13 @@ class _HistoriquesOffresState extends State<HistoriquesOffres> {
                           color: Color(0xB26DC76D),
                           child: ListTile(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>ProjetsDetail(credit: credit)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>OffreDetail(offre: offre)));
                               },
                             title: Row(
                               children: [
                                 CircleAvatar(
-                                  backgroundImage: credit.agriculteur?.image != null
-                                      ? NetworkImage("${credit.agriculteur?.image}") as ImageProvider<Object>?
+                                  backgroundImage: offre.offreInvestisseur?.image != null
+                                      ? NetworkImage("${offre.offreInvestisseur?.image}") as ImageProvider<Object>?
                                       : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
                                   radius: 40,
                                 ),
@@ -98,9 +101,9 @@ class _HistoriquesOffresState extends State<HistoriquesOffres> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      FittedBox(child: Text(" ${credit.titre} ")),
-                                      FittedBox(child: Text("Montant : ${credit.montant} Fcfa ")),
-                                      FittedBox(child: Text("Durrée ${credit.durre} mois ")),
+                                      FittedBox(child: Text(" ${offre.titre} ")),
+                                      FittedBox(child: Text("Montant : ${offre.montant} Fcfa ")),
+                                      FittedBox(child: Text("Durrée ${offre.durre} mois ")),
 
                                     ],
                                   ),

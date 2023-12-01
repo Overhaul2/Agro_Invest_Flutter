@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:agro_invest/model/Investisseur.dart';
 import 'package:http/http.dart' as http;
-import 'package:agro_invest/model/Agriculteur.dart';
+import 'package:agro_invest/model/AgriculteurModele.dart';
 
 import '../Provider/AgriculteurPovider.dart';
 
@@ -114,6 +114,42 @@ class InvestisseurService {
       // Si la requête ne réussit pas, lancez une exception
       //throw Exception('Vous n\'avez effectuer aucune demande');
       throw Exception('Vous n\'avez effectuer aucune Offre');
+    }
+  }
+
+  //Affichet tout les offre sans agriculteur qui contient l'id de l'investisseur connecter
+  Future<List<Offre>>  OffreInvestisseurSansAgriculteur(int idInv) async {
+    //print('Avant recuperation');
+    final response = await http.get(Uri.parse("http://10.0.2.2:8080/offre/offresansagriculteur"));
+    // print('Apres recup : ${response.statusCode}');
+
+    if (response.statusCode == 200) {
+      // print("on est a 200" );
+      final responseData = jsonDecode(response.body) as List;
+      List<Offre> offres = responseData
+          .map((offre) => Offre.fromMap(offre))
+          .toList();
+      // print(OffreAffichertout);
+      return offres;
+    } else {
+      throw Exception('Impossible de recuperer les offres');
+    }
+  }
+
+  Future<List<Offre>>  OffreSansAgriculteurs() async {
+    //print('Avant recuperation');
+    final response = await http.get(Uri.parse("http://10.0.2.2:8080/offre/offresansagriculteur"));
+    // print('Apres recup : ${response.statusCode}');
+    if (response.statusCode == 200) {
+      // print("on est a 200" );
+      final responseData = jsonDecode(response.body) as List;
+      List<Offre> offres = responseData
+          .map((offre) => Offre.fromMap(offre))
+          .toList();
+      print(OffreSansAgriculteurs);
+      return offres;
+    } else {
+      throw Exception('Impossible de recuperer les offres');
     }
   }
 

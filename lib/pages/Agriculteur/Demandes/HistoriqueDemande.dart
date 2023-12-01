@@ -1,4 +1,5 @@
 import 'package:agro_invest/Provider/AgriculteurPovider.dart';
+import 'package:agro_invest/pages/Agriculteur/Demandes/HistoriqueCreditDetaillePage.dart';
 import 'package:agro_invest/pages/Agriculteur/Demandes/RchercheCredit.dart';
 import 'package:agro_invest/service/agriculteurService.dart';
 import 'package:flutter/material.dart';
@@ -80,10 +81,10 @@ class _HistoriqueDemandeState extends State<HistoriqueDemande> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           elevation: 10,
-                          color: Color(0xB26DC76D),
+                         // color: Color(0xB26DC76D),
                           child: ListTile(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>CreditDetaille(credit: credit)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoriqueCreditDetaille(credit: credit)));
                               },
                             title: Row(
                               children: [

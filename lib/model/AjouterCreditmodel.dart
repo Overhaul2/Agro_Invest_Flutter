@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:agro_invest/model/Agriculteur.dart';
+import 'package:agro_invest/model/AgriculteurModele.dart';
 import 'package:agro_invest/model/Investisseur.dart';
 
 class Credit {
@@ -74,7 +74,7 @@ class Credit {
       durre: map['durre'] != null ? map['durre'] as int : null,
       description: map['description'] != null ? map['description'] as String : null,
       audioDescriptionPath: map['audioDescriptionPath'] != null ? map['audioDescriptionPath'] as String : null,
-      agriculteur: map['agriculteur'] != null ? Agriculteur.fromJson(map['agriculteur'] as Map<String,dynamic>) : null,
+      agriculteur: map['agriculteur'] != null ? Agriculteur.fromMap(map['agriculteur'] as Map<String,dynamic>) : null,
       offreInvestisseur: map['offreInvestisseur'] != null ? Investisseur.fromJson(map['offreInvestisseur'] as Map<String,dynamic>) : null,
     );
   }

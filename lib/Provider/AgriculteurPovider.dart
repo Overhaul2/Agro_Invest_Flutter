@@ -1,6 +1,6 @@
 
 import 'package:flutter/foundation.dart';
-import 'package:agro_invest/model/Agriculteur.dart';
+import 'package:agro_invest/model/AgriculteurModele.dart';
 
 class AgriculteurProvider with ChangeNotifier {
   Agriculteur? _agriculteur;

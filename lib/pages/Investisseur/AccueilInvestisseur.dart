@@ -5,7 +5,9 @@ import 'package:agro_invest/pages/SideBarre/NoterApplication.dart';
 import 'package:agro_invest/pages/SideBarre/PartagerApplication.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../Provider/InvestisseurProvider.dart';
 import '../Agriculteur/OffreAProximite.dart';
 import '../Agriculteur/SideBar.dart';
 import '../SideBarre/Appropos.dart';
@@ -46,7 +48,21 @@ class _AccueilState extends State<AccueilInves> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Center(child: Text("Accueil")),
+          title: Consumer<InvestisseurProvider>(
+            builder: (context, investisseurProvider, _) {
+              if (investisseurProvider.investisseur != null) {
+                String? nomPrenom = investisseurProvider.investisseur!.nomPrenom;
+                if (nomPrenom != null) {
+                  return Text("investisseur $nomPrenom");
+                } else {
+                  return Text("Aucun Utilisateur Connecté",
+                      style: TextStyle(color: Colors.black87));
+                }
+              } else {
+                return Text("");
+              }
+            },
+          ),
         ),
         body: container,
         drawer: Drawer(
@@ -67,33 +83,6 @@ class _AccueilState extends State<AccueilInves> {
       ),
     );
   }
-
-  /*itemDashbord(String title, String image) => Container(
-        decoration: BoxDecoration(
-            color: Colors.white38,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                  offset: const Offset(0, 5),
-                  color: Theme.of(context).primaryColor.withOpacity(2),
-                  spreadRadius: 2,
-                  blurRadius: 5)
-            ]),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(shape: BoxShape.circle),
-              child: Image.asset(
-                (image),
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(title, style: Theme.of(context).textTheme.titleMedium)
-          ],
-        ),
-      ); */
 
 //carousel slider
   Widget content(BuildContext context, List<String> images) {

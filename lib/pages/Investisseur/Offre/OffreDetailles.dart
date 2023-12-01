@@ -2,21 +2,21 @@ import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:flutter/material.dart';
 import '../../../model/AjouterCreditmodel.dart';
 
-class ProjetsDetail extends StatefulWidget {
-  final Credit credit;
-  const ProjetsDetail({Key? key, required this.credit}) : super(key: key);
+class OffreDetail extends StatefulWidget {
+  final Offre offre;
+  const OffreDetail({Key? key,  required this.offre}) : super(key: key);
 
   @override
-  State<ProjetsDetail> createState() => _ProjetsDetailState();
+  State<OffreDetail> createState() => _OffreDetailState();
 }
 
-class _ProjetsDetailState extends State<ProjetsDetail> {
+class _OffreDetailState extends State<OffreDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Center(
-            child: Text("Détails du Projets"),
+            child: Text("Offre Detaille"),
           ),
         ),
         body: Center(
@@ -50,8 +50,8 @@ class _ProjetsDetailState extends State<ProjetsDetail> {
                         children: [
                           ListTile(
                             leading: CircleAvatar(
-                              backgroundImage: widget.credit.agriculteur?.image != null
-                                  ? NetworkImage("${widget.credit.agriculteur?.image}") as ImageProvider<Object>
+                              backgroundImage: widget.offre.agriculteur?.image != null
+                                  ? NetworkImage("${widget.offre.agriculteur?.image}") as ImageProvider<Object>
                                   : AssetImage("asset/images/logo.png") as ImageProvider<Object>,
                             radius: 20,),
                             title: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,19 +60,19 @@ class _ProjetsDetailState extends State<ProjetsDetail> {
                                 Row(
                                   children: [
                                     Text("Nom: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                    Text("${widget.credit.agriculteur?.nomPrenom}"),
+                                    Text("${widget.offre.agriculteur?.nomPrenom}"),
                                   ],
                                 ),
                                 Row(
                                   children: [
                                     Text("Résidense : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                    Text("${widget.credit.agriculteur?.residense}"),
+                                    Text("${widget.offre.agriculteur?.residense}"),
                                   ],
                                 ),
                                 Row(
                                   children: [
                                     Text("Téléphone : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                    Text("+223 ${widget.credit.agriculteur?.telephone}"),
+                                    Text("+223 ${widget.offre.agriculteur?.telephone}"),
                                   ],
                                 ),
                               ],
@@ -81,26 +81,26 @@ class _ProjetsDetailState extends State<ProjetsDetail> {
                           Row(
                             children: [
                               Text("Titre : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                              Text("${widget.credit.titre}"),
+                              Text("${widget.offre.titre}"),
                             ],
                           ),SizedBox(height: 10,),
                           SizedBox(height: 5,),
                           Row(
                             children: [
                               Text("Montant : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                              Text("${widget.credit.montant} Fcfa"),
+                              Text("${widget.offre.montant} Fcfa"),
                             ],
                           ),
                           SizedBox(height: 5,),
                           Row(
                             children: [
                               Text("Duréé : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                              Text("${widget.credit.durre} mois"),
+                              Text("${widget.offre.durre} mois"),
                             ],
                           ),
                           SizedBox(height: 5,),
                           Text("Description : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                          Text("${widget.credit.description}"),
+                          Text("${widget.offre.description}"),
                           SizedBox(height: 45,),
                           Container(alignment: Alignment.center,
                               child: ElevatedButton(onPressed: (){

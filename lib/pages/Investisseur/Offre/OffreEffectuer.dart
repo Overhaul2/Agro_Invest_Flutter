@@ -36,7 +36,7 @@ class _OffreEffectuerState extends State<OffreEffectuer> {
                       child: Image.asset("asset/images/mesdemandes.jpg",fit: BoxFit.fitWidth,)),)
             ),
             SizedBox(height: 20,),
-            FittedBox(child: Text("Mes demandes en Cours", style: TextStyle(fontWeight: FontWeight.bold,
+            FittedBox(child: Text("Mes Offres ", style: TextStyle(fontWeight: FontWeight.bold,
                 fontSize: 30, color: MesCouleur().couleurPrincipal),),),
 
             FutureBuilder(
@@ -61,7 +61,7 @@ class _OffreEffectuerState extends State<OffreEffectuer> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           elevation: 10,
-                          color: Colors.green,
+                        //  color: Colors.green,
                           child: ListTile(
                               title: Row(
                                 children: [

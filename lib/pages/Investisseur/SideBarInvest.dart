@@ -48,7 +48,7 @@ class _MonHearderDrawerinvestState extends State<MonHearderDrawerinvest> {
                   return Text("+223", style: TextStyle(color: Colors.black87));
                 }
               } else {
-                return Text("");
+                return Text("+223 xxxxxxxx");
               }
             },
           ),

@@ -45,7 +45,7 @@ class _HistoriqueDemandeState extends State<HistoriqueDemande> {
               ),
             ),
             FutureBuilder(
-              future: agriculteurService.affichertout(),
+              future: agriculteurService.afficherCreditSansInvestisseur(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();

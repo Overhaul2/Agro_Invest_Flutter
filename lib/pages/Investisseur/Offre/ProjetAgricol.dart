@@ -33,13 +33,13 @@ class _ProjetsAgricolState extends State<ProjetsAgricol> {
         child: Column(
           children: [
             Container(
-                //height: 250,
+              //height: 250,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 0),
                   child: SizedBox(
                       child: Image.asset(
                         "asset/images/projetAgricoles.jpg",
-                       // fit: BoxFit.fitWidth,
+                        // fit: BoxFit.fitWidth,
                       )),
                 )),
             SizedBox(
@@ -55,7 +55,7 @@ class _ProjetsAgricolState extends State<ProjetsAgricol> {
               ),
             ),
             FutureBuilder(
-              future: agriculteurServices.affichertout(),
+              future: agriculteurServices.afficherCreditSansInvestisseur(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
@@ -73,10 +73,13 @@ class _ProjetsAgricolState extends State<ProjetsAgricol> {
                         return Card(
                           clipBehavior: Clip.hardEdge,
                           shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: MesCouleur().couleurPrincipal
+                            ),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           elevation: 10,
-                          color: Color(0xB26DC76D),
+                         // color: Color(0xB26DC76D),
                           child: ListTile(
                               onTap: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>ProjetsDetail(credit: credit)));
@@ -94,7 +97,9 @@ class _ProjetsAgricolState extends State<ProjetsAgricol> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        FittedBox(child: Text(" ${credit.titre} ")),
+                                        FittedBox(child: SizedBox(
+                                          width: 280,
+                                            child: Text(" ${credit.titre} "))),
                                         FittedBox(child: Text("Montant : ${credit.montant} Fcfa ")),
                                         FittedBox(child: Text("Durrée ${credit.durre} mois ")),
 

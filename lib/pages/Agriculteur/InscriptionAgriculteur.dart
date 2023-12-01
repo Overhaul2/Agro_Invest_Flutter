@@ -22,7 +22,7 @@ class InscriptionAgriculteur extends StatefulWidget {
 
 class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
   Uint8List? _image;
-  File? selectedIMage;
+  File? selectedImage;
 
   bool nonVisibles = false;
   bool nonVisible2 = false;
@@ -393,7 +393,7 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                                   residense: residense,
                                   age: age,
                                   ActiviteMenee: ActiviteMenee,
-                                  image: selectedIMage,
+                                  image: selectedImage,
                                   passWord: passWord,
                                   passWordConfirm: passWordConfirm,
                                 );
@@ -527,7 +527,7 @@ Future _pickImageFromGallery() async {
   await ImagePicker().pickImage(source: ImageSource.gallery);
   if (returnImage == null) return;
   setState(() {
-    selectedIMage = File(returnImage.path);
+    selectedImage = File(returnImage.path);
     _image = File(returnImage.path).readAsBytesSync();
   });
   Navigator.of(context).pop(); //close the model sheet
@@ -539,7 +539,7 @@ Future _pickImageFromCamera() async {
   await ImagePicker().pickImage(source: ImageSource.camera);
   if (returnImage == null) return;
   setState(() {
-    selectedIMage = File(returnImage.path);
+    selectedImage = File(returnImage.path);
     _image = File(returnImage.path).readAsBytesSync();
   });
   Navigator.of(context).pop();

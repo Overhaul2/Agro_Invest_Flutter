@@ -1,11 +1,10 @@
 import 'package:agro_invest/configuration/configurationCouleur.dart';
-import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
 import 'package:agro_invest/pages/Investisseur/Offre/OffreEffectuer.dart';
 import 'package:agro_invest/pages/Investisseur/Offre/OffreEncour.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import '../ProjetAgricole.dart';
 import 'AjouterOffre.dart';
+import 'Historiques.dart';
 
 class MesOffres extends StatefulWidget {
   const MesOffres({Key? key}) : super(key: key);
@@ -123,7 +122,7 @@ class _MesOffresState extends State<MesOffres> {
             child: InkWell(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => OffreEffectuer()));
+                    builder: (context) => HistoriquesOffres()));
               },
               child: SizedBox(
                 width: 350,
