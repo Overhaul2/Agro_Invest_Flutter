@@ -144,7 +144,7 @@ class InvestisseurService {
       List<Offre> offres = responseData
           .map((offre) => Offre.fromMap(offre))
           .toList();
-      print(OffreSansAgriculteurs);
+      print(response.body);
       return offres;
     } else {
       throw Exception('Impossible de recuperer les offres');

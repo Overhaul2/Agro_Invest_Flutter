@@ -1,7 +1,10 @@
+import 'package:agro_invest/model/AgriculteurModele.dart';
+import 'package:agro_invest/pages/Investisseur/ProfileInvestisseurPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../Provider/AgriculteurPovider.dart';
+import '../../Provider/InvestisseurProvider.dart';
 import 'ProfilePage.dart';
 
 class MonHearderDrawer extends StatefulWidget {
@@ -12,6 +15,7 @@ class MonHearderDrawer extends StatefulWidget {
 }
 
 class _MonHearderDrawerState extends State<MonHearderDrawer> {
+
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -40,14 +44,14 @@ class _MonHearderDrawerState extends State<MonHearderDrawer> {
               if (agriculteurProvider.agriculteur != null) {
                 int? Tel = agriculteurProvider.agriculteur!.telephone;
                 if (Tel != null) {
-                  return Text("+223 $Tel" ,style: TextStyle(
+                  return Text("+223 $Tel" ,style: TextStyle(color: Colors.white,fontSize:20 ),);/*style: TextStyle(
                     color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold
-                  ),);
+                  ),);*/
                 } else {
-                  return Text("+223", style: TextStyle(color: Colors.black87));
+                  return Text("+223", style: TextStyle(color: Colors.white));
                 }
               } else {
-                return Text("");
+                return Text("+223 xxxxxxxx");
               }
             },
           ),
@@ -56,13 +60,21 @@ class _MonHearderDrawerState extends State<MonHearderDrawer> {
     );
   }
 }
+
 DecorationImage _buildImageProvider(BuildContext context) {
   final agriculteurProvider = Provider.of<AgriculteurProvider>(context, listen: false);
 
+  late Agriculteur agriculteur;
+  @override
+  void initState() {
+    // TODO: implement initState
+    agriculteur = Provider.of<AgriculteurProvider>(context, listen: false).agriculteur!;
+
+  }
   if (agriculteurProvider.agriculteur != null &&
       agriculteurProvider.agriculteur!.image != null) {
     return DecorationImage(
-      image: NetworkImage(agriculteurProvider.agriculteur!.image!)
+        image: NetworkImage( "http://10.0.2.2/" + agriculteur!.image!)
     );
   } else {
     return DecorationImage(

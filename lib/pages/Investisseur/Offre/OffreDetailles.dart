@@ -102,10 +102,15 @@ class _OffreDetailState extends State<OffreDetail> {
                           Text("Description : ", style: TextStyle(fontWeight: FontWeight.bold)),
                           Text("${widget.offre.description}"),
                           SizedBox(height: 45,),
-                          Container(alignment: Alignment.center,
-                              child: ElevatedButton(onPressed: (){
-                                Invesrtir();
-                              }, child: Text("Accepter",style: TextStyle(fontWeight: FontWeight.bold),)))
+                Container(
+                  alignment: Alignment.center,
+                  child: widget.offre.agriculteur == null
+                      ? ElevatedButton(
+                      onPressed: () {
+                      },
+                      child: Text("Modifier"))
+                      : Container(),
+                )
                         ],
                       ),
                     ),

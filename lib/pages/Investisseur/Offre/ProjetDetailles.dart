@@ -1,10 +1,9 @@
 import 'package:agro_invest/Provider/InvestisseurProvider.dart';
-import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:agro_invest/pages/Investisseur/Offre/MesOffres.dart';
-import 'package:agro_invest/service/CreditService.dart';
 import 'package:agro_invest/service/investisseurService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../model/AjouterCreditmodel.dart';
 
 class ProjetsDetail extends StatefulWidget {
@@ -79,33 +78,55 @@ class _ProjetsDetailState extends State<ProjetsDetail> {
                                     Text("Résidense : ", style: TextStyle(fontWeight: FontWeight.bold)),
                                     Text("${widget.credit.agriculteur?.residense}"),
                                   ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text("Téléphone : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                    Text("+223 ${widget.credit.agriculteur?.telephone}"),
-                                  ],
-                                ),
+                            ),
+                            Row(
+                              children: [
+                                Text("Téléphone : ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text(
+                                    "+223 ${widget.credit.agriculteur?.telephone}"),
                               ],
                             ),
-                          ),SizedBox(height: 20,),
-                          Row(
-                            children: [
-                              Text("Titre : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                              Text("${widget.credit.titre}"),
-                            ],
-                          ),SizedBox(height: 10,),
-                          SizedBox(height: 5,),
-                          Row(
-                            children: [
-                              Text("Montant : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                              Text("${widget.credit.montant} Fcfa"),
-                            ],
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Text("Titre : ",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Container(
+                            width: 280,
+                            // Spécifiez la largeur que vous trouvez appropriée
+                            child: Text(
+                              "${widget.credit.titre}",
+                              softWrap: true,
+                            ),
                           ),
-                          SizedBox(height: 5,),
-                          Row(
-                            children: [
-                              Text("Duréé : ", style: TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          Text("Montant : ",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text("${widget.credit.montant} Fcfa"),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          Text("Duréé : ", style: TextStyle(fontWeight: FontWeight.bold)),
                               Text("${widget.credit.durre} mois"),
                             ],
                           ),

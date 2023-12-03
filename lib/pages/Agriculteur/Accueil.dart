@@ -1,4 +1,5 @@
 import 'package:agro_invest/pages/Agriculteur/AccueiltestContent.dart';
+import 'package:agro_invest/pages/Investisseur/footBarInvest.dart';
 import 'package:agro_invest/pages/SideBarre/Aide.dart';
 import 'package:agro_invest/pages/SideBarre/Appropos.dart';
 import 'package:agro_invest/pages/SideBarre/ContacterSupport.dart';
@@ -11,7 +12,7 @@ import 'package:provider/provider.dart';
 
 import '../../Provider/AgriculteurPovider.dart';
 import 'OffreAProximite.dart';
-import 'SideBar.dart';
+import 'SideBarAgri.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _AccueilState extends State<Accueil> {
       container = Accueiltest();
     } else if (currentPage == DrawersSection.Parametre) {
       container = ParametrePage();
-    } else if (currentPage == DrawersSection.Apropos) {
+    } /*else if (currentPage == DrawersSection.Apropos) {
       container = ApproposApplication();
     } else if (currentPage == DrawersSection.Contacter_le_Supports) {
       container = ContacterSupport();
@@ -40,7 +41,7 @@ class _AccueilState extends State<Accueil> {
       container = PartagerApplication();
     } else if (currentPage == DrawersSection.noter) {
       container = NoterApliccation();
-    } else if (currentPage == DrawersSection.Se_Deconnecter) {
+    }*/ else if (currentPage == DrawersSection.Se_Deconnecter) {
       container = OffreAProximite();
     }
     return SafeArea(
@@ -69,39 +70,15 @@ class _AccueilState extends State<Accueil> {
         child: SingleChildScrollView(
           child: Container(
               child: Column(
-            children: [MonHearderDrawer(), MonheaderDrawerList()],
+            children: [MonHearderDrawer(),
+              MonheaderDrawerList(),
+              FooterDrawers()
+            ],
           )),
         ),
       ),
     ));
   }
-
-  /*itemDashbord(String title, String image) => Container(
-        decoration: BoxDecoration(
-            color: Colors.white38,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                  offset: const Offset(0, 5),
-                  color: Theme.of(context).primaryColor.withOpacity(2),
-                  spreadRadius: 2,
-                  blurRadius: 5)
-            ]),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(shape: BoxShape.circle),
-              child: Image.asset(
-                (image),
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(title, style: Theme.of(context).textTheme.titleMedium)
-          ],
-        ),
-      ); */
 
 //carousel slider
   Widget content(BuildContext context, List<String> images) {
@@ -144,7 +121,7 @@ class _AccueilState extends State<Accueil> {
               currentPage == DrawersSection.Accueil ? true : false),
           menuItem(2, "Paramètre", Icons.settings,
               currentPage == DrawersSection.Parametre ? true : false),
-          menuItem(3, "Apropos", Icons.info_outline,
+          /*menuItem(3, "Apropos", Icons.info_outline,
               currentPage == DrawersSection.Apropos ? true : false),
           menuItem(
               4,
@@ -163,7 +140,7 @@ class _AccueilState extends State<Accueil> {
                   ? true
                   : false),
           menuItem(7, "Noter l'Application", Icons.feedback_outlined,
-              currentPage == DrawersSection.noter ? true : false),
+              currentPage == DrawersSection.noter ? true : false),*/
           menuItem(8, "Se Deconnecter", Icons.logout,
               currentPage == DrawersSection.Se_Deconnecter ? true : false),
         ],
@@ -183,7 +160,7 @@ class _AccueilState extends State<Accueil> {
               currentPage = DrawersSection.Accueil;
             } else if (id == 2) {
               currentPage = DrawersSection.Parametre;
-            } else if (id == 3) {
+            } /*else if (id == 3) {
               currentPage = DrawersSection.Apropos;
             } else if (id == 4) {
               currentPage = DrawersSection.Contacter_le_Supports;
@@ -193,7 +170,7 @@ class _AccueilState extends State<Accueil> {
               currentPage = DrawersSection.Partager_lapplication;
             } else if (id == 7) {
               currentPage = DrawersSection.noter;
-            } else if (id == 8) {
+            }*/ else if (id == 8) {
               currentPage = DrawersSection.Se_Deconnecter;
             }
           });
@@ -232,10 +209,10 @@ class _AccueilState extends State<Accueil> {
 enum DrawersSection {
   Accueil,
   Parametre,
-  Apropos,
+  /*Apropos,
   Contacter_le_Supports,
   Aide,
   Partager_lapplication,
-  noter,
+  noter,*/
   Se_Deconnecter,
 }

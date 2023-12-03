@@ -19,7 +19,7 @@ class _OffreAProximiteState extends State<OffreAProximite> {
     return Scaffold(
       appBar: AppBar(
         leading: (BackButton()),
-        title: Text("Offre A Proximite"),
+        title: Center(child: Text("Offre A Proximite")),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -35,15 +35,32 @@ class _OffreAProximiteState extends State<OffreAProximite> {
                   } else {
                     List<Offre> offres = snapshot.data!;
 
+                    if (offres.isEmpty) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 200),
+                        child: Center(
+                          child: Container(
+                            child: Column(
+                              children: [
+                                Text('Aucune offre disponible pour l\'instant !',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),SizedBox(height: 20,),
+                                Image.asset('asset/images/notfound.jpg'),
+                                Text('Revenez plustard',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17)),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        height: MediaQuery.of(context).size.height - 100, // Ajustez la hauteur selon vos besoins
+                        height: MediaQuery.of(context).size.height - 100,
                         child: ListView.builder(
-                          itemCount: (offres == null) ? 0 : offres.length,
+                          itemCount: offres.length,
                           itemBuilder: (context, index) {
                             Offre offre = offres[index];
-                            return  Card(
+                            return Card(
                               clipBehavior: Clip.hardEdge,
                               shape: RoundedRectangleBorder(
                                 side: BorderSide(
@@ -52,35 +69,33 @@ class _OffreAProximiteState extends State<OffreAProximite> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               elevation: 10,
-                              // color: Color(0xB26DC76D),
                               child: ListTile(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>OffreDetailleAgriculteur(offre: offre)));
-                                  },
-                                  title: Row(
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundImage: offre.agriculteur?.image != null
-                                            ? NetworkImage("${offre.agriculteur?.image}") as ImageProvider<Object>?
-                                            : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
-                                        radius: 40,
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => OffreDetailleAgriculteur(offre: offre)));
+                                },
+                                title: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      backgroundImage: offre.agriculteur?.image != null
+                                          ? NetworkImage("${offre.agriculteur?.image}") as ImageProvider<Object>?
+                                          : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
+                                      radius: 40,
+                                    ),
+                                    SizedBox(width: 10,),
+                                    Container(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          FittedBox(child: SizedBox(
+                                              width: 265,
+                                              child: Text(" ${offre.titre} "))),
+                                          FittedBox(child: Text("Montant : ${offre.montant} Fcfa ")),
+                                          FittedBox(child: Text("Durée ${offre.durre} mois ")),
+                                        ],
                                       ),
-                                      SizedBox(width: 10,),
-                                      Container(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            FittedBox(child: SizedBox(
-                                                width: 265,
-                                                child: Text(" ${offre.titre} "))),
-                                            FittedBox(child: Text("Montant : ${offre.montant} Fcfa ")),
-                                            FittedBox(child: Text("Durrée ${offre.durre} mois ")),
-
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  )
+                                    )
+                                  ],
+                                ),
                               ),
                             );
                           },
@@ -90,6 +105,7 @@ class _OffreAProximiteState extends State<OffreAProximite> {
                   }
                 },
               ),
+
             ],
           ),
         ),

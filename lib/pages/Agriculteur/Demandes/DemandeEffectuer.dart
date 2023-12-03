@@ -9,14 +9,14 @@ import '../../../service/agriculteurService.dart';
 import '../../Investisseur/Offre/OffreEffectuerDetaillePage.dart';
 import 'CreditDetaillePage.dart';
 
-class DemandeEnCour extends StatefulWidget {
-  const DemandeEnCour({Key? key}) : super(key: key);
+class DemandeEffectuer extends StatefulWidget {
+  const DemandeEffectuer({Key? key}) : super(key: key);
 
   @override
-  State<DemandeEnCour> createState() => _DemandeEnCourState();
+  State<DemandeEffectuer> createState() => _DemandeEffectuerState();
 }
 
-class _DemandeEnCourState extends State<DemandeEnCour> {
+class _DemandeEffectuerState extends State<DemandeEffectuer> {
   @override
   Widget build(BuildContext context) {
 
@@ -40,7 +40,7 @@ class _DemandeEnCourState extends State<DemandeEnCour> {
                 fontSize: 30, color: MesCouleur().couleurPrincipal),),),
 
             FutureBuilder(
-              future: agriculteurServices.demandeAccepter(idAgr!),
+              future: agriculteurServices.CreditAgriculteur(idAgr!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Padding(
@@ -51,7 +51,7 @@ class _DemandeEnCourState extends State<DemandeEnCour> {
                   return
                     Column(
                       children: [
-                        Container(child: Image.asset("asset/images/notfound.jpg"),
+                        Container(child: Image.asset("asset/images/notfoundo.jpg"),
                           padding: EdgeInsets.only(top: 50),
                           height: 200,
                         ),

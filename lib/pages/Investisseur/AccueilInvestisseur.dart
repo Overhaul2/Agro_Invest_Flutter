@@ -1,15 +1,19 @@
 
+import 'package:agro_invest/pages/Agriculteur/login.dart';
 import 'package:agro_invest/pages/Investisseur/AccueilleInvestContent.dart';
+import 'package:agro_invest/pages/Investisseur/SideBarInvest.dart';
+import 'package:agro_invest/pages/Investisseur/footBarInvest.dart';
 import 'package:agro_invest/pages/SideBarre/Aide.dart';
 import 'package:agro_invest/pages/SideBarre/NoterApplication.dart';
 import 'package:agro_invest/pages/SideBarre/PartagerApplication.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Provider/InvestisseurProvider.dart';
 import '../Agriculteur/OffreAProximite.dart';
-import '../Agriculteur/SideBar.dart';
+import '../Agriculteur/SideBarAgri.dart';
 import '../SideBarre/Appropos.dart';
 import '../SideBarre/ContacterSupport.dart';
 import '../SideBarre/Parametre.dart';
@@ -32,7 +36,7 @@ class _AccueilState extends State<AccueilInves> {
       container = AccueilleInvestContent();
     } else if (currentPage == DrawersSection.Parametre) {
       container = ParametrePage();
-    } else if (currentPage == DrawersSection.Apropos) {
+    } /*else if (currentPage == DrawersSection.Apropos) {
       container = ApproposApplication();
     } else if (currentPage == DrawersSection.Contacter_le_Supports) {
       container = ContacterSupport();
@@ -42,8 +46,8 @@ class _AccueilState extends State<AccueilInves> {
       container = PartagerApplication();
     } else if (currentPage == DrawersSection.noter) {
       container = NoterApliccation();
-    } else if (currentPage == DrawersSection.Se_Deconnecter) {
-      container = OffreAProximite();
+    }*/ else if (currentPage == DrawersSection.Se_Deconnecter) {
+       container== AccueilleInvestContent;
     }
     return SafeArea(
       child: Scaffold(
@@ -70,8 +74,9 @@ class _AccueilState extends State<AccueilInves> {
             child: Container(
               child: Column(
                 children: [
-                  MonHearderDrawer(),
+                  MonHearderDrawerinvest(),
                   MonheaderDrawerList(),
+                  FooterDrawers(),
                   /* Container(
                     child: Container1,
                   )*/
@@ -128,7 +133,7 @@ class _AccueilState extends State<AccueilInves> {
               currentPage == DrawersSection.Accueil ? true : false),
           menuItem(2, "Paramètre", Icons.settings,
               currentPage == DrawersSection.Parametre ? true : false),
-          menuItem(3, "Apropos", Icons.info_outline,
+          /*menuItem(3, "Apropos", Icons.info_outline,
               currentPage == DrawersSection.Apropos ? true : false),
           menuItem(4, "Contacter le Support",
               Icons.contact_support_outlined,
@@ -142,13 +147,15 @@ class _AccueilState extends State<AccueilInves> {
               currentPage == DrawersSection.Partager_lapplication
                   ? true : false),
           menuItem(7, "Noter l'Application", Icons.feedback_outlined,
-              currentPage == DrawersSection.noter ? true : false),
+              currentPage == DrawersSection.noter ? true : false),*/
           menuItem(8, "Se Deconnecter", Icons.logout,
               currentPage == DrawersSection.Se_Deconnecter ? true : false),
         ],
       ),
     );
   }
+
+
 
   //affectation des pages de la liste enum dans le side
   Widget menuItem(int id, String title, IconData icon, bool selected) {
@@ -162,7 +169,7 @@ class _AccueilState extends State<AccueilInves> {
               currentPage = DrawersSection.Accueil;
             } else if (id == 2) {
               currentPage = DrawersSection.Parametre;
-            } else if (id == 3) {
+            } /*else if (id == 3) {
               currentPage = DrawersSection.Apropos;
             } else if (id == 4) {
               currentPage = DrawersSection.Contacter_le_Supports;
@@ -172,7 +179,7 @@ class _AccueilState extends State<AccueilInves> {
               currentPage = DrawersSection.Partager_lapplication;
             } else if (id == 7) {
               currentPage = DrawersSection.noter;
-            } else if (id == 8) {
+            }*/ else if (id == 8) {
               currentPage = DrawersSection.Se_Deconnecter;
             }
           });
@@ -211,10 +218,10 @@ class _AccueilState extends State<AccueilInves> {
 enum DrawersSection {
   Accueil,
   Parametre,
-  Apropos,
+  /*Apropos,
   Contacter_le_Supports,
   Aide,
   Partager_lapplication,
-  noter,
+  noter,*/
   Se_Deconnecter,
 }

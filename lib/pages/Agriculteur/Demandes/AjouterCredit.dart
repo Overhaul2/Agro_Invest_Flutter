@@ -1,6 +1,9 @@
+
 import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
 import 'package:flutter/material.dart';
 import 'package:agro_invest/service/CreditService.dart';
+import 'package:social_media_recorder/audio_encoder_type.dart';
+import 'package:social_media_recorder/screen/social_media_recorder.dart';
 import '../../../configuration/configurationCouleur.dart';
 class FaireUneDemane extends StatefulWidget {
   const FaireUneDemane({Key? key}) : super(key: key);
@@ -165,28 +168,46 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10.0)),
                           ),
-                          prefixIcon: Icon(Icons.description_outlined,),
+                          prefixIcon: Icon(Icons.description_outlined,)
                         ),
                         keyboardType: TextInputType.text,
                       ),
-                    ),Padding(
-                      padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
-                      child: TextFormField(
-                        controller: _audioController,
-                        //obscureText: true,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 20),
-                          labelText: "Description audio",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.6, // Ajustez la largeur comme nécessaire
+                            child: Text(
+                              "Description Audio",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 16, // Ajustez la taille de la police comme nécessaire
+                              ),
+                            ),
                           ),
-                          prefixIcon: Icon(Icons.person,
-                              color: Color(0xA8008000)),
-                        ),
-                        keyboardType: TextInputType.name,
+                          Expanded(
+                            child:  Padding(
+                              padding: const EdgeInsets.only(right: 20.0),
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: SocialMediaRecorder(
+                                  sendRequestFunction: (File ,soundFile) {},
+                                  encode: AudioEncoderType.AAC,
+                                  counterTextStyle: TextStyle(color: MesCouleur().couleurPrincipal),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+
                     SizedBox(height: 15,),
+
                     Container(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(

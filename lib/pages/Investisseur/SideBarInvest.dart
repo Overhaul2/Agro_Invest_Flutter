@@ -1,8 +1,8 @@
 import 'package:agro_invest/Provider/InvestisseurProvider.dart';
+import 'package:agro_invest/pages/Investisseur/ProfileInvestisseurPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../Provider/AgriculteurPovider.dart';
 import '../Agriculteur/ProfilePage.dart';
 
 class MonHearderDrawerinvest extends StatefulWidget {
@@ -25,7 +25,7 @@ class _MonHearderDrawerinvestState extends State<MonHearderDrawerinvest> {
         children: [
           InkWell(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>UserProfil()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>InvestisseurProfil()));
             },
             child: Container(
               margin: EdgeInsets.only(bottom: 10),
@@ -41,9 +41,9 @@ class _MonHearderDrawerinvestState extends State<MonHearderDrawerinvest> {
               if (investisseurProvider.investisseur != null) {
                 int? Tel = investisseurProvider.investisseur!.telephone;
                 if (Tel != null) {
-                  return Text("+223 $Tel" ,style: TextStyle(
+                  return Text("+223 $Tel" ,style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold),);/*style: TextStyle(
                     color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold
-                  ),);
+                  ),);*/
                 } else {
                   return Text("+223", style: TextStyle(color: Colors.black87));
                 }

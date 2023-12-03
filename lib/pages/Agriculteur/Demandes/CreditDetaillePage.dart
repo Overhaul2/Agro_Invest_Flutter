@@ -101,10 +101,17 @@ class _CreditDetailleState extends State<CreditDetaille> {
                             SizedBox(height: 20,),
                             Text("Description : ${widget.credit.description} "),
                             SizedBox(height: 40,),
-                            Container(alignment: Alignment.center,
-                                child: ElevatedButton(onPressed: (){
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ModiffierDemane(credit: widget.credit)));
-                                }, child: Text("Modifier")))
+                            Container(
+                              alignment: Alignment.center,
+                              child: widget.credit.offreInvestisseur == null
+                                  ? ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => ModiffierDemane(credit: widget.credit)));
+                                  },
+                                  child: Text("Modifier"))
+                                  : Container(),
+                            )
                           ],
                         ),
                       ),

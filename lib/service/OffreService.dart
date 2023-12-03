@@ -56,11 +56,11 @@ class OffreService{
       if (response.statusCode == 200 || response.statusCode == 201) {
         final responseData =
         json.decode(await response.stream.bytesToString());
-        print("id Investisseur: ${investisseurProvider.investisseur?.idInv}");
+       // print("id Investisseur: ${investisseurProvider.investisseur?.idInv}");
         return Offre.fromMap(responseData);
       } else {
         final errorResponse = await response.stream.bytesToString();
-        print('Erreur ajout de credit ${response.statusCode}, Message d\'erreur : $errorResponse');
+        print('Erreur ajout offre ${response.statusCode}, Message d\'erreur : $errorResponse');
         throw Exception('Échec : $errorResponse');
       }
     } catch (e) {

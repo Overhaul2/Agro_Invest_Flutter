@@ -77,39 +77,43 @@ class _HistoriquesOffresState extends State<HistoriquesOffres> {
                       itemBuilder: (context, index) {
                         Offre offre = offres[index];
                        // print(credits[index]);
-                        return Card(
-                          clipBehavior: Clip.hardEdge,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          elevation: 10,
-                          color: Color(0xB26DC76D),
-                          child: ListTile(
-                              onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>OffreDetail(offre: offre)));
-                              },
-                            title: Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage: offre.offreInvestisseur?.image != null
-                                      ? NetworkImage("${offre.offreInvestisseur?.image}") as ImageProvider<Object>?
-                                      : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
-                                  radius: 40,
-                                ),
-                                SizedBox(width: 10,),
-                                Container(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      FittedBox(child: Text(" ${offre.titre} ")),
-                                      FittedBox(child: Text("Montant : ${offre.montant} Fcfa ")),
-                                      FittedBox(child: Text("Durrée ${offre.durre} mois ")),
-
-                                    ],
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                          child: Card(
+                            clipBehavior: Clip.hardEdge,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(color: MesCouleur().couleurPrincipal),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 10,
+                           // color: Color(0xB26DC76D),
+                            child: ListTile(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>OffreDetail(offre: offre)));
+                                },
+                              title: Row(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: offre.offreInvestisseur?.image != null
+                                        ? NetworkImage("${offre.offreInvestisseur?.image}") as ImageProvider<Object>?
+                                        : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
+                                    radius: 40,
                                   ),
-                                )
-                              ],
-                            )
+                                  SizedBox(width: 10,),
+                                  Container(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        FittedBox(child: Text(" ${offre.titre} ")),
+                                        FittedBox(child: Text("Montant : ${offre.montant} Fcfa ")),
+                                        FittedBox(child: Text("Durrée ${offre.durre} mois ")),
+
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )
+                            ),
                           ),
                         );
                       },

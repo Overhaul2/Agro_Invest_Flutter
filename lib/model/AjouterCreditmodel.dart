@@ -1,7 +1,6 @@
 import 'dart:convert';
-
-import 'package:agro_invest/model/AgriculteurModele.dart';
-import 'package:agro_invest/model/Investisseur.dart';
+import 'AgriculteurModele.dart';
+import 'Investisseur.dart';
 
 class Credit {
   int? idCredit;
@@ -25,7 +24,6 @@ class Credit {
     this.agriculteur,
     this.offreInvestisseur,
   });
-
 
   Credit copyWith({
     int? idCredit,
@@ -74,16 +72,14 @@ class Credit {
       durre: map['durre'] != null ? map['durre'] as int : null,
       description: map['description'] != null ? map['description'] as String : null,
       audioDescriptionPath: map['audioDescriptionPath'] != null ? map['audioDescriptionPath'] as String : null,
-      agriculteur: map['agriculteur'] != null ? Agriculteur.fromMap(map['agriculteur'] as Map<String,dynamic>) : null,
-      offreInvestisseur: map['offreInvestisseur'] != null ? Investisseur.fromJson(map['offreInvestisseur'] as Map<String,dynamic>) : null,
+      agriculteur: map['agriculteur'] != null ? Agriculteur.fromMap(map['agriculteur'] as Map<String, dynamic>) : null,
+      offreInvestisseur: map['offreInvestisseur'] != null ? Investisseur.fromJson(map['offreInvestisseur'] as Map<String, dynamic>) : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
- // factory Credit.fromJson(String source) => Credit.fromMap(json.decode(source) as Map<String, dynamic>);
   factory Credit.fromJson(String source) => Credit.fromMap(json.decode(source) as Map<String, dynamic>);
-
 
   @override
   String toString() {
@@ -93,29 +89,29 @@ class Credit {
   @override
   bool operator ==(covariant Credit other) {
     if (identical(this, other)) return true;
-  
-    return 
+
+    return
       other.idCredit == idCredit &&
-      other.titre == titre &&
-      other.montant == montant &&
-      other.dateDebut == dateDebut &&
-      other.durre == durre &&
-      other.description == description &&
-      other.audioDescriptionPath == audioDescriptionPath &&
-      other.agriculteur == agriculteur &&
-      other.offreInvestisseur == offreInvestisseur;
+          other.titre == titre &&
+          other.montant == montant &&
+          other.dateDebut == dateDebut &&
+          other.durre == durre &&
+          other.description == description &&
+          other.audioDescriptionPath == audioDescriptionPath &&
+          other.agriculteur == agriculteur &&
+          other.offreInvestisseur == offreInvestisseur;
   }
 
   @override
   int get hashCode {
     return idCredit.hashCode ^
-      titre.hashCode ^
-      montant.hashCode ^
-      dateDebut.hashCode ^
-      durre.hashCode ^
-      description.hashCode ^
-      audioDescriptionPath.hashCode ^
-      agriculteur.hashCode ^
-      offreInvestisseur.hashCode;
+    titre.hashCode ^
+    montant.hashCode ^
+    dateDebut.hashCode ^
+    durre.hashCode ^
+    description.hashCode ^
+    audioDescriptionPath.hashCode ^
+    agriculteur.hashCode ^
+    offreInvestisseur.hashCode;
   }
 }

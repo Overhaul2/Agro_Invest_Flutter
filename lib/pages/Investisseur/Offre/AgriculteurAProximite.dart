@@ -51,7 +51,7 @@ class _AgriculteurAProximiteState extends State<AgriculteurAProximite> {
                               CircleAvatar(
                                 backgroundImage: agriculteur.image!= null
                                     ? NetworkImage("${agriculteur.image}") as ImageProvider<Object>?
-                                    : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
+                                    : AssetImage("asset/images/user1.png") as ImageProvider<Object>?,
                                 radius: 40,
                               ),
                               SizedBox(width: 10,),
@@ -59,21 +59,10 @@ class _AgriculteurAProximiteState extends State<AgriculteurAProximite> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    FittedBox(child: Text(" ${agriculteur.nomPrenom} ",style: TextStyle(fontWeight: FontWeight.bold,
-                                    fontSize: 20),)),
-                                    /*FittedBox(child: Row(
-                                      children: [
-                                        Text("Montant : ",style: TextStyle(fontWeight: FontWeight.bold)),
-                                        Text("${credit.montant} Fcfa "),
-                                      ],
-                                    )),
-                                    FittedBox(child: Row(
-                                      children: [
-                                        Text("Durrée : ",style: TextStyle(fontWeight: FontWeight.bold)),
-                                        Text("${credit.durre} mois"),
-                                      ],
-                                    )),*/
-
+                                    SizedBox(width: 280,
+                                      child: Text(" ${agriculteur.nomPrenom}",style: TextStyle(fontWeight: FontWeight.bold,
+                                      fontSize: 20),),
+                                    ),
                                   ],
                                 ),
                               )

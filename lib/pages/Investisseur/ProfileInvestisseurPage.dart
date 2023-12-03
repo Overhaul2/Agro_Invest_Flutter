@@ -1,19 +1,20 @@
+import 'package:agro_invest/Provider/InvestisseurProvider.dart';
 import 'package:agro_invest/configuration/configurationCouleur.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Provider/AgriculteurPovider.dart';
-import 'login.dart';
+import '../Agriculteur/login.dart';
 
-class UserProfil extends StatefulWidget {
-  const UserProfil({Key? key}) : super(key: key);
+class InvestisseurProfil extends StatefulWidget {
+  const InvestisseurProfil({Key? key}) : super(key: key);
 
   @override
-  State<UserProfil> createState() => _UserProfilState();
+  State<InvestisseurProfil> createState() => _InvestisseurProfilState();
 }
 
-class _UserProfilState extends State<UserProfil> {
+class _InvestisseurProfilState extends State<InvestisseurProfil> {
   @override
   void initState() {
     super.initState();
@@ -70,12 +71,12 @@ class _UserProfilState extends State<UserProfil> {
             Transform.translate(
               offset: Offset(0, 30),
               child:
-              Consumer<AgriculteurProvider>(
-                builder: (context, agriculteurProvider, _) {
-                  if (agriculteurProvider.agriculteur != null) {
-                    String? nomPrenom = agriculteurProvider.agriculteur!.nomPrenom;
+              Consumer<InvestisseurProvider>(
+                builder: (context, investisseurPorvider, _) {
+                  if (investisseurPorvider.investisseur != null) {
+                    String? nomPrenom = investisseurPorvider.investisseur!.nomPrenom;
                     if (nomPrenom != null) {
-                      return Text("Souleymane Fomba",
+                      return Text("$nomPrenom",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -166,8 +167,7 @@ class _UserProfilState extends State<UserProfil> {
                       child: ListTile(
                         onTap: () {
                           sedeconecter();
-                          Deconexion(context)
-                          ;
+                          Deconexion(context);
                         },
                         title: Center(
                             child: Text("Se Deconnecter",style: TextStyle(

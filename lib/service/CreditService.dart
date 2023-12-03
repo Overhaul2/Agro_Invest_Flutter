@@ -54,7 +54,7 @@ class CreditService {
       var response = await request.send();
       if (response.statusCode == 200 || response.statusCode == 201) {
         final responseData = json.decode(await response.stream.bytesToString());
-        print("id Agriulteur: ${agriculteurProvider.agriculteur?.idAgr}");
+       // print("id Agriulteur: ${agriculteurProvider.agriculteur?.idAgr}");
         return Credit.fromMap(responseData);
       } else {
         final errorResponse = await response.stream.bytesToString();

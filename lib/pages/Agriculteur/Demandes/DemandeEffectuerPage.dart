@@ -9,14 +9,14 @@ import '../../../service/agriculteurService.dart';
 import '../../Investisseur/Offre/OffreEffectuerDetaillePage.dart';
 import 'CreditDetaillePage.dart';
 
-class DemandeEnCour extends StatefulWidget {
-  const DemandeEnCour({Key? key}) : super(key: key);
+class DemandeEffectuerPage extends StatefulWidget {
+  const DemandeEffectuerPage({Key? key}) : super(key: key);
 
   @override
-  State<DemandeEnCour> createState() => _DemandeEnCourState();
+  State<DemandeEffectuerPage> createState() => _DemandeEffectuerPageState();
 }
 
-class _DemandeEnCourState extends State<DemandeEnCour> {
+class _DemandeEffectuerPageState extends State<DemandeEffectuerPage> {
   @override
   Widget build(BuildContext context) {
 
@@ -36,11 +36,11 @@ class _DemandeEnCourState extends State<DemandeEnCour> {
                       child: Image.asset("asset/images/mesdemandes.jpg",fit: BoxFit.fitWidth,)),)
             ),
             SizedBox(height: 20,),
-            FittedBox(child: Text("Mes demandes en Cours", style: TextStyle(fontWeight: FontWeight.bold,
+            FittedBox(child: Text("Mes demandes de Credit", style: TextStyle(fontWeight: FontWeight.bold,
                 fontSize: 30, color: MesCouleur().couleurPrincipal),),),
 
             FutureBuilder(
-              future: agriculteurServices.demandeAccepter(idAgr!),
+              future: agriculteurServices.CreditAgriculteur(idAgr!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Padding(
@@ -51,16 +51,18 @@ class _DemandeEnCourState extends State<DemandeEnCour> {
                   return
                     Column(
                       children: [
-                        Container(child: Image.asset("asset/images/notfound.jpg"),
+                        Container(child: Image.asset("asset/images/notfoundo.jpg"),
                           padding: EdgeInsets.only(top: 50),
                           height: 200,
                         ),
-                        Text('Vous n\'avez pas de demande en cour',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold), )
+                        Center(child: Text('une erreur s\'est produite lors de la recuperation des donné',style: TextStyle(fontSize: 15,color: Colors.red,fontWeight: FontWeight.bold), ))
                       ],
                     );
 
                 } else {
                   List<Credit> credits = snapshot.data!;
+                  print(snapshot.data);
+                  print("sssssssssssss");
 
                   return Expanded(
                     child: ListView.builder(

@@ -17,7 +17,7 @@ class _OffreEffectuerDetailleState extends State<OffreEffectuerDetaille> {
     return Scaffold(
         appBar: AppBar(
           title: Center(
-            child: Text("Détails du Credit"),
+            child: Text("Détails de L\'offre"),
           ),
         ),
         body: Center(
@@ -96,8 +96,15 @@ class _OffreEffectuerDetailleState extends State<OffreEffectuerDetaille> {
                             SizedBox(height: 15,),
                             Text("Description : ${widget.offre.description} "),
                             SizedBox(height: 30),
-                            Container(alignment: Alignment.center,
-                                child: ElevatedButton(onPressed: (){}, child: Text("Modifier")))
+                        Container(
+                          alignment: Alignment.center,
+                          child: widget.offre.agriculteur == null
+                              ? ElevatedButton(
+                              onPressed: () {
+                              },
+                              child: Text("Modifier"))
+                              : Container(),
+                        )
                           ],
                         ),
                       ),

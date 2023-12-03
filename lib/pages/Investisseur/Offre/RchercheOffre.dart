@@ -82,10 +82,8 @@ class _RechercheCreditState extends State<RechercheCredit> {
   }
 
   void _recherche(String query) {
-    final idAgr = Provider.of<AgriculteurProvider>(context, listen: false)
-        .agriculteur!
-        .idAgr;
-    String urlString = 'http://10.0.2.2:8080/Credit/list/$idAgr?q=$query';
+
+    String urlString = 'http://localhost:8080/Credit/recherche/$query';
 
     print(urlString);
 

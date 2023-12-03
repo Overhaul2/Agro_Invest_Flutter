@@ -1,8 +1,9 @@
 import 'package:agro_invest/Provider/AgriculteurPovider.dart';
+import 'package:agro_invest/configuration/configurationCouleur.dart';
 import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
-import 'package:agro_invest/pages/Agriculteur/Demandes/ModifierCredit.dart';
 import 'package:agro_invest/service/agriculteurService.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,19 @@ class _OffreDetailleAgriculteurState extends State<OffreDetailleAgriculteur> {
     final idOf = widget.offre.idOf; // Remplacez par l'ID de votre crédit
     final idAgr = Provider.of<AgriculteurProvider>(context ,listen: false).agriculteur!.idAgr; // Remplacez par l'ID de votre investisseur
     agriculteurService.accepterOffreCredit(idOf!, idAgr!);
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.info,
+      animType: AnimType.bottomSlide,
+      title: 'Confirmation',
+      desc: 'Offre accepter succès ?',
+      btnOkOnPress: () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => DemandeEnCour()),// Supprime toutes les pages précédentes de la pile
+        );
+        },
+    )..show();
   }
   @override
   Widget build(BuildContext context) {
@@ -114,9 +128,20 @@ class _OffreDetailleAgriculteurState extends State<OffreDetailleAgriculteur> {
                             SizedBox(height: 40,),
                             Container(alignment: Alignment.center,
                                 child: ElevatedButton(onPressed: (){
-                                  _accepterOffre();
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>DemandeEnCour()));
-
+                                  AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.info,
+                                    animType: AnimType.bottomSlide,
+                                    title: 'Confirmation',
+                                    desc: 'Voulez-vous vraiment accepter cette offre ?',
+                                    btnCancelOnPress: () {},
+                                    btnOkOnPress: () {
+                                      _accepterOffre();
+                                    },
+                                    btnCancelText: "Annuler",
+                                    btnOkText: "Accepter",
+                                    btnOkColor: MesCouleur().couleurPrincipal,
+                                  )..show();
                                 }, child: Text("Accepter")))
                           ],
                         ),

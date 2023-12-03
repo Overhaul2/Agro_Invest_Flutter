@@ -48,12 +48,23 @@ class _HistoriqueDemandeState extends State<HistoriqueDemande> {
               future: agriculteurService.afficherCreditSansInvestisseur(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return Padding(
+                    padding: const EdgeInsets.only(top:50),
+                    child: CircularProgressIndicator(),
+                  );
                 } else if (snapshot.hasError) {
-                  return Text('Erreur: ${snapshot.error}');
+                  return
+                    Column(
+                      children: [
+                        Container(child: Image.asset("asset/images/notfoundo.jpg"),
+                          padding: EdgeInsets.only(top: 50),
+                          height: 200,
+                        ),
+                        Text('une erreur s\'est produite',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold), )
+                      ],
+                    );
                 } else {
                   List<Credit> credits = snapshot.data!;
-
                   return Expanded(
                     child: ListView.builder(
                       itemCount: credits.length,

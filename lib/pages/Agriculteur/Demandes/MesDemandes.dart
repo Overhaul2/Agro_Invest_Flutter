@@ -1,4 +1,5 @@
 import 'package:agro_invest/configuration/configurationCouleur.dart';
+import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEffectuerPage.dart';
 import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +57,34 @@ class _MesDemndesState extends State<MesDemndes> {
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text('Demandes En Cours', style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold,
+                            ),),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 15,),
+                  Card(
+                    clipBehavior: Clip.hardEdge,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        side: BorderSide(color: MesCouleur().couleurPrincipal)
+                    ),
+                    elevation: 10,
+                    shadowColor: MesCouleur().couleurPrincipal,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => DemandeEffectuerPage()));
+                      },
+                      child: SizedBox(
+                        width: 300,
+                        height: 70,
+                        child: Center(
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('Demandes Effectuer', style: TextStyle(
                               fontSize: 30, fontWeight: FontWeight.bold,
                             ),),
                           ),

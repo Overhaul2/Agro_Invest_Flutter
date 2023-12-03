@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:agro_invest/model/AgriculteurModele.dart';
 import 'package:agro_invest/model/AjouterCreditmodel.dart';
+import 'package:flutter_launcher_icons/constants.dart';
+import 'package:flutter_launcher_icons/custom_exceptions.dart';
 import 'package:get/get.dart' as getx;
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -25,31 +28,39 @@ class AgriculteurService {
     File? image,
   }) async {
     try {
-      print("Debut");
-      getx.FormData data = getx.FormData({'agriculteur': {
-        "nomPrenom": nomPrenom,
-        "email": email,
-        "age": age,
-        "residense": residense,
-        "ActiviteMenee": ActiviteMenee,
-        "telephone": telephone,
-        "passWord": passWord,
-        "passWordConfirm": passWordConfirm,
-      }});
+
+      getx.FormData data = getx.FormData({
+        'agriculteur': jsonEncode({
+          'nomPrenom': nomPrenom,
+          'email': email,
+          'age': age,
+          'residense': residense,
+          'activiteMenee': ActiviteMenee,
+          'telephone': telephone,
+          'passWord': passWord,
+          'passWordConfirm': passWordConfirm,
+        })
+      });
 
 
-     if (image != null) {
+      if (image != null) {
         try {
-          data.files.add(MapEntry("image", getx.MultipartFile(image, filename: DateTime.timestamp().toString())));
+          String fileName = image.path.split("\\")[image.path.split("\\").length - 1];
 
-        } catch (e) {
-          print('Erreur lors de la lecture de l\'image : $e');
-          // Gestion des erreurs
-          throw Exception('Erreur lors de la lecture de l\'image : $e');
-        }
-      }
+          File imageFile = new File(image.path);
+          if (await imageFile.exists()) {
+            data.files.add(MapEntry("image", getx.MultipartFile(image, filename: fileName)));
+          } else {
+            throw new FileNotFoundException("Le fichier spécifié n'existe pas : " + image.path);
+          }
+        } catch (FileNotFoundException) {
+    // Gestion des erreurs
+    throw new Exception("Erreur lors de la lecture de l'image : ");
+    }
 
-      print("Envoie");
+    }
+
+    print("Envoie");
       final response = await getx.GetConnect().post('http://10.0.2.2:8080/agriculteur/inscrire', data);
       // var response = await request.send();
       print("Envoyé");
@@ -71,6 +82,7 @@ class AgriculteurService {
       throw Exception('ERREUR : $e');
     }
   }
+
 
 //connection Agriulteur
   Future<Agriculteur?> loginAgriculteur(String email, String password) async {
@@ -134,9 +146,22 @@ class AgriculteurService {
       throw Exception('Impossible de recuperer les credits');
     }
   }
-//recuperer les demande de credit effectuer par l'agriculteur connecter
+//recuperer les demande de credit effectuer par l'agriculteur connecter sans investisseur
   Future<List<Credit>> CreditAgriculteur(int idAgr) async {
     final response = await http.get(Uri.parse('http://10.0.2.2:8080/Credit/list/$idAgr'));
+
+    if (response.statusCode == 200) {
+      print(response);
+      List<dynamic> data = jsonDecode(response.body);
+      List<Credit> credits = data.map((creditData) => Credit.fromMap(creditData)).toList();
+      return credits;
+    } else {
+      throw Exception('Vous n\'avez effectuer aucune demande');
+    }
+  }
+//Tout les demande ou l'investisseur n'est pas null avec id de l'agriculteur connecter
+  Future<List<Credit>> demandeAccepter(int idAgr) async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8080/Credit/investisseur/$idAgr'));
 
     if (response.statusCode == 200) {
       print(response);
