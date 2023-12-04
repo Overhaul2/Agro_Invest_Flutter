@@ -1,8 +1,6 @@
-import 'package:agro_invest/pages/Agriculteur/Demandes/CreditDetaillePage.dart';
 import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
 import 'package:flutter/material.dart';
 import 'package:agro_invest/service/CreditService.dart';
-import 'package:provider/provider.dart';
 import '../../../configuration/configurationCouleur.dart';
 import '../../../model/AjouterCreditmodel.dart';
 class ModiffierDemane extends StatefulWidget {
@@ -105,7 +103,7 @@ class _ModiffierDemaneState extends State<ModiffierDemane> {
                         keyboardType: TextInputType.numberWithOptions(decimal: false,signed: false),
                       ),
                     ),
-                    Padding(
+                    /*Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextFormField(
                         controller: _dateDebuitController,
@@ -129,7 +127,8 @@ class _ModiffierDemaneState extends State<ModiffierDemane> {
                         ),
                         keyboardType: TextInputType.numberWithOptions(signed: false,decimal: false),
                       ),
-                    ),Padding(
+                    ),*/
+                    Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextFormField(
                         controller: _durreController,
@@ -178,23 +177,10 @@ class _ModiffierDemaneState extends State<ModiffierDemane> {
                         ),
                         keyboardType: TextInputType.text,
                       ),
-                    ),Padding(
-                      padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
-                      child: TextFormField(
-                        controller: _audioController,
-                        //obscureText: true,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 20),
-                          labelText: "Description audio",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          ),
-                          prefixIcon: Icon(Icons.person,
-                              color: Color(0xA8008000)),
-                        ),
-                        keyboardType: TextInputType.name,
-                      ),
                     ),
+
+
+
                     SizedBox(height: 15,),
                     Container(
                       child: ElevatedButton(
@@ -211,7 +197,7 @@ class _ModiffierDemaneState extends State<ModiffierDemane> {
                                final titre= _nomController.text;
                                final montant= int.parse (_montantController.text);
                                final durre= int.parse(_durreController.text);
-                               final dateDebut = _dateDebuitController.text;
+                              // final dateDebut = _dateDebuitController.text;
                                //final audioDescriptionPath=_audioController.text;
                                final description = _descriptionController.text;
 
@@ -220,7 +206,7 @@ class _ModiffierDemaneState extends State<ModiffierDemane> {
                                    montant: montant,
                                    description: description,
                                    durre: durre,
-                                   dateDebut: dateDebut,
+                                  // dateDebut: dateDebut,
                                    idCredit: widget.credit.idCredit!,);
                                print('Demande Modiffier avec succes : ${result.toString()}');
                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Demande Modiffier avec succès")));

@@ -1,6 +1,5 @@
 import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:flutter/material.dart';
-import '../../../model/AjouterCreditmodel.dart';
 
 class OffreDetail extends StatefulWidget {
   final Offre offre;
@@ -48,6 +47,7 @@ class _OffreDetailState extends State<OffreDetail> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          IconButton(alignment: Alignment.topRight,onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.close_sharp)),
                           ListTile(
                             leading: CircleAvatar(
                               backgroundImage: widget.offre.agriculteur?.image != null
@@ -57,24 +57,30 @@ class _OffreDetailState extends State<OffreDetail> {
                             title: Column(crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Informations de l'Agriculteur:",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),SizedBox(height: 10,),
-                                Row(
-                                  children: [
-                                    Text("Nom: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                    Text("${widget.offre.agriculteur?.nomPrenom}"),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text("Résidense : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                    Text("${widget.offre.agriculteur?.residense}"),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text("Téléphone : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                    Text("+223 ${widget.offre.agriculteur?.telephone}"),
-                                  ],
-                                ),
+                                widget.offre.agriculteur != null
+                                    ?
+
+                                    Column(children: [
+                                      Row(
+                                        children: [
+                                          Text("Nom: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                          Text("${widget.offre.agriculteur?.nomPrenom}"),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("Résidense : ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                          Text("${widget.offre.agriculteur?.residense}"),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("Téléphone : ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                          Text("+223 ${widget.offre.agriculteur?.telephone}"),
+                                        ],
+                                      ),
+                                    ],)
+                                    : Container(child: Text("Cette Offre n'a pas encore d'Agriculteur!"),),
                               ],
                             ),
                           ),SizedBox(height: 20,),
@@ -121,7 +127,7 @@ class _OffreDetailState extends State<OffreDetail> {
   }
 
 
-  Future Invesrtir() => showDialog(
+ /* Future Invesrtir() => showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(
@@ -138,6 +144,5 @@ class _OffreDetailState extends State<OffreDetail> {
 
   void resset() {
     Navigator.pop(context);
-  }
-
+  }*/
 }

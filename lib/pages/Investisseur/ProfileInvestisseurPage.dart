@@ -203,8 +203,7 @@ class _InvestisseurProfilState extends State<InvestisseurProfil> {
       context: context,
       builder: (context) => AlertDialog(
             title: Text(
-                'Notre application de gestion de budget est un outil qui vous permet  de suivre, de gérer et d\'analyser vos dépenses et vos revenus pour mieux gérer vos finances personnelles.'),
-            actions: [
+                'L\'objectif principal est de relier les agriculteurs locaux à des investisseurs pour soutenir l\'achat de semences, d\'engrais et d\'équipements agricoles.'),            actions: [
               TextButton(onPressed: resset, child: Text("Fermer")),
             ],
           ));

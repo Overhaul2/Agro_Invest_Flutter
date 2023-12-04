@@ -9,6 +9,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Provider/AgriculteurPovider.dart';
 import 'Provider/InvestisseurProvider.dart';
 
+
+final apikey= "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";
+
 void main() {
   runApp(
     MultiProvider(
@@ -21,8 +24,16 @@ void main() {
   );
 }
 
+class ChatMessage{
+  final String text;
+  final bool isUser;
+
+  ChatMessage({required this.text, required this.isUser});
+}
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
 
   @override
   State<MyApp> createState() => _MyAppState();

@@ -56,9 +56,11 @@ class _MesDemndesState extends State<MesDemndes> {
                         child: Center(
                           child: Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Demandes En Cours', style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold,
-                            ),),
+                            child: Center(
+                              child: Text('Demandes En Cours', style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.bold,
+                              ),),
+                            ),
                           ),
                         ),
                       ),
@@ -84,9 +86,11 @@ class _MesDemndesState extends State<MesDemndes> {
                         child: Center(
                           child: Align(
                             alignment: Alignment.centerLeft,
-                            child: Text('Demandes Effectuer', style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold,
-                            ),),
+                            child: Center(
+                              child: Text('Demandes Effectuer', style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.bold,
+                              ),),
+                            ),
                           ),
                         ),
                       ),
@@ -114,9 +118,11 @@ class _MesDemndesState extends State<MesDemndes> {
                               padding: const EdgeInsets.only(left: 10.0),
                               child: Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text('Historiques', style: TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.bold,
-                                ),),
+                                child: Center(
+                                  child: Text('Historiques', style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.bold,
+                                  ),),
+                                ),
                               )
                           ),
                         ),

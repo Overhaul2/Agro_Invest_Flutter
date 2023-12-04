@@ -63,26 +63,34 @@ class _CreditDetailleState extends State<HistoriqueCreditDetaille> {
                                   style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(height: 10,),
-                                Row(
+                                widget.credit.offreInvestisseur != null
+                                    ?
+                                Column(
                                   children: [
-                                    Text("Nom : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                    Text("${widget.credit.offreInvestisseur?.nomPrenom}"),
+                                    Row(
+                                      children: [
+                                        Text("Nom : ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                        Text("${widget.credit.offreInvestisseur?.nomPrenom}"),
+                                      ],
+                                    ),
+                                    SizedBox(height: 5,),
+                                    Row(
+                                      children: [
+                                        Text("Résidence : ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                        Text("${widget.credit.offreInvestisseur?.residense}"),
+                                      ],
+                                    ),
+                                    SizedBox(height: 5,),
+                                    Row(
+                                      children: [
+                                        Text("Téléphone : ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                        Text("+223 ${widget.credit.offreInvestisseur?.telephone}"),
+                                      ],
+                                    ),
                                   ],
-                                ),
-                                SizedBox(height: 5,),
-                                Row(
-                                  children: [
-                                    Text("Résidence : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                    Text("${widget.credit.offreInvestisseur?.residense}"),
-                                  ],
-                                ),
-                                SizedBox(height: 5,),
-                                Row(
-                                  children: [
-                                    Text("Téléphone : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                                    Text("+223 ${widget.credit.offreInvestisseur?.telephone}"),
-                                  ],
-                                ),
+                                )
+
+                                  : Container(child: Text("Cette Offre n'a pas encore d'Agriculteur!"),),
                               ],
 
                             ),

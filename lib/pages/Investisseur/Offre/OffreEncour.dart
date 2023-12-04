@@ -1,14 +1,10 @@
 import 'package:agro_invest/Provider/InvestisseurProvider.dart';
-import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:agro_invest/pages/Investisseur/Offre/Tabs/Encour.dart';
 import 'package:agro_invest/service/investisseurService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../Provider/AgriculteurPovider.dart';
 import '../../../configuration/configurationCouleur.dart';
-import '../../../model/AjouterCreditmodel.dart';
-import '../../../service/agriculteurService.dart';
 import 'Tabs/Offre.dart';
 
 class OffreEnCour extends StatefulWidget {
@@ -23,9 +19,9 @@ class _OffreEnCourState extends State<OffreEnCour> {
   @override
   Widget build(BuildContext context) {
 
-    final investisseurServices = InvestisseurService();
+    /*final investisseurServices = InvestisseurService();
     final idInv = Provider.of<InvestisseurProvider>(context, listen: false).investisseur!.idInv;
-
+*/
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -52,7 +48,6 @@ class _OffreEnCourState extends State<OffreEnCour> {
                   setState(() {
                     currentIndex = index;
 
-
                   });
                 },
                 tabs: [
@@ -60,12 +55,14 @@ class _OffreEnCourState extends State<OffreEnCour> {
                 Tab(icon: Text("Offre", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
               ],),
 
-            Column(
-            children: [
-            (currentIndex == 0)? InvestissementDemandeEncour()
-            : InvestissementOffreEnCour(),
+            Expanded(
+              child: Column(
+              children: [
+              (currentIndex == 0)? InvestissementDemandeEncour()
+              : InvestissementOffreEnCour(),
         ],
       ),
+            ),
 
             ],
           ),

@@ -67,9 +67,29 @@ class _HistoriquesOffresState extends State<HistoriquesOffres> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
                 } else if (snapshot.hasError) {
-                  return Text('Erreur: ${snapshot.error}');
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 38.0),
+                    child: Column(
+                      children: [
+                        Image.asset("asset/images/notfoundo.jpg"),
+                        Text("Vous n'avez effectuer aucune Demande ",style: TextStyle(fontWeight: FontWeight.bold),)
+                      ],
+                    ),
+                  );
                 } else {
                   List<Offre> offres = snapshot.data!;
+
+                  if(offres==null){
+                    Padding(
+                      padding: const EdgeInsets.only(top: 38.0),
+                      child: Column(
+                        children: [
+                          Image.asset("asset/images/notfoundo.jpg"),
+                          Text("Vous pas d\'historique ",style: TextStyle(fontWeight: FontWeight.bold),)
+                        ],
+                      ),
+                    );
+                  }
 
                   return Expanded(
                     child: ListView.builder(
@@ -100,6 +120,7 @@ class _HistoriquesOffresState extends State<HistoriquesOffres> {
                                     radius: 40,
                                   ),
                                   SizedBox(width: 10,),
+
                                   Container(
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,

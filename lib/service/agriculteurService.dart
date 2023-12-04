@@ -1,15 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:agro_invest/model/AgriculteurModele.dart';
 import 'package:agro_invest/model/AjouterCreditmodel.dart';
-import 'package:flutter_launcher_icons/constants.dart';
 import 'package:flutter_launcher_icons/custom_exceptions.dart';
 import 'package:get/get.dart' as getx;
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 
 class AgriculteurService {
   //creation de la methode inscrire agriculteur

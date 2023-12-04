@@ -81,7 +81,6 @@ class Agriculteur {
 
   String toJson() => json.encode(toMap());
 
-  // factory Credit.fromJson(String source) => Credit.fromMap(json.decode(source) as Map<String, dynamic>);
   factory Agriculteur.fromJson(String source) =>
       Agriculteur.fromMap(json.decode(source) as Map<String, dynamic>);
 

@@ -46,7 +46,15 @@ class _OffreEffectuerState extends State<OffreEffectuer> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
                 } else if (snapshot.hasError) {
-                  return Text('Erreur: ${snapshot.error}');
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 38.0),
+                    child: Column(
+                       children: [
+                         Image.asset("asset/images/notfoundo.jpg"),
+                         Text("Vous n'avez effectuer aucune Demande ",style: TextStyle(fontWeight: FontWeight.bold),)
+                       ],
+                    ),
+                  );
                 } else {
                   List<Offre> offres = snapshot.data!;
 

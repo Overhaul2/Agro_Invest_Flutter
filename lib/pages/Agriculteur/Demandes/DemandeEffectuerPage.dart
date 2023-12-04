@@ -61,9 +61,6 @@ class _DemandeEffectuerPageState extends State<DemandeEffectuerPage> {
 
                 } else {
                   List<Credit> credits = snapshot.data!;
-                  print(snapshot.data);
-                  print("sssssssssssss");
-
                   return Expanded(
                     child: ListView.builder(
                       itemCount: (credits==null)?0:credits.length,

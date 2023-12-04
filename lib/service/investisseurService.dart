@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:agro_invest/model/AjouterCreditmodel.dart';
 import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:agro_invest/model/Investisseur.dart';
 import 'package:http/http.dart' as http;
@@ -95,7 +96,7 @@ class InvestisseurService {
       return null;
     }
   }
-//offres effectuer par un id investisseur
+//offres effectuer par un id investisseur(Mes offre)
   Future<List<Offre>> OffreInvestisseur(int idInv) async {
     final response = await http.get(Uri.parse('http://10.0.2.2:8080/offre/list/$idInv'));
 
@@ -115,7 +116,7 @@ class InvestisseurService {
     }
   }
 
-  //Afficher tout les offres effectuer par l'investisseur connecter sans agriculteur
+  //Afficher tout les offres effectuer par l'investisseur connecter sans agriculteur(Mes proposition offre)
   Future<List<Offre>>  OffreInvestisseurSansAgriculteur(int idInv) async {
     //print('Avant recuperation');
     final response = await http.get(Uri.parse("http://10.0.2.2:8080/offre/offresansagriculteur"));
@@ -133,7 +134,7 @@ class InvestisseurService {
       throw Exception('Impossible de recuperer les offres');
     }
   }
-//tout les offres qui existe sans agriculteur(projet Agricole)
+//tout les offres qui existe sans agriculteur(offre investisseur)
   Future<List<Offre>>  OffreSansAgriculteurs() async {
     //print('Avant recuperation');
     final response = await http.get(Uri.parse("http://10.0.2.2:8080/offre/offresansagriculteur"));
@@ -165,5 +166,34 @@ class InvestisseurService {
       print('Erreur lors de la requête : $error');
     }
   }
+
+  //Tout les offre ou l'agriculteur n'est pas null avec id de l'investisseur connecter(Offre en cour)
+  Future<List<Offre>> offreAccepter(int idInv) async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8080/offre/agriculteur/$idInv'));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      List<dynamic> data = jsonDecode(response.body);
+      List<Offre> offres = data.map((offreData) => Offre.fromMap(offreData)).toList();
+      return offres;
+    } else {
+      throw Exception('Vous n\'avez effectuer aucune demande');
+    }
+  }
+
+  //Tout les demande ou l'investisseur n'est pas null avec id de l'investisseur connecter
+  Future<List<Credit>> demandeAccepterEncour(int idAInv) async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8080/offre/Creditagriculteur/$idAInv'));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      List<dynamic> data = jsonDecode(response.body);
+      List<Credit> credits = data.map((creditData) => Credit.fromMap(creditData)).toList();
+      return credits;
+    } else {
+      throw Exception('Vous n\'avez effectuer aucune demande');
+    }
+  }
+
 
 }

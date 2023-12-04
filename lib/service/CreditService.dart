@@ -17,9 +17,9 @@ class CreditService {
 
   Future<Credit> ajouter({
     required String titre,
-    required int montant,
-    required String dateDebut,
-    required int durre,
+    required String montant,
+    //required String dateDebut,
+    required String durre,
     required String description,
     File? audio,
   }) async {
@@ -44,7 +44,7 @@ class CreditService {
             .toJson(),
         "titre": titre,
         "montant": montant,
-        "dateDebut": dateDebut,
+        "dateDebut": DateTime.now().toIso8601String(),
         "durre": durre,
         "description": description,
       });
@@ -71,7 +71,7 @@ class CreditService {
     required int idCredit,
     required String titre,
     required int montant,
-    required String dateDebut,
+   // required String dateDebut,
     required int durre,
     required String description,
     File? audio,
@@ -80,7 +80,7 @@ class CreditService {
     try {
       var request = http.MultipartRequest(
         'PUT',
-        Uri.parse("http://10.0.2.2:8080/Credit/modifier/$idCredit"), // Correction de l'URL
+        Uri.parse("http://10.0.2.2:8080/Credit/modiffier/$idCredit"), // Correction de l'URL
       );
 
       if (audio != null) {
@@ -92,11 +92,11 @@ class CreditService {
         );
       }
 
-      request.fields.addAll({
+      request.fields['credit']=jsonEncode({
        // "idAgriculteur": idAgriculteur.toString(), // Ajouter l'ID de l'agriculteur
         "titre": titre,
         "montant": montant.toString(),
-        "dateDebut": dateDebut,
+        "dateDebut": DateTime.now().toIso8601String(),
         "durre": durre.toString(),
         "description": description,
       });

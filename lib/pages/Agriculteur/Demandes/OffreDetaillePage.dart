@@ -20,8 +20,8 @@ class OffreDetailleAgriculteur extends StatefulWidget {
 class _OffreDetailleAgriculteurState extends State<OffreDetailleAgriculteur> {
   AgriculteurService agriculteurService =AgriculteurService();
   void _accepterOffre() {
-    final idOf = widget.offre.idOf; // Remplacez par l'ID de votre crédit
-    final idAgr = Provider.of<AgriculteurProvider>(context ,listen: false).agriculteur!.idAgr; // Remplacez par l'ID de votre investisseur
+    final idOf = widget.offre.idOf;
+    final idAgr = Provider.of<AgriculteurProvider>(context ,listen: false).agriculteur!.idAgr;
     agriculteurService.accepterOffreCredit(idOf!, idAgr!);
     AwesomeDialog(
       context: context,

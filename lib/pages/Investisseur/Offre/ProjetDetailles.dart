@@ -1,9 +1,12 @@
 import 'package:agro_invest/Provider/InvestisseurProvider.dart';
 import 'package:agro_invest/pages/Investisseur/Offre/MesOffres.dart';
+import 'package:agro_invest/pages/Investisseur/Offre/OffreEncour.dart';
 import 'package:agro_invest/service/investisseurService.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../configuration/configurationCouleur.dart';
 import '../../../model/AjouterCreditmodel.dart';
 
 class ProjetsDetail extends StatefulWidget {
@@ -17,9 +20,22 @@ class ProjetsDetail extends StatefulWidget {
 class _ProjetsDetailState extends State<ProjetsDetail> {
   InvestisseurService investisseurService =InvestisseurService();
   void _accepter() {
-    final idCredit = widget.credit.idCredit; // Remplacez par l'ID de votre crédit
-    final idInv = Provider.of<InvestisseurProvider>(context ,listen: false).investisseur!.idInv; // Remplacez par l'ID de votre investisseur
+    final idCredit = widget.credit.idCredit;
+    final idInv = Provider.of<InvestisseurProvider>(context ,listen: false).investisseur!.idInv;
     investisseurService.accepterDemandeCredit(idCredit!, idInv!);
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.info,
+      animType: AnimType.bottomSlide,
+      title: 'Confirmation',
+      desc: 'Demande accepter succès ?',
+      btnOkOnPress: () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => OffreEnCour()),// Supprime toutes les pages précédentes de la pile
+        );
+      },
+    )..show();
   }
   @override
   Widget build(BuildContext context) {
@@ -136,7 +152,20 @@ class _ProjetsDetailState extends State<ProjetsDetail> {
                           SizedBox(height: 45,),
                           Container(alignment: Alignment.center,
                               child: ElevatedButton(onPressed: (){
-                                Invesrtir();
+                                AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.info,
+                                  animType: AnimType.bottomSlide,
+                                  title: 'Confirmation',
+                                  desc: 'Voulez-vous vraiment accepter cette Demande de credit ?',
+                                  btnCancelOnPress: () {},
+                                  btnOkOnPress: () {
+                                    _accepter();
+                                  },
+                                  btnCancelText: "Annuler",
+                                  btnOkText: "Accepter",
+                                  btnOkColor: MesCouleur().couleurPrincipal,
+                                )..show();
                               }, child: Text("Accepter",style: TextStyle(fontWeight: FontWeight.bold),)))
                         ],
                       ),

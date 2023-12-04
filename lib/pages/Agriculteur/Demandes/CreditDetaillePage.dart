@@ -93,13 +93,33 @@ class _CreditDetailleState extends State<CreditDetaille> {
                               ),
 
                             ),SizedBox(height: 20,),
-                            Text("Titre : ${widget.credit.titre} "),SizedBox(height: 10,),
+                            Row(
+                              children: [
+                                Text("Titre : ",style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text("${widget.credit.titre} "),
+                              ],
+                            ),SizedBox(height: 10,),
                             SizedBox(height: 20,),
-                            Text("Montant : ${widget.credit.montant} Fcfa "),
+                            Row(
+                              children: [
+                                Text("Montant : ",style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text("${widget.credit.montant} Fcfa "),
+                              ],
+                            ),
                             SizedBox(height: 20,),
-                            Text("Duréé : ${widget.credit.durre} mois "),
+                            Row(
+                              children: [
+                                Text("Duréé : ",style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text(" ${widget.credit.durre} mois "),
+                              ],
+                            ),
                             SizedBox(height: 20,),
-                            Text("Description : ${widget.credit.description} "),
+                            Row(
+                              children: [
+                                Text("Description : ",style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text(" ${widget.credit.description} "),
+                              ],
+                            ),
                             SizedBox(height: 40,),
                             Container(
                               alignment: Alignment.center,

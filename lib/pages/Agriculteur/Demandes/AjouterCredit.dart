@@ -1,4 +1,5 @@
 
+import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEffectuerPage.dart';
 import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
 import 'package:flutter/material.dart';
 import 'package:agro_invest/service/CreditService.dart';
@@ -57,9 +58,9 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                             return "Le titre doit contenir au moins 10 caractères";
                           } else if (value.length >= 31) {
                             return "Le titre ne doit pas dépasser 30 caractères";
-                          } else if (RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+                          } /*else if (RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
                             return "Le titre ne doit contenir que des caractères alphabétiques";
-                          } else {
+                          }*/ else {
                             return null;
                           }
                         },
@@ -99,7 +100,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                         keyboardType: TextInputType.numberWithOptions(decimal: false,signed: false),
                       ),
                     ),
-                    Padding(
+                   /* Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextFormField(
                         controller: _dateDebuitController,
@@ -123,7 +124,8 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                         ),
                         keyboardType: TextInputType.numberWithOptions(signed: false,decimal: false),
                       ),
-                    ),Padding(
+                    ),*/
+                   Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextFormField(
                         controller: _durreController,
@@ -190,14 +192,22 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                             ),
                           ),
                           Expanded(
-                            child:  Padding(
-                              padding: const EdgeInsets.only(right: 20.0),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: SocialMediaRecorder(
-                                  sendRequestFunction: (File ,soundFile) {},
-                                  encode: AudioEncoderType.AAC,
-                                  counterTextStyle: TextStyle(color: MesCouleur().couleurPrincipal),
+                            child:  SingleChildScrollView(
+
+                              scrollDirection: Axis.horizontal,
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 20.0),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: SocialMediaRecorder(
+
+                                    sendRequestFunction: (File ,soundFile) {
+                                      _audioController;
+
+                                    },
+                                    encode: AudioEncoderType.AAC,
+                                    counterTextStyle: TextStyle(color: MesCouleur().couleurPrincipal),
+                                  ),
                                 ),
                               ),
                             ),
@@ -221,19 +231,20 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                            if (_formkey.currentState!.validate()) {
                              try{
                                final titre= _nomController.text;
-                               final montant= int.parse (_montantController.text);
-                               final durre= int.parse(_durreController.text);
-                               final dateDebut = _dateDebuitController.text;
+                               final montant= _montantController.text;
+                               final durre= _durreController.text;
+                              // final dateDebut = _dateDebuitController.text;
                                //final audioDescriptionPath=_audioController.text;
                                final description = _descriptionController.text;
                                final result = await creditService.ajouter(titre: titre,
                                    montant: montant,
                                    description: description,
                                    durre: durre,
-                                   dateDebut: dateDebut );
+                                 //  dateDebut: dateDebut
+                                    );
                                print('Demande effectuer avec succes : ${result.toString()}');
                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Demande effectuer avec succès")));
-                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DemandeEnCour()));
+                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DemandeEffectuerPage()));
 
                              } catch (e) {
                                if (e is String) {

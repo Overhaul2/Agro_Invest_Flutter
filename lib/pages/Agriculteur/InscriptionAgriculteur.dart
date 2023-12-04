@@ -408,9 +408,9 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
 
                                 //print('Inscription réussie : $result');
 
-                               /* Navigator.of(context).push(
+                                Navigator.of(context).push(
                                     MaterialPageRoute(builder: (context) =>
-                                        CompteEnAttente()));*/
+                                        CompteEnAttente()));
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text(
                                         "Inscription Effectuer avec Succès !!!   En attente de verification du compte")));

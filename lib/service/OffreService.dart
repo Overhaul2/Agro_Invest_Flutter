@@ -20,7 +20,7 @@ class OffreService{
   Future<Offre> ajouterOffre({
     required String titre,
     required String montant,
-    required String dateDebut,
+  //  required String dateDebut,
     required String durre,
     required String description,
      File?audio,
@@ -45,7 +45,7 @@ class OffreService{
         "investisseur": Provider.of<InvestisseurProvider>(context,listen: false).investisseur!.toJson(),
         "titre": titre,
         "montant": montant,
-        "dateDebut": dateDebut,
+        "dateDebut": DateTime.now().toIso8601String(),
         "durre": durre,
         "description": description,
       });
@@ -86,7 +86,6 @@ class OffreService{
       throw Exception('Impossible de recuperer les offres');
     }
   }
-
 
 
 

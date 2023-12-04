@@ -16,7 +16,7 @@ class _FaireUneOffreState extends State<FaireUneOffre> {
   final _formkey= GlobalKey<FormState>();
   final _nomController=TextEditingController();
   final _montantController=TextEditingController();
-  final _dateDebuitController=TextEditingController();
+  //final _dateDebuitController=TextEditingController();
   final _descriptionController=TextEditingController();
   final _durreController=TextEditingController();
   final _audioController=TextEditingController();
@@ -94,7 +94,7 @@ class _FaireUneOffreState extends State<FaireUneOffre> {
                         keyboardType: TextInputType.numberWithOptions(decimal: false,signed: false),
                       ),
                     ),
-                    Padding(
+                    /*Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextFormField(
                         controller: _dateDebuitController,
@@ -118,7 +118,9 @@ class _FaireUneOffreState extends State<FaireUneOffre> {
                         ),
                         keyboardType: TextInputType.numberWithOptions(signed: false,decimal: false),
                       ),
-                    ),Padding(
+                    ),*/
+
+                    Padding(
                       padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
                       child: TextFormField(
                         controller: _durreController,
@@ -200,18 +202,19 @@ class _FaireUneOffreState extends State<FaireUneOffre> {
                                final titre= _nomController.text;
                                final montant= _montantController.text;
                                final durre= _durreController.text;
-                               final dateDebut = _dateDebuitController.text;
+                              // final dateDebut = _dateDebuitController.text;
                                //final audioDescriptionPath=_audioController.text;
                                final description = _descriptionController.text;
-                               final result = await offreservice.ajouterOffre(titre: titre,
+                               final result = await offreservice.ajouterOffre(
+                                   titre: titre,
                                    montant: montant,
                                    description: description,
                                    durre: durre,
-                                   dateDebut: dateDebut );
-                               print('Offre effectuer avec succes : ${result.toString()}');
-                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Offre effectuer avec succès")));
+                                  // dateDebut: dateDebut
+                                   );
+                              print('Offre effectuer avec succes : ${result.toString()}');
                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>OffreEffectuer()));
-
+                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Offre effectuer avec succès")));
                              } catch (e) {
                                if (e is String) {
                                  // Gérer le cas où la réponse est une chaîne de caractères
