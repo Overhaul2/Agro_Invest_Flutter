@@ -1,5 +1,6 @@
 import 'package:agro_invest/pages/InscriptionInvestisseur.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../Agriculteur/InscriptionAgriculteur.dart';
 
@@ -28,20 +29,37 @@ class _DemoPage1State extends State<DemoPage2> {
             ),
             SizedBox(height: 20),
             Center(
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 30),
-                //alignment: Alignment.center,
-                // child: FittedBox(alignment: Alignment.center,
-                child: Text("Bienvenue sur AGRO INVEST",
-                  style: TextStyle(
-                    color: Color(0xA8008000),
-                    fontSize: 40,
-                    fontFamily: "Inika",
-                    fontWeight: FontWeight.bold,
+              child: Text("Continnuons",
+                style: TextStyle(
+                  color: Color(0xA8008000),
+                  fontSize: 40,
+                  fontFamily: "Inika",
+                  fontWeight: FontWeight.bold,
 
-                  ),),//),
-              ),
+                ),).animate().slide(delay: 500.ms).slideY(curve: Curves.decelerate),
             ),
+            SizedBox(height: 20),
+            Center(
+              child: Text("Veillez indiquer votre statut",
+                style: TextStyle(
+ //                 color: Color(0xA8008000),
+                  fontSize: 20,
+                  fontFamily: "Inika",
+                  fontWeight: FontWeight.bold,
+
+                ),).animate().fadeIn(delay: 500.ms).slideY(curve: Curves.easeInCirc),
+            ),
+            Center(
+              child: Text("sur la plateforme",
+                style: TextStyle(
+ //                 color: Color(0xA8008000),
+                  fontSize: 20,
+                  fontFamily: "Inika",
+                  fontWeight: FontWeight.bold,
+
+                ),).animate().fadeIn(delay: 500.ms).slideY(curve: Curves.bounceInOut),
+            ),
+
             SizedBox(height: 80,),
             Container(
               child: ElevatedButton(

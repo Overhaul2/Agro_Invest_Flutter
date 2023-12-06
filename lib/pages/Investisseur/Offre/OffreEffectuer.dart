@@ -44,23 +44,50 @@ class _OffreEffectuerState extends State<OffreEffectuer> {
               future: investisseurServices.OffreInvestisseur(idInv!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
+                  SizedBox(height: 50);
                   return CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Padding(
                     padding: const EdgeInsets.only(top: 38.0),
                     child: Column(
                        children: [
-                         Image.asset("asset/images/notfoundo.jpg"),
-                         Text("Vous n'avez effectuer aucune Demande ",style: TextStyle(fontWeight: FontWeight.bold),)
-                       ],
+                        /*Image.asset("asset/images/notfoundo.jpg", height: 200),
+                        SizedBox(
+                          height: 50,
+                        ),*/
+                        Text(
+                          "Désolé une erreur s'est produite; veillez resayér plutard !",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
                     ),
                   );
                 } else {
                   List<Offre> offres = snapshot.data!;
+                  if (offres == null || offres.isEmpty) {
+                    return Center(
+                      child: Column(children: [
+                        Padding(
+                          padding: EdgeInsets.only(top: 40),
+                          child: Image.asset(
+                            "asset/images/vide.jpg",
+                            height: 200,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Text(
+                          "Vous n'avez aucune Investissement en cour",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ]),
+                    );
+                  }
 
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: (offres==null)?0:offres.length,
+                      itemCount: (offres == null) ? 0 : offres.length,
                       itemBuilder: (context, index) {
                         Offre offre = offres[index];
                         // print(credits[index]);
@@ -93,12 +120,21 @@ class _OffreEffectuerState extends State<OffreEffectuer> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          FittedBox(child: SizedBox(
+                                          SizedBox(
                                               width: 260,
-                                              child: Text(" ${offre.titre} "))),
-                                          FittedBox(child: Text("Montant : ${offre.montant} Fcfa ")),
-                                          FittedBox(child: Text("Durrée ${offre.durre} mois ")),
-
+                                              child: Text(
+                                                " ${offre.titre} ",
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                                overflow: TextOverflow.ellipsis,
+                                              )),
+                                          FittedBox(
+                                              child: Text(
+                                                  "Montant : ${offre.montant} Fcfa ")),
+                                          FittedBox(
+                                              child: Text(
+                                                  "Durrée ${offre.durre} mois ")),
                                         ],
                                       ),
                                     )

@@ -155,6 +155,23 @@ class AgriculteurService {
     } else {
       throw Exception('Vous n\'avez effectuer aucune demande');
     }
+
+  }
+
+
+
+  //recuperer les demande de credit et offre par id de l'agriculteur connecter avec ou sans investiseur
+  Future<List<Credit>> Historiques(int idAgr) async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8080/CreditsOffres/HistoriqueAgr/$idAgr'));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      List<dynamic> data = jsonDecode(response.body);
+      List<Credit> credits = data.map((creditData) => Credit.fromMap(creditData)).toList();
+      return credits;
+    } else {
+      throw Exception('Vous n\'avez effectuer aucune demande');
+    }
   }
 //Tout les demande ou l'investisseur n'est pas null avec id de l'agriculteur connecter
   Future<List<Credit>> demandeAccepter(int idAgr) async {

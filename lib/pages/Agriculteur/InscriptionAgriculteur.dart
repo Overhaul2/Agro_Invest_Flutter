@@ -4,8 +4,10 @@ import 'dart:typed_data';
 
 import 'package:agro_invest/configuration/configurationCouleur.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 
 import '../../Provider/AgriculteurPovider.dart';
 import '../../service/agriculteurService.dart';
@@ -38,8 +40,10 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
   final _passWordController = TextEditingController();
   final _passWordConfirmController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
+    ProgressDialog pd = ProgressDialog(context: context);
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Color.fromARGB(255, 19, 108, 22),
@@ -56,7 +60,7 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                 child: SizedBox(
                     child:
                     Image.asset(
-                      "asset/images/agriculteur.jpg", fit: BoxFit.cover,)),
+                      "asset/images/agriculteur.jpg", fit: BoxFit.cover,).animate().slideX(delay: 8.ms).fadeIn(delay: 5.milliseconds)),
               ),
             ),
             SizedBox(height: 20,),
@@ -376,6 +380,7 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                             print("Ici");
                             if (_formkey.currentState!.validate()) {
                               try {
+                                pd.show( msg: 'Inscription en cour...');
                                 final nomPrenom = _nomPrenomController.text;
                                 final email = _emailController.text;
                                 final telephone = _telephoneController.text;
@@ -407,8 +412,8 @@ class _InscriptionAgriculteurState extends State<InscriptionAgriculteur> {
                                     result);
 
                                 //print('Inscription réussie : $result');
-
-                                Navigator.of(context).push(
+                                pd.close();
+                                Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(builder: (context) =>
                                         CompteEnAttente()));
                                 ScaffoldMessenger.of(context).showSnackBar(

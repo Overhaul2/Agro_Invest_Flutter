@@ -50,7 +50,7 @@ class _AgriculteurAProximiteState extends State<AgriculteurAProximite> {
                             children: [
                               CircleAvatar(
                                 backgroundImage: agriculteur.image!= null
-                                    ? NetworkImage("${agriculteur.image}") as ImageProvider<Object>?
+                                    ? NetworkImage("http://10.0.2.2/"+"${agriculteur.image}") as ImageProvider<Object>?
                                     : AssetImage("asset/images/user1.png") as ImageProvider<Object>?,
                                 radius: 40,
                               ),

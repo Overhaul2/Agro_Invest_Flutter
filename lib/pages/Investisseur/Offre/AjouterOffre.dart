@@ -3,6 +3,8 @@ import 'package:agro_invest/pages/Investisseur/Offre/OffreEffectuer.dart';
 import 'package:agro_invest/service/OffreService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:social_media_recorder/audio_encoder_type.dart';
+import 'package:social_media_recorder/screen/social_media_recorder.dart';
 import '../../../configuration/configurationCouleur.dart';
 class FaireUneOffre extends StatefulWidget {
   const FaireUneOffre({Key? key}) : super(key: key);
@@ -20,9 +22,8 @@ class _FaireUneOffreState extends State<FaireUneOffre> {
   final _descriptionController=TextEditingController();
   final _durreController=TextEditingController();
   final _audioController=TextEditingController();
-
-
-
+ // File? audioEnregistre;
+  String duree = "";
   @override
   Widget build(BuildContext context) {
    // AgriculteurProvider agriculteurProvider = Provider.of<AgriculteurProvider>(context, listen: false);
@@ -169,21 +170,48 @@ class _FaireUneOffreState extends State<FaireUneOffre> {
                         ),
                         keyboardType: TextInputType.text,
                       ),
-                    ),Padding(
-                      padding: const EdgeInsets.only(left: 30,right:30,top: 25.0),
-                      child: TextFormField(
-                        controller: _audioController,
-                        //obscureText: true,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 20),
-                          labelText: "Description audio",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30, right: 30),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Description Audio",
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 16, // Ajustez la taille de la police comme nécessaire
+                            ),
                           ),
-                          prefixIcon: Icon(Icons.person,
-                              color: Color(0xA8008000)),
-                        ),
-                        keyboardType: TextInputType.name,
+                          duree.isEmpty ?
+                          Expanded(
+                            child: SocialMediaRecorder(
+                              sendRequestFunction: (fichier ,temps) {
+                               // audioEnregistre = fichier;
+                               // print(audioEnregistre);
+                                print(duree);
+                                duree = temps;
+                                setState(() {
+                                });
+                              },
+                              encode: AudioEncoderType.AAC,
+                              counterTextStyle: TextStyle(color: MesCouleur().couleurPrincipal),
+                            ),
+                          ) : Expanded(
+                            child: Row(
+                              children: [
+                                Spacer(),
+                                Text("Durée : $duree"),
+                                IconButton(onPressed: (){
+                                  duree = "";
+                                  //audioEnregistre = null;
+                                  setState(() {
+                                  });
+                                }, icon: Icon(Icons.delete)),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(height: 15,),
@@ -196,16 +224,17 @@ class _FaireUneOffreState extends State<FaireUneOffre> {
                                 borderRadius: BorderRadius.circular(15))),
                         onPressed: ()  async {
                           InvestisseurProvider investisseurProvider = Provider.of<InvestisseurProvider>(context, listen: false);
-                          OffreService offreservice = OffreService(context);
+                          OffreService offreservice = await OffreService(context);
                            if (_formkey.currentState!.validate()) {
                              try{
+
                                final titre= _nomController.text;
                                final montant= _montantController.text;
                                final durre= _durreController.text;
                               // final dateDebut = _dateDebuitController.text;
                                //final audioDescriptionPath=_audioController.text;
                                final description = _descriptionController.text;
-                               final result = await offreservice.ajouterOffre(
+                               final result =  offreservice.ajouterOffre(
                                    titre: titre,
                                    montant: montant,
                                    description: description,

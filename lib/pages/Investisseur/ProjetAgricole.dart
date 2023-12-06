@@ -18,6 +18,7 @@ class _HistoriqueDemandeState extends State<HistoriqueDemande> {
     return Scaffold(
       appBar: AppBar(
         leading: (BackButton()),
+
       ),
       body: Center(
         child: Column(
@@ -36,12 +37,18 @@ class _HistoriqueDemandeState extends State<HistoriqueDemande> {
               height: 20,
             ),
             FittedBox(
-              child: Text(
-                "Projets Agricole",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    color: MesCouleur().couleurPrincipal),
+              child: Column(
+                children: [
+                  Text(
+                    "Projets Agricole",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        color: MesCouleur().couleurPrincipal),
+                  ),IconButton(onPressed: (){setState(() {
+
+                  });}, icon: Icon(Icons.refresh,size: 20,color: Colors.red,))
+                ],
               ),
             ),
             FutureBuilder(

@@ -31,7 +31,7 @@ class _OffreAProximiteState extends State<OffreAProximite> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return CircularProgressIndicator();
                   } else if (snapshot.hasError) {
-                    return Text('Erreur: ${snapshot.error}');
+                    return Text('Une Erreur s\'est produit lors de la recupération des donnés :');
                   } else {
                     List<Offre> offres = snapshot.data!;
 
@@ -43,6 +43,10 @@ class _OffreAProximiteState extends State<OffreAProximite> {
                             child: Column(
                               children: [
                                 Text('Aucune offre disponible pour l\'instant !',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),SizedBox(height: 20,),
+                                IconButton(onPressed: (){investisseurService.OffreSansAgriculteurs();
+                                  setState(() {
+                                  });
+                                  }, icon: Icon(Icons.refresh,size: 20),),
                                 Image.asset('asset/images/notfound.jpg'),
                                 Text('Revenez plustard',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17)),
                               ],
@@ -70,9 +74,12 @@ class _OffreAProximiteState extends State<OffreAProximite> {
                               ),
                               elevation: 10,
                               child: ListTile(
-                                onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => OffreDetailleAgriculteur(offre: offre)));
-                                },
+                                onTap: () async{
+                                  await Navigator.push(context, MaterialPageRoute(builder: (context) => OffreDetailleAgriculteur(offre: offre)));
+                                  setState(() {
+
+                                  });
+                                  },
                                 title: Row(
                                   children: [
                                     CircleAvatar(
@@ -86,9 +93,14 @@ class _OffreAProximiteState extends State<OffreAProximite> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          FittedBox(child: SizedBox(
-                                              width: 265,
-                                              child: Text(" ${offre.titre} "))),
+                                          SizedBox(
+                                            width: 260,
+                                            child: Text(
+                                              " ${offre.titre} ",
+                                              style: TextStyle(fontWeight: FontWeight.bold),
+                                              overflow: TextOverflow.ellipsis, // Ajoutez cette ligne
+                                            ),
+                                          ),
                                           FittedBox(child: Text("Montant : ${offre.montant} Fcfa ")),
                                           FittedBox(child: Text("Durée ${offre.durre} mois ")),
                                         ],

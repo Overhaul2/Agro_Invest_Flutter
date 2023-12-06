@@ -1,6 +1,7 @@
 import 'package:agro_invest/Provider/AgriculteurPovider.dart';
 import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:agro_invest/pages/Agriculteur/Demandes/RchercheCredit.dart';
+import 'package:agro_invest/pages/Investisseur/Offre/HistoriqueDetailles.dart';
 import 'package:agro_invest/service/investisseurService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -62,7 +63,7 @@ class _HistoriquesOffresState extends State<HistoriquesOffres> {
               ),
             ),
             FutureBuilder(
-              future: investisseurServices.OffreInvestisseur(idInv!),
+              future: investisseurServices.HistoriqueInvestisseur(idInv!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
@@ -109,7 +110,7 @@ class _HistoriquesOffresState extends State<HistoriquesOffres> {
                            // color: Color(0xB26DC76D),
                             child: ListTile(
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>OffreDetail(offre: offre)));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoriqueDetail(offre: offre)));
                                 },
                               title: Row(
                                 children: [
@@ -125,9 +126,16 @@ class _HistoriquesOffresState extends State<HistoriquesOffres> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        FittedBox(child: Text(" ${offre.titre} ")),
+                                        SizedBox(
+                                          width: 240,
+                                          child: Text(
+                                            " ${offre.titre} ",
+                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                            overflow: TextOverflow.ellipsis, // Ajoutez cette ligne
+                                          ),
+                                        ),
                                         FittedBox(child: Text("Montant : ${offre.montant} Fcfa ")),
-                                        FittedBox(child: Text("Durrée ${offre.durre} mois ")),
+                                        SizedBox(width: 200,child: Text("Durrée ${offre.durre} mois ",overflow: TextOverflow.ellipsis,)),
 
                                       ],
                                     ),

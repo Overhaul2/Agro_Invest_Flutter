@@ -64,17 +64,10 @@ class _MonHearderDrawerState extends State<MonHearderDrawer> {
 DecorationImage _buildImageProvider(BuildContext context) {
   final agriculteurProvider = Provider.of<AgriculteurProvider>(context, listen: false);
 
-  late Agriculteur agriculteur;
-  @override
-  void initState() {
-    // TODO: implement initState
-    agriculteur = Provider.of<AgriculteurProvider>(context, listen: false).agriculteur!;
-
-  }
   if (agriculteurProvider.agriculteur != null &&
       agriculteurProvider.agriculteur!.image != null) {
     return DecorationImage(
-        image: NetworkImage( "http://10.0.2.2/" + agriculteur!.image!)
+        image: NetworkImage( "http://10.0.2.2/"+agriculteurProvider.agriculteur!.image!)
     );
   } else {
     return DecorationImage(

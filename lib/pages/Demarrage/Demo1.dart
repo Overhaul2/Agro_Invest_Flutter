@@ -1,5 +1,6 @@
 import 'package:agro_invest/pages/Demarrage/Demo2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../Agriculteur/login.dart';
 
@@ -22,21 +23,21 @@ class _DemoPage1State extends State<DemoPage1> {
               child: Image.asset("asset/images/logo.png",height: 200,),
             ),
             SizedBox(height: 60),
-            Center(
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 30),
-                //alignment: Alignment.center,
-                // child: FittedBox(alignment: Alignment.center,
-                child: Text("Bienvenue sur AGRO INVEST",
-                  style: TextStyle(
-                    color: Color(0xA8008000),
-                    fontSize: 40,
-                    fontFamily: "Inika",
-                    fontWeight: FontWeight.bold,
+            Text("Bienvenue sur",
+              style: TextStyle(
+                color: Color(0xA8008000),
+                fontSize: 40,
+                fontFamily: "Inika",
+                fontWeight: FontWeight.bold,
 
-                  ),),//),
-              ),
-            ),
+              ),).animate().fadeIn(delay: 500.ms).slideY(curve: Curves.bounceInOut),
+            Text("AGRO INVEST",
+              style: TextStyle(
+                color: Color(0xA8008000),
+                fontSize: 40,
+                fontFamily: "Inika",
+                fontWeight: FontWeight.bold,
+              ),).animate().fadeIn(delay: 500.ms).slideY(curve: Curves.bounceInOut),
             SizedBox(height: 60,),
             Container(
               child: ElevatedButton(
@@ -46,7 +47,7 @@ class _DemoPage1State extends State<DemoPage1> {
                 onPressed: (){
                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginAgriculteur()));
                 },
-                child: Text("J'ai un Compte",
+                child: Text("J'ai un compte",
                 style: TextStyle(fontSize: 20),),
               ),
             ),
@@ -59,7 +60,7 @@ class _DemoPage1State extends State<DemoPage1> {
                 onPressed: (){
                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DemoPage2()));
                 },
-                child: Text("Je suis Nouveau",
+                child: Text("Je suis nouveau",
                 style: TextStyle(fontSize: 20),),
               ),
             )

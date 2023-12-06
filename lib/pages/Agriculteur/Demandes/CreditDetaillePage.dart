@@ -94,11 +94,13 @@ class _CreditDetailleState extends State<CreditDetaille> {
 
                             ),SizedBox(height: 20,),
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Titre : ",style: TextStyle(fontWeight: FontWeight.bold)),
-                                Text("${widget.credit.titre} "),
+                                SizedBox(width: 270,child: Text("${widget.credit.titre} ")),
                               ],
-                            ),SizedBox(height: 10,),
+                            ),
+                            SizedBox(height: 10,),
                             SizedBox(height: 20,),
                             Row(
                               children: [
@@ -108,16 +110,18 @@ class _CreditDetailleState extends State<CreditDetaille> {
                             ),
                             SizedBox(height: 20,),
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Duréé : ",style: TextStyle(fontWeight: FontWeight.bold)),
-                                Text(" ${widget.credit.durre} mois "),
+                                SizedBox(width: 290,child: Text(" ${widget.credit.durre} mois ")),
                               ],
                             ),
                             SizedBox(height: 20,),
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Description : ",style: TextStyle(fontWeight: FontWeight.bold)),
-                                Text(" ${widget.credit.description} "),
+                                SizedBox(child: Text("Description : ",style: TextStyle(fontWeight: FontWeight.bold))),
+                                SizedBox(width: 240,child: Text(" ${widget.credit.description} ")),
                               ],
                             ),
                             SizedBox(height: 40,),
@@ -128,6 +132,9 @@ class _CreditDetailleState extends State<CreditDetaille> {
                                   onPressed: () {
                                     Navigator.of(context).push(MaterialPageRoute(
                                         builder: (context) => ModiffierDemane(credit: widget.credit)));
+                                    setState(() {
+
+                                    });
                                   },
                                   child: Text("Modifier"))
                                   : Container(),

@@ -63,7 +63,7 @@ DecorationImage _buildImageProvider(BuildContext context) {
   if (investisseurProvider.investisseur != null &&
       investisseurProvider.investisseur!.image != null) {
     return DecorationImage(
-      image: NetworkImage(investisseurProvider.investisseur!.image!)
+      image: NetworkImage("http://10.0.2.2/"+investisseurProvider.investisseur!.image!)
     );
   } else {
     return DecorationImage(

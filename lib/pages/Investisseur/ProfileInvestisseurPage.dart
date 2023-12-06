@@ -126,7 +126,7 @@ class _InvestisseurProfilState extends State<InvestisseurProfil> {
                           Icons.share,
                           color: Colors.green,
                         ),
-                        title: Text("Partager l'application"),
+                        title: Text("Contacter le support"),
                       ),
                     ),SizedBox(height: 10,),
                     Card(
@@ -256,7 +256,11 @@ class _InvestisseurProfilState extends State<InvestisseurProfil> {
       isUserLoggedIn = false;
     });
 
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginAgriculteur()));
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => LoginAgriculteur()),
+          (Route<dynamic> route) => false,
+    );
+
   }
 
 

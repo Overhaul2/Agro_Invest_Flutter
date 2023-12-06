@@ -1,6 +1,8 @@
+import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEffectuerPage.dart';
 import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
 import 'package:flutter/material.dart';
 import 'package:agro_invest/service/CreditService.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 import '../../../configuration/configurationCouleur.dart';
 import '../../../model/AjouterCreditmodel.dart';
 class ModiffierDemane extends StatefulWidget {
@@ -34,6 +36,7 @@ class _ModiffierDemaneState extends State<ModiffierDemane> {
 
   @override
   Widget build(BuildContext context) {
+    ProgressDialog pd = ProgressDialog(context: context);
    // AgriculteurProvider agriculteurProvider = Provider.of<AgriculteurProvider>(context, listen: false);
   //  CreditService creditService = CreditService(context);
     return Scaffold(
@@ -194,6 +197,7 @@ class _ModiffierDemaneState extends State<ModiffierDemane> {
                           CreditService creditService = CreditService(context);
                            if (_formkey.currentState!.validate()) {
                              try{
+                               pd.show( msg: 'Enregistrement en cour...');
                                final titre= _nomController.text;
                                final montant= int.parse (_montantController.text);
                                final durre= int.parse(_durreController.text);
@@ -209,8 +213,9 @@ class _ModiffierDemaneState extends State<ModiffierDemane> {
                                   // dateDebut: dateDebut,
                                    idCredit: widget.credit.idCredit!,);
                                print('Demande Modiffier avec succes : ${result.toString()}');
+                               pd.close();
                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Demande Modiffier avec succès")));
-                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DemandeEnCour()));
+                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DemandeEffectuerPage()));
 
                              } catch (e) {
                                if (e is String) {

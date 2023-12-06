@@ -47,6 +47,10 @@ dependencies:
   path: ^1.8.3
   social_media_recorder: ^1.1.1
   awesome_dialog: ^3.1.0
+  audioplayers: ^5.2.1
+  flutter_animate: ^4.3.0
+  sn_progress_dialog: ^1.1.3
+  lottie: ^2.7.0
 
 
 dev_dependencies:
@@ -94,6 +98,7 @@ flutter:
    - asset/images/
    - asset/videos/
    - asset/images/sliders/
+   - asset/images/lottie/
    - asset/fonts/
   #   - images/a_dot_ham.jpeg
 

@@ -28,10 +28,8 @@ class _HistoriqueDemandeState extends State<HistoriqueDemande> {
       appBar: AppBar(
         leading: (BackButton()),
         actions: [
-          IconButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RechercheCredit()));
-          },
-              icon: Icon(Icons.search_outlined))
+          IconButton(onPressed: (){agriculteurServices.Historiques(idAgr!);},
+              icon: Icon(Icons.refresh))
         ],
       ),
       body: Center(
@@ -60,7 +58,7 @@ class _HistoriqueDemandeState extends State<HistoriqueDemande> {
               ),
             ),
             FutureBuilder(
-              future: agriculteurServices.CreditAgriculteur(idAgr!),
+              future: agriculteurServices.Historiques(idAgr!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Padding(
@@ -75,11 +73,31 @@ class _HistoriqueDemandeState extends State<HistoriqueDemande> {
                           padding: EdgeInsets.only(top: 50),
                           height: 200,
                         ),
-                        Text('Vous n\'avez pas d\'historique de demande',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold), )
+                        Text('Une erreur s\'est produite lors de la recupération des donné',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold), )
                       ],
                     );
                 } else {
                   List<Credit> credits = snapshot.data!;
+                  if (credits == null || credits.isEmpty) {
+                    return Center(
+                      child: Column(children: [
+                        Padding(
+                          padding: EdgeInsets.only(top: 40),
+                          child: Image.asset(
+                            "asset/images/vide.jpg",
+                            height: 200,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Text(
+                          "Vous n'avez aucune Demande en cour",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ]),
+                    );
+                  }
 
                   return Expanded(
                     child: ListView.builder(
@@ -114,7 +132,14 @@ class _HistoriqueDemandeState extends State<HistoriqueDemande> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        FittedBox(child: Text(" ${credit.titre} ")),
+                                        SizedBox(
+                                          width: 100,
+                                          child: Text(
+                                            " ${credit.titre} ",
+                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                            overflow: TextOverflow.ellipsis, // Ajoutez cette ligne
+                                          ),
+                                        ),
                                         SizedBox(height: 20,),
                                         FittedBox(child: Text("Montant : ${credit.montant} Fcfa ")),
                                         FittedBox(child: Text("Durrée ${credit.durre} mois ")),

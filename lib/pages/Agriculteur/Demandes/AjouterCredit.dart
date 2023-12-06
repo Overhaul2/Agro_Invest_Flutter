@@ -3,9 +3,11 @@ import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEffectuerPage.dart
 import 'package:agro_invest/pages/Agriculteur/Demandes/DemandeEnCourPage.dart';
 import 'package:flutter/material.dart';
 import 'package:agro_invest/service/CreditService.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 import 'package:social_media_recorder/audio_encoder_type.dart';
 import 'package:social_media_recorder/screen/social_media_recorder.dart';
 import '../../../configuration/configurationCouleur.dart';
+import 'dart:io';
 class FaireUneDemane extends StatefulWidget {
   const FaireUneDemane({Key? key}) : super(key: key);
 
@@ -22,10 +24,13 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
   final _descriptionController=TextEditingController();
   final _durreController=TextEditingController();
   final _audioController=TextEditingController();
+  File? audioEnregistre;
+  String duree = "";
 
 
   @override
   Widget build(BuildContext context) {
+    ProgressDialog pd = ProgressDialog(context: context);
    // AgriculteurProvider agriculteurProvider = Provider.of<AgriculteurProvider>(context, listen: false);
   //  CreditService creditService = CreditService(context);
     return Scaffold(
@@ -176,40 +181,43 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 30),
+                      padding: const EdgeInsets.only(left: 30, right: 30),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.6, // Ajustez la largeur comme nécessaire
-                            child: Text(
-                              "Description Audio",
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 16, // Ajustez la taille de la police comme nécessaire
-                              ),
+                          Text(
+                            "Description Audio",
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 16, // Ajustez la taille de la police comme nécessaire
                             ),
                           ),
+                          duree.isEmpty ?
                           Expanded(
-                            child:  SingleChildScrollView(
-
-                              scrollDirection: Axis.horizontal,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 20.0),
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: SocialMediaRecorder(
-
-                                    sendRequestFunction: (File ,soundFile) {
-                                      _audioController;
-
-                                    },
-                                    encode: AudioEncoderType.AAC,
-                                    counterTextStyle: TextStyle(color: MesCouleur().couleurPrincipal),
-                                  ),
-                                ),
-                              ),
+                            child: SocialMediaRecorder(
+                              sendRequestFunction: (fichier ,temps) {
+                                audioEnregistre = fichier;
+                                print(audioEnregistre);
+                                print(duree);
+                                duree = temps;
+                                setState(() {
+                                });
+                              },
+                              encode: AudioEncoderType.AAC,
+                              counterTextStyle: TextStyle(color: MesCouleur().couleurPrincipal),
+                            ),
+                          ) : Expanded(
+                            child: Row(
+                              children: [
+                                Spacer(),
+                                Text("Durée : $duree"),
+                                IconButton(onPressed: (){
+                                  duree = "";
+                                  audioEnregistre = null;
+                                  setState(() {
+                                  });
+                                }, icon: Icon(Icons.delete)),
+                              ],
                             ),
                           ),
                         ],
@@ -230,6 +238,7 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                           CreditService creditService = CreditService(context);
                            if (_formkey.currentState!.validate()) {
                              try{
+                               pd.show( msg: 'Enregisrement en cour...');
                                final titre= _nomController.text;
                                final montant= _montantController.text;
                                final durre= _durreController.text;
@@ -240,9 +249,11 @@ class _FaireUneDemaneState extends State<FaireUneDemane> {
                                    montant: montant,
                                    description: description,
                                    durre: durre,
+                                   audio: audioEnregistre
                                  //  dateDebut: dateDebut
                                     );
                                print('Demande effectuer avec succes : ${result.toString()}');
+                               pd.close();
                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Demande effectuer avec succès")));
                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>DemandeEffectuerPage()));
 

@@ -115,6 +115,25 @@ class InvestisseurService {
       throw Exception('Vous n\'avez effectuer aucune Offre');
     }
   }
+//tout les offre effectuer et demande accepter par un id investisseur(Mes offre)
+  Future<List<Offre>> HistoriqueInvestisseur(int idInv) async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8080/CreditsOffres/HistoriqueInvestisseur/$idInv'));
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      //print("object====================");
+      // La requête a réussi,
+      List<dynamic> data = jsonDecode(response.body);
+      // print("azertyuiop");
+      List<Offre> offres = data.map((offreData) => Offre.fromMap(offreData)).toList();
+      // print("qsdfghjklm");
+      return offres;
+    } else {
+      // Si la requête ne réussit pas, lancez une exception
+      //throw Exception('Vous n\'avez effectuer aucune demande');
+      throw Exception('Vous n\'avez effectuer aucune Offre');
+    }
+  }
 
   //Afficher tout les offres effectuer par l'investisseur connecter sans agriculteur(Mes proposition offre)
   Future<List<Offre>>  OffreInvestisseurSansAgriculteur(int idInv) async {

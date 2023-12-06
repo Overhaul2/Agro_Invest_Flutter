@@ -64,7 +64,7 @@ class _MesOffresState extends State<MesOffres> {
                     alignment: Alignment.centerLeft,
                     child: Center(
                       child: Text(
-                        'Investissements en Cours',
+                        'Mes Investissements',
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,

@@ -1,21 +1,21 @@
 import 'package:agro_invest/model/AjouterOffremodel.dart';
 import 'package:flutter/material.dart';
 
-class OffreDetail extends StatefulWidget {
+class HistoriqueDetail extends StatefulWidget {
   final Offre offre;
-  const OffreDetail({Key? key,  required this.offre}) : super(key: key);
+  const HistoriqueDetail({Key? key,  required this.offre}) : super(key: key);
 
   @override
-  State<OffreDetail> createState() => _OffreDetailState();
+  State<HistoriqueDetail> createState() => _HistoriqueDetailState();
 }
 
-class _OffreDetailState extends State<OffreDetail> {
+class _HistoriqueDetailState extends State<HistoriqueDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Center(
-            child: Text("Offre Detaille"),
+            child: Text("Historiques Detailles"),
           ),
         ),
         body: Center(
@@ -85,10 +85,9 @@ class _OffreDetailState extends State<OffreDetail> {
                             ),
                           ),SizedBox(height: 20,),
                           Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text("Titre : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                              SizedBox(width: 250,child: Text("${widget.offre.titre}",overflow: TextOverflow.clip,)),
+                              Text("${widget.offre.titre}"),
                             ],
                           ),SizedBox(height: 10,),
                           SizedBox(height: 5,),
@@ -109,15 +108,6 @@ class _OffreDetailState extends State<OffreDetail> {
                           Text("Description : ", style: TextStyle(fontWeight: FontWeight.bold)),
                           Text("${widget.offre.description}"),
                           SizedBox(height: 45,),
-                Container(
-                  alignment: Alignment.center,
-                  child: widget.offre.agriculteur == null
-                      ? ElevatedButton(
-                      onPressed: () {
-                      },
-                      child: Text("Modifier"))
-                      : Container(),
-                )
                         ],
                       ),
                     ),

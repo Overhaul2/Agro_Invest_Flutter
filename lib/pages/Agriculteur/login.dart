@@ -6,9 +6,11 @@ import 'package:agro_invest/pages/Investisseur/AccueilInvestisseur.dart';
 import 'package:agro_invest/pages/MotDePasse/MotDePasseOublier.dart';
 import 'package:agro_invest/service/agriculteurService.dart';
 import 'package:agro_invest/service/investisseurService.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 
 import '../../Provider/AgriculteurPovider.dart';
 
@@ -78,6 +80,7 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
 
   @override
   Widget build(BuildContext context) {
+    ProgressDialog pd = ProgressDialog(context: context);
     return Scaffold(
       body: Center(
         child: Column(
@@ -206,9 +209,9 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                           if (_formkey.currentState!.validate()) {
                             // Si le formulaire est valide, effectuer la requête API
                             try {
+                              pd.show( msg: 'Connexion en cour...', elevation: 10);
                               final email = _emailController.text;
                               final password = _passWordController.text;
-
 
                               final success = await _agriculteurService.loginAgriculteur(email, password);
                               final success1 = await _investisseurService.loginInvestisseur(email, password);
@@ -219,12 +222,15 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                                 pref?.setBool("isUserLoggedIn", true);
                                 setState(() {
                                   isUserLoggedIn = true;
-                                });
+                                  pd.close();
+                                }
+                                );
 
                                 //stocker les nouvvelle donné
                                 print(success);
+
                                 Provider.of<AgriculteurProvider>(context, listen: false).setAgriculteur(success);
-                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Accueil()));
+                                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Accueil()),(Route<dynamic> route)=> false );
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Connecté avec succès en tant qu'agriculteur")));
                               } else if(success1!=null) {
 
@@ -233,12 +239,16 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
                                 //stocker les nouvvelle donné
                                 print(success);
                                 Provider.of<InvestisseurProvider>(context, listen: false).setInvestisseur(success1);
-                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AccueilInves()));
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(builder: (context) => AccueilInves()),
+                                      (Route<dynamic> route) => false,
+                                );
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Connecté avec succès en tant qu'investisseur")));
                               }else{
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text("adress email ou mot de passe incorrect")));
                               }
+
                             } catch (e) {
                               // gestion des erreurs de la requête API
                               print('Erreur API: $e');
@@ -295,4 +305,12 @@ class _LoginAgriculteurState extends State<LoginAgriculteur> {
 //Future<void> login() async {
 //  await http.post(Uri.parse("http://localhost:8080/agriculteur/inscrire"), body: ({}));
 //}
+
+/*
+Future<void> showProgressDialog(BuildContext context) async {
+  final progressDialog = ProgressDialog(context: context);
+  progressDialog.show(max: 100, msg: 'Connexion en cours...', backgroundColor: MesCouleur().couleurPrincipal);
+
+  progressDialog.close();
+}*/
 }

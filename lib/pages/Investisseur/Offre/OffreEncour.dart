@@ -37,8 +37,8 @@ class _OffreEnCourState extends State<OffreEnCour> {
                         child: Image.asset("asset/images/mesdemandes.jpg",fit: BoxFit.fitWidth,)),)
               ),
               SizedBox(height: 20,),
-              FittedBox(child: Text("Mes Offres en Cours", style: TextStyle(fontWeight: FontWeight.bold,
-                  fontSize: 30, color: MesCouleur().couleurPrincipal),),),
+              FittedBox(child: Text("Mes Investissements en Cours", style: TextStyle(fontWeight: FontWeight.bold,
+                  fontSize: 25, color: MesCouleur().couleurPrincipal),),),
 
               TabBar(
                 labelColor: MesCouleur().couleurPrincipal,

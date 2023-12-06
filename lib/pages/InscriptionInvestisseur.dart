@@ -4,6 +4,7 @@ import 'package:agro_invest/pages/Investisseur/AccueilInvestisseur.dart';
 import 'package:agro_invest/service/investisseurService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 
 import 'Agriculteur/login.dart';
 
@@ -33,6 +34,7 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
 
   @override
   Widget build(BuildContext context) {
+    ProgressDialog pd = ProgressDialog(context: context);
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Color.fromARGB(255, 19, 108, 22),
@@ -259,6 +261,7 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                       onPressed: () async {
                         if( _formkey.currentState!.validate()){
                           try{
+                            pd.show( msg: 'Inscription en cour...');
                             final nomPrenom = _nomPrenomController.text;
                             final email = _emailController.text;
                             final telephone = _telephoneController.text;
@@ -276,6 +279,7 @@ class _InscriptionInvestisseurState extends State<InscriptionInvestisseur> {
                             print('Investisseur inscrit:${result.toString()}');
                             print(('idInv:${result.idInv}'));
                             Provider.of<InvestisseurProvider>(context, listen: false).setInvestisseur(result);
+                            pd.close();
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(builder: (context) =>
                                     AccueilInves()));

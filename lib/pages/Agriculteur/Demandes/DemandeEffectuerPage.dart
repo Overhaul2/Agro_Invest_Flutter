@@ -1,4 +1,3 @@
-import 'package:agro_invest/pages/Agriculteur/Demandes/HistoriqueCreditDetaillePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,7 +5,6 @@ import '../../../Provider/AgriculteurPovider.dart';
 import '../../../configuration/configurationCouleur.dart';
 import '../../../model/AjouterCreditmodel.dart';
 import '../../../service/agriculteurService.dart';
-import '../../Investisseur/Offre/OffreEffectuerDetaillePage.dart';
 import 'CreditDetaillePage.dart';
 
 class DemandeEffectuerPage extends StatefulWidget {
@@ -51,11 +49,11 @@ class _DemandeEffectuerPageState extends State<DemandeEffectuerPage> {
                   return
                     Column(
                       children: [
-                        Container(child: Image.asset("asset/images/notfoundo.jpg"),
+                        Container(child: Image.asset("asset/images/vide.jpg"),
                           padding: EdgeInsets.only(top: 50),
                           height: 200,
                         ),
-                        Center(child: Text('une erreur s\'est produite lors de la recuperation des donné',style: TextStyle(fontSize: 15,color: Colors.red,fontWeight: FontWeight.bold), ))
+                        Center(child: Text('Vous n\'avez effectuer aucune demande',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold), ))
                       ],
                     );
 
@@ -85,7 +83,7 @@ class _DemandeEffectuerPageState extends State<DemandeEffectuerPage> {
                                   children: [
                                     CircleAvatar(
                                       backgroundImage: credit.agriculteur?.image != null
-                                          ? NetworkImage("${credit.agriculteur?.image}") as ImageProvider<Object>?
+                                          ? NetworkImage("http://10.0.2.2/"+"${credit.agriculteur?.image}") as ImageProvider<Object>?
                                           : AssetImage("asset/images/logo.png") as ImageProvider<Object>?,
                                       radius: 40,
                                     ),
@@ -94,7 +92,14 @@ class _DemandeEffectuerPageState extends State<DemandeEffectuerPage> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          FittedBox(child: Text(" ${credit.titre} ")),
+                                          SizedBox(
+                                            width: 240,
+                                            child: Text(
+                                              " ${credit.titre} ",
+                                              style: TextStyle(fontWeight: FontWeight.bold),
+                                              overflow: TextOverflow.ellipsis, // Ajoutez cette ligne
+                                            ),
+                                          ),
                                           SizedBox(height: 20,),
                                           FittedBox(child: Text("Montant : ${credit.montant} Fcfa ")),
                                           FittedBox(child: Text("Durrée ${credit.durre} mois ")),

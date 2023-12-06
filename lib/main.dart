@@ -1,6 +1,7 @@
 import 'package:agro_invest/configuration/configurationCouleur.dart';
 import 'package:agro_invest/pages/Agriculteur/Accueil.dart';
 import 'package:agro_invest/pages/Agriculteur/login.dart';
+import 'package:agro_invest/pages/Demarrage/SplashScren.dart';
 import 'package:agro_invest/pages/Investisseur/AccueilInvestisseur.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -65,7 +66,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.green,
       ),
       debugShowCheckedModeBanner: false,
-      home: /*isUserLoggedIn ? Accueil():*/LoginAgriculteur(),
+      home: /*isUserLoggedIn ? Accueil():*/SplashScreen(),
     );
   }
 }

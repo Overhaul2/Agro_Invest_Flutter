@@ -172,7 +172,7 @@ class _AccueilleInvestContentState extends State<AccueilleInvestContent> {
                         ),
                       )),
                 ),
-                InkWell(
+                /*InkWell(
                   onTap: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => Forums()));
@@ -227,7 +227,7 @@ class _AccueilleInvestContentState extends State<AccueilleInvestContent> {
                           ],
                         ),
                       )),
-                ),
+                ),*/
               ],
             ),
           )

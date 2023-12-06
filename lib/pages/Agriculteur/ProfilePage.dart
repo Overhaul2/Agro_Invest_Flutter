@@ -25,6 +25,7 @@ class _UserProfilState extends State<UserProfil> {
 
   @override
   Widget build(BuildContext context) {
+    AgriculteurProvider agriculteurProvider =AgriculteurProvider();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -54,14 +55,15 @@ class _UserProfilState extends State<UserProfil> {
                       child: Container(
                         width: 120,
                         height: 120,
-                        child: Image.asset(
-                          "asset/images/user1.png",
-                          fit: BoxFit.cover,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: _buildImageProvider(agriculteurProvider.agriculteur?.image),
                         ),
                       ),
                     ),
                   ),
                 ),
+
               ],
             ),
             SizedBox(
@@ -75,7 +77,7 @@ class _UserProfilState extends State<UserProfil> {
                   if (agriculteurProvider.agriculteur != null) {
                     String? nomPrenom = agriculteurProvider.agriculteur!.nomPrenom;
                     if (nomPrenom != null) {
-                      return Text("Souleymane Fomba",
+                      return Text("${agriculteurProvider.agriculteur!.nomPrenom}",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -122,10 +124,10 @@ class _UserProfilState extends State<UserProfil> {
                       child: ListTile(
                         onTap: partagerApplication,
                         leading: Icon(
-                          Icons.share,
+                          Icons.contact_support,
                           color: Colors.green,
                         ),
-                        title: Text("Partager l'application"),
+                        title: Text("Contacter le support"),
                       ),
                     ),SizedBox(height: 10,),
                     Card(
@@ -260,5 +262,16 @@ class _UserProfilState extends State<UserProfil> {
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginAgriculteur()));
   }
 
+  DecorationImage _buildImageProvider(String? imageUrl) {
+    AgriculteurProvider agriculteurProvider=AgriculteurProvider();
+    return DecorationImage(
+      image: imageUrl != null
+          ? NetworkImage("http://10.0.2.2/"+agriculteurProvider.agriculteur!.image!) as ImageProvider<Object>
+          : AssetImage("asset/images/user1.png") as ImageProvider<Object>,
+      fit: BoxFit.cover,
+    );
+  }
+
 
 }
+

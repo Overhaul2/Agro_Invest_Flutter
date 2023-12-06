@@ -19,10 +19,10 @@ class _AccueiltestState extends State<Accueiltest> {
     //images dans le carousel
     List<String> imagePath = [
       "asset/images/sliders/slider1.png",
-      "asset/images/sliders/slider2.png",
+     // "asset/images/sliders/slider2.png",
       "asset/images/sliders/slider3.png",
       "asset/images/sliders/slider4.png",
-      "asset/images/sliders/slider5.png",
+     // "asset/images/sliders/slider5.png",
       "asset/images/sliders/slider6.png",
       "asset/images/sliders/slider7.png",
       "asset/images/sliders/slider8.png",
@@ -127,7 +127,7 @@ class _AccueiltestState extends State<Accueiltest> {
                               "asset/images/proximite2.jpg", height: 125,),
                             FittedBox(
                               child: Text(
-                                "Offre à proximité",
+                                "Offre d'Investissement",
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold),
@@ -137,7 +137,7 @@ class _AccueiltestState extends State<Accueiltest> {
                         ),
                       )),
                 ),
-                InkWell(
+                /*InkWell(
                   onTap: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => Forums()));
@@ -192,7 +192,7 @@ class _AccueiltestState extends State<Accueiltest> {
                           ],
                         ),
                       )),
-                ),
+                ),*/
               ],
             ),
           )

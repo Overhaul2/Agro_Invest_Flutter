@@ -1,4 +1,3 @@
-import 'package:agro_invest/pages/Agriculteur/Demandes/HistoriqueCreditDetaillePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,7 +5,6 @@ import '../../../Provider/AgriculteurPovider.dart';
 import '../../../configuration/configurationCouleur.dart';
 import '../../../model/AjouterCreditmodel.dart';
 import '../../../service/agriculteurService.dart';
-import '../../Investisseur/Offre/OffreEffectuerDetaillePage.dart';
 import 'CreditDetaillePage.dart';
 
 class DemandeEffectuer extends StatefulWidget {
@@ -61,10 +59,20 @@ class _DemandeEffectuerState extends State<DemandeEffectuer> {
 
                 } else {
                   List<Credit> credits = snapshot.data!;
+                  if (credits == null || credits.isEmpty) {
+                    return Center(
+                      child: Column(children: [
+                        Padding(padding: EdgeInsets.only(top: 40),
+                          child: Image.asset("asset/images/vide.jpg",height: 200,),
+                        ),SizedBox(height: 40,),
+                        Text("Vous n'avez aucune Investissement en cour",style: TextStyle(fontWeight: FontWeight.bold),)
+                      ]),
+                    );
+                  }
 
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: (credits==null)?0:credits.length,
+                      itemCount: (credits == null) ? 0 : credits.length,
                       itemBuilder: (context, index) {
                         Credit credit = credits[index];
                         // print(credits[index]);
@@ -95,10 +103,18 @@ class _DemandeEffectuerState extends State<DemandeEffectuer> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          FittedBox(child: Text(" ${credit.titre} ")),
-                                          SizedBox(height: 20,),
-                                          FittedBox(child: Text("Montant : ${credit.montant} Fcfa ")),
-                                          FittedBox(child: Text("Durrée ${credit.durre} mois ")),
+                                          SizedBox(
+                                              child: Text(" ${credit.titre} ")),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          FittedBox(
+                                              child: Text(
+                                            "Montant : ${credit.montant} Fcfa ",
+                                          )),
+                                          FittedBox(
+                                              child: Text(
+                                                  "Durrée ${credit.durre} mois ")),
                                         ],
                                       ),
                                     )

@@ -38,7 +38,7 @@ class DemoPage extends StatelessWidget {
           ),
           Container(
             height: MediaQuery.of(context).size.height / 3,
-            margin:const  EdgeInsets.only(bottom: 80),
+            margin:const  EdgeInsets.only(bottom: 120),
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("asset/images/logo.png"),
@@ -47,8 +47,10 @@ class DemoPage extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(bottom: 150, left: 40, right: 40),
-            child:const Text("Relier les agriculteurs locaux à des investisseurs pour soutenir l'achat de semences, d'engrais et d'équipements agricoles.",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, ),
+            child:Center(
+              child: const Text("Relier les agriculteurs locaux à des investisseurs pour soutenir l'achat de semences, d'engrais et d'équipements agricoles.",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, ),
+              ),
             ),
           ),
 
